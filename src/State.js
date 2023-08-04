@@ -1,4 +1,4 @@
-import states from "./states.js";
+import STATES from "./states.js";
 
 const STATE_ICON_GRID = 36;
 const CENTERCODE = '111';
@@ -143,7 +143,7 @@ export class State {
     this.coords = animate ? [0, 0] : this.posts[0];
     this.hex = code.codeToHex();
     this.value = 1;
-    this.info = states[code];
+    this.info = STATES[code];
 
     sketch.loadImage('assets/symbolspritenew.png', img => {
       this.symbolSprite = img;

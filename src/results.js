@@ -1,6 +1,6 @@
 import Bar from './Bar.js';
 import State from "./State.js";
-import states from "./states.js";
+import STATES from "./states.js";
 import * as style from "./style.js";
 import * as AUX from "./functions.js";
 
@@ -9,7 +9,7 @@ export const feature = new Binder('#808080');
 const featureInfo = new Binder();
 
 feature.bind(featureInfo, v => {
-  let info = states[v.hexToCode()];
+  let info = STATES[v.hexToCode()];
   const level = (d, i) => new Object({
     margin: '0.25em',
     padding: '0.25em',
@@ -117,7 +117,7 @@ export const model = {
     },
     h5: {
       margin: '0.5em 0',
-      text: feature.bind(v => v ? `The ${states[v.hexToCode()].archetype}` : '')
+      text: feature.bind(v => v ? `The ${STATES[v.hexToCode()].archetype}` : '')
     },
     small: {
       display: 'block',

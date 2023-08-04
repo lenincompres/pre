@@ -1,7 +1,7 @@
 import Cube from "./src/Cube.js";
 import * as questionnaire from "./src/questionnaire.js";
 import * as results from "./src/results.js";
-import * as style from "./src/style.js";
+import * as STYLE from "./src/style.js";
 
 const QS = DOM.querystring();
 let rgb = QS.rgb ? "#" + QS.rgb : undefined;
@@ -54,8 +54,8 @@ DOM.set({
   backgroundColor: rgb ? rgb : questionnaire.favorite,
   css: CSS,
   header: {
-    backgroundColor: style.lightSreen,
-    boxShadow: "0 1em 1em " + style.lightSreen,
+    backgroundColor: STYLE.lightSreen,
+    boxShadow: "0 1em 1em " + STYLE.lightSreen,
     paddingTop: "2em",
     
     main: {
@@ -121,14 +121,14 @@ DOM.set({
     },
   },
 
-  main: rgb ? undefined : questionnaire.model,
+  main: rgb ? undefined : questionnaire.questionnaire,
 
   footer: {
     boxShadow: rgb ? "0 -1em 1em " + rgb : results.feature.bind(v => "0 -1em 1em " + v),
     backgroundColor: rgb ? rgb : results.feature,
 
     section: {
-      style: style.section,
+      style: STYLE.section,
       display: "flex",
       flexDirection: "column",
       h1: rgb && !fav ? "Featured" : "Results",

@@ -1,14 +1,11 @@
 import * as style from "./style.js";
 import * as AUX from "./functions.js";
+import QUESTIONS from "./questions.js";
 
 /* Methods to calculate the results */
 
 export const favorite = new Binder('#808080');
 export const results = new Binder('#808080');
-
-const questions = new Binder([]);
-fetch('assets/questionnaire.json').then(r => r.json())
-  .then(data => questions.value = data.questions.map(modelQuestion));
 
 const sampleQuestions = [{
   "question": "How much do you like these colors?",
@@ -123,7 +120,9 @@ const modelQuestion = q => {
   return q;
 };
 
-export const model = {
+const questions = new Binder(QUESTIONS.map(modelQuestion));
+
+export const questionnaire = {
   style: style.section,
   header: {
     style: style.floatingSign,
@@ -178,4 +177,4 @@ const updateResults = _ => {
   );
 }
 
-export default model;
+export default questionnaire;

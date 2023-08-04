@@ -1,4 +1,4 @@
-const states = {
+const STATES = {
   "000": {
       code: "000",
       adjective: "Elemental",
@@ -460,4 +460,4 @@ const states = {
   }
 }
 
-export default states;
+export default STATES;
