@@ -49,7 +49,7 @@ DOM.set({
   viewport: "width=device-width, initial-scale=1, minimum-scale=1",
   keywords: "3dpsyche, psychology, test, psychology test, personality types, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction, lenino, lenin compres",
   description: "A psychometric tool to visualize Physical, Rational & Emotional focus.",
-  icon: "assets/favicon.gif",
+  icon: "media/favicon.gif",
   textAlign: "center",
   backgroundColor: rgb ? rgb : questionnaire.favorite,
   css: CSS,

@@ -45,7 +45,7 @@ feature.bind(featureInfo, v => {
 });
 
 const bars = {
-  e: new Bar('*E|I', '6em', 'gray', 'assets/extremes.gif'),
+  e: new Bar('*E|I', '6em', 'gray', 'media/extremes.gif'),
   s: new Bar('S|N', '6em', 'red', 'cyan'),
   f: new Bar('F|T', '6em', 'blue', 'lime'),
   j: new Bar('J|P', '6em', 'white', 'black'),

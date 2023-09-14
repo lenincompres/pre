@@ -145,7 +145,7 @@ export class State {
     this.value = 1;
     this.info = STATES[code];
 
-    sketch.loadImage('assets/symbolspritenew.png', img => {
+    sketch.loadImage('media/symbolspritenew.png', img => {
       this.symbolSprite = img;
       this.draw();
     });
