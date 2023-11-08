@@ -1,144 +1,144 @@
 export const QUESTIONS = [{
-    question: "When appreciating art, how much do you value the ___?",
+    question: "What do you value when appreciating art?",
     options: [{
-        choice: "execution",
+        choice: "Execution",
         hint: "magnitude, elaboration, dexterity"
       },
       {
-        choice: "concept",
+        choice: "Concept",
         hint: "meaning, idea, message"
       },
       {
-        choice: "feeling",
+        choice: "Feeling",
         hint: "sentiment, emotion, nostalgia"
       }
     ]
   },
   {
-    question: "In sports, how much do you get into ___?",
+    question: "What part of sports do you get into?",
     options: [{
-        choice: "playing",
+        choice: "Playing",
         hint: "challenge, practice, competition"
       },
       {
-        choice: "keeping scores",
+        choice: "Keeping scores",
         hint: "records, stats, strategies"
       },
       {
-        choice: "cheering",
-        hint: "fans, environment, team"
+        choice: "Cheering",
+        hint: "fandom, environment, team"
       }
     ]
   },
   {
-    question: "In your studies, how interested are you in ___?",
+    question: "What peaks your interest when studying?",
     options: [{
-        choice: "industry",
+        choice: "Industry",
         hint: "application, commerce, production"
       },
       {
-        choice: "science",
+        choice: "Science",
         hint: "logic, structure, functionality"
       },
       {
-        choice: "culture",
-        hint: "art, literature, poetry"
+        choice: "Culture",
+        hint: "art, literature, history"
       }
     ]
   },
   {
-    question: "Considering meals, how much do you mind a ___?",
+    question: "What comes to mind when considering an ideal meal?",
     options: [{
-        choice: "feast",
-        hint: "gorge, indulge, fill up"
+        choice: "Feast",
+        hint: "abundance, indulgence, treats"
       },
       {
-        choice: "diet",
-        hint: "nutrition, portions, timing"
+        choice: "Nutrition",
+        hint: "diet, balance, timing"
       },
       {
-        choice: "ritual",
-        hint: "setting, presentation, ceremony"
+        choice: "Ceremony",
+        hint: "setting, presentation, company"
       }
     ]
   },
   {
-    question: "At work, how much do you focus on ___?",
+    question: "Where does your focus go at work?",
     options: [{
-        choice: "productivity",
+        choice: "Productivity",
         hint: "execute, deliver, profit"
       },
       {
-        choice: "methodology",
+        choice: "Methodology",
         hint: "anylisis, process, assessment"
       },
       {
-        choice: "service",
+        choice: "Service",
         hint: "help, support, contribute"
       }
     ]
   },
   {
-    question: "In stories, how drawn are you to ___?",
+    question: "What part of a story draws you in?",
     options: [{
-        choice: "action",
+        choice: "Action",
         hint: "thrill, pace, audiovisuals"
       },
       {
-        choice: "plot",
+        choice: "Plot",
         hint: "development, intrigue, sense"
       },
       {
-        choice: "drama",
+        choice: "Drama",
         hint: "romance, misfortune, joy"
       }
     ]
   },
   {
-    question: "How likely are you to give up rest for ___?",
+    question: "What is likely to make you give up rest?",
     options: [{
-        choice: "spontaneous activity",
+        choice: "Spontaneous activities",
         hint: "play, chores, exercise"
       },
       {
-        choice: "analyzing ideas",
+        choice: "Analyzing ideas",
         hint: "ponder, research, clarify"
       },
       {
-        choice: "tending to feelings",
+        choice: "Tending to feelings",
         hint: "affection, appreciation, care"
       }
     ]
   },
   {
     reverse: true,
-    question: "How much of your free time is spent on ___?",
+    question: "What do you spent your free time on?",
     options: [{
-        choice: "mental recreation",
+        choice: "Mental recreation",
         hint: "read, write, converse"
       },
       {
-        choice: "carefree fun",
+        choice: "Carefree fun",
         hint: "play, party, indulge"
       },
       {
-        choice: "practical tasks",
-        hint: "make things, work out, organize"
+        choice: "Practical tasks",
+        hint: "make, work out, organize"
       }
     ]
   },
   {
-    question: "How much are you ___?",
+    question: "How much are you like this?",
     options: [{
-        choice: "prompt with duties",
+        choice: "Prompt with duties",
         hint: "Gotta be done."
       },
       {
-        choice: "clear about plans",
-        hint: "And stick to them."
+        choice: "Clear about plans",
+        hint: "Will stick to them."
       },
       {
-        choice: "committed to values",
+        choice: "Committed to values",
         hint: "Won't give them up."
       }
     ]
@@ -164,17 +164,17 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "How much would you call yourself ___?",
+    question: "How much are you like this?",
     options: [{
-        choice: "habitual",
+        choice: "Habitual",
         hint: "Do as you always do"
       },
       {
-        choice: "resolute",
+        choice: "Resolute",
         hint: "Stick to your decisions"
       },
       {
-        choice: "particular",
+        choice: "Particular",
         hint: "Like it the way you like it"
       }
     ]
@@ -182,42 +182,42 @@ export const QUESTIONS = [{
   {
     reverse: true,
     options: [{
-        choice: "alert",
-        hint: "Attentive to your surroundings"
+        choice: "Alert",
+        hint: "Aware of your surroundings"
       },
       {
-        choice: "inquisitive",
+        choice: "Inquisitive",
         hint: "Strive to understand and clarify"
       },
       {
-        choice: "softhearted",
+        choice: "Softhearted",
         hint: "Even with strangers or critters"
       }
     ]
   },
   {
-    question: "How strong is your tendency to ___?",
+    question: "How strong is your tendency to these?",
     options: [{
-        choice: "work alone"
+        choice: "Work alone"
       },
       {
-        choice: "demand freedom and control"
+        choice: "Demand freedom and control"
       },
       {
-        choice: "avoid others' drama"
+        choice: "Avoid others' drama"
       }
     ]
   },
   {
     reverse: true,
     options: [{
-        choice: "seek group activities"
+        choice: "Seek group activities"
       },
       {
-        choice: "enjoy discussions"
+        choice: "Enjoy discussions"
       },
       {
-        choice: "meet diverse people",
+        choice: "Meet diverse people",
         hint: "ages, genders, backgrounds"
       }
     ]
