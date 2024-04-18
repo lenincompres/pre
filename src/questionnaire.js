@@ -19,7 +19,7 @@ const sampleQuestions = [{
     },
     {
       "choice": "Blues",
-      "hint": "royal, sky, navy"
+      "hint": "sky, azure, navy"
     }
   ]
 }, {

@@ -21,7 +21,7 @@ export const QUESTIONS = [{
         hint: "challenge, practice, competition"
       },
       {
-        choice: "Keeping scores",
+        choice: "Knowing",
         hint: "records, stats, strategies"
       },
       {
