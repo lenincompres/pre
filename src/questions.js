@@ -1,5 +1,5 @@
 export const QUESTIONS = [{
-    question: "What do you value when appreciating art?",
+    question: "When appreciating art, What do you value?",
     options: [{
         choice: "Execution",
         hint: "magnitude, elaboration, dexterity"
@@ -15,23 +15,23 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "What part of sports do you get into?",
+    question: "In physical activities, what do you get into?",
     options: [{
-        choice: "Playing",
-        hint: "challenge, practice, competition"
+        choice: "Practice",
+        hint: "training, challenge, competition"
       },
       {
-        choice: "Knowing",
+        choice: "Knowledge",
         hint: "records, stats, strategies"
       },
       {
-        choice: "Cheering",
+        choice: "Camaraderie",
         hint: "fandom, environment, team"
       }
     ]
   },
   {
-    question: "What peaks your interest when studying?",
+    question: "When studying, what peaks your interest?",
     options: [{
         choice: "Industry",
         hint: "application, commerce, production"
@@ -47,7 +47,7 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "What comes to mind when considering an ideal meal?",
+    question: "As an ideal meal, what comes to your mind?",
     options: [{
         choice: "Feast",
         hint: "abundance, indulgence, treats"
@@ -63,7 +63,7 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "Where does your focus go at work?",
+    question: "When working, What do you focus on?",
     options: [{
         choice: "Productivity",
         hint: "execute, deliver, profit"
@@ -79,7 +79,7 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "What part of a story draws you in?",
+    question: "In stories, what draws you in?",
     options: [{
         choice: "Action",
         hint: "thrill, pace, audiovisuals"
@@ -95,24 +95,24 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "What is likely to make you give up rest?",
+    question: "In general, how open are you to these?",
     options: [{
-        choice: "Spontaneous activities",
+        choice: "Activities to perform",
         hint: "play, chores, exercise"
       },
       {
-        choice: "Analyzing ideas",
+        choice: "Concepts to analyze",
         hint: "ponder, research, clarify"
       },
       {
-        choice: "Tending to feelings",
+        choice: "Feelings to consider",
         hint: "affection, appreciation, care"
       }
     ]
   },
   {
     reverse: true,
-    question: "What do you spent your free time on?",
+    question: "On your free time, where do you go to?",
     options: [{
         choice: "Mental recreation",
         hint: "read, write, converse"
@@ -164,7 +164,7 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "How much are you like this?",
+    question: "How much would these terms define you?",
     options: [{
         choice: "Habitual",
         hint: "Do as you always do"
@@ -187,7 +187,7 @@ export const QUESTIONS = [{
       },
       {
         choice: "Inquisitive",
-        hint: "Strive to understand and clarify"
+        hint: "Look to understand and clarify"
       },
       {
         choice: "Softhearted",
@@ -217,7 +217,7 @@ export const QUESTIONS = [{
         choice: "Enjoy discussions"
       },
       {
-        choice: "Meet diverse people",
+        choice: "Engage with diverse people",
         hint: "ages, genders, backgrounds"
       }
     ]

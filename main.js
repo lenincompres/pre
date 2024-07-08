@@ -12,10 +12,6 @@ questionnaire.results.bind(results.feature);
 if (rgb) results.feature.value = rgb;
 
 const CSS = {
-  body: {
-    fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
-    fontSize: "16px",
-  },
   b: {
     fontWeight: "bold"
   },
@@ -53,6 +49,8 @@ DOM.set({
   textAlign: "center",
   backgroundColor: rgb ? rgb : questionnaire.favorite,
   css: CSS,
+  fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
+  fontSize: "16px",
   header: {
     backgroundColor: STYLE.lightSreen,
     boxShadow: "0 1em 1em " + STYLE.lightSreen,
@@ -73,7 +71,7 @@ DOM.set({
         textAlign: "left",
         lineHeight: "1.2em",
         margin: "0 1em",
-        text:"The PRE spectrum is a psychometric tool that helps us visualize physical, rational & emotional focus, values or tendencies. The questionaire below will average your answers and map them to one of the archetypes in the cube."
+        text:"The PRE spectrum is a psychometric tool that helps us visualize our personalities, values or tendencies based on our physical, rational & emotional focus. The following questionaire averages your answers and map them to an archetype in this cube."
       },
     },
     section: {

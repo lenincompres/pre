@@ -23,12 +23,12 @@ const sampleQuestions = [{
     }
   ]
 }, {
-  "question": "Which way does your color preference lean?",
+  "question": "How much does your color preference lean to these?",
   "options": [
     [{
       "choice": "Neutral"
     }, {
-      "choice": "Intense"
+      "choice": "Bright"
     }],
     [{
       "choice": "Dark"
@@ -49,73 +49,78 @@ const modelQuestion = q => {
       backgroundColor: style.darkSreen,
       text: q.question
     },
-    div: q.options.map(o => {
-      var isVS = Array.isArray(o);
-      if (!isVS) o = [o];
-      var answer = new Binder(50);
-      q.answers.push(answer);
-      return {
-        backgroundColor: style.whiteSreen,
-        margin: '1px 0',
-        padding: '0.68em',
-        position: 'relative',
-        color: 'black',
-        div: {
-          margin: '0 1em',
-          display: 'flex',
-          flexDirection: 'row',
-          placeContent: 'space-around',
-          div: o.map(option => new Object({
-            h3: {
-              fontSize: '1.5em',
-              marginTop: '0.5em',
-              color: 'black',
-              textShadow: 'none',
-              text: option.choice
-            },
-            p: {
-              fontSize: 'small',
-              color: '#777',
-              text: option.hint
+    ul: {
+      display: 'flex',
+      flexDirection: 'column',
+      li: q.options.map(o => {
+        var isVS = Array.isArray(o);
+        if (!isVS) o = [o];
+        var answer = new Binder(50);
+        q.answers.push(answer);
+        return {
+          backgroundColor: style.whiteSreen,
+          margin: '1px 0',
+          padding: '0.68em',
+          position: 'relative',
+          color: 'black',
+          order: Math.floor(100 * Math.random()),
+          div: {
+            margin: '0 1em',
+            display: 'flex',
+            flexDirection: 'row',
+            placeContent: 'space-around',
+            div: o.map(option => new Object({
+              h3: {
+                fontSize: '1.5em',
+                marginTop: '0.5em',
+                color: 'black',
+                textShadow: 'none',
+                text: option.choice
+              },
+              p: {
+                fontSize: 'small',
+                color: '#777',
+                text: option.hint
+              }
+            }))
+          },
+          input: {
+            display: 'block',
+            width: '100%',
+            type: 'range',
+            min: 1,
+            max: 99,
+            value: answer.value,
+            oninput: e => {
+              answer.value = parseInt(e.target.value);
+              updateResults();
             }
-          }))
-        },
-        input: {
-          display: 'block',
-          width: '100%',
-          type: 'range',
-          min: 1,
-          max: 99,
-          value: answer.value,
-          oninput: e => {
-            answer.value = parseInt(e.target.value);
-            updateResults();
+          },
+          small: {
+            fontSize: isVS ? '1em' : 'small',
+            color: '#06c',
+            bottom: isVS ? '3.5em' : '3em',
+            position: 'absolute',
+            pointerEvents: 'none',
+            margin: isVS ? '0 2em' : '0 1em',
+            maxWidth: '15%',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            content: [{
+              right: 0,
+              text: isVS ? '⟶' : answer.bind(v => v + '%')
+            }, {
+              left: 0,
+              text: isVS ? '⟵' : answer.bind(v => frequencies[Math.floor(v * frequencies.length / 100)])
+            }, !isVS ? undefined : {
+              left: '50%',
+              marginLeft: '-0.5em',
+              text: 'or'
+            }]
           }
-        },
-        small: {
-          fontSize: isVS ? '1em' : 'small',
-          color: '#06c',
-          bottom: isVS ? '3.5em' : '3em',
-          position: 'absolute',
-          pointerEvents: 'none',
-          margin: isVS ? '0 2em' : '0 1em',
-          maxWidth: '15%',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          content: [{
-            right: 0,
-            text: isVS ? '⟶' : answer.bind(v => v + '%')
-          }, {
-            left: 0,
-            text: isVS ? '⟵' : answer.bind(v => frequencies[Math.floor(v * frequencies.length / 100)])
-          }, !isVS ? undefined : {
-            left: '50%',
-            marginLeft: '-0.5em',
-            text: 'or'
-          }]
         }
-      }
-    })
+      })
+    }
   }
   return q;
 };
@@ -128,14 +133,14 @@ export const questionnaire = {
     style: style.floatingSign,
     h4: 'Questionnaire Instructions',
     p: [
-      'Rate options individually, but mind how they compare to others in the same group.',
+      'Rate each option individually, but compare them to others in the same group.',
     ]
   },
   article: {
     color: '#fff',
     margin: '4em 0 0',
     content: [{
-      h1: 'Practice Section',
+      h1: 'Sample Section',
       div: sampleQuestions.map(q => modelQuestion(q).model),
     }, {
       marginTop: '1em',
@@ -147,8 +152,8 @@ export const questionnaire = {
       }
     }, {
       marginTop: '8em',
-      h1: 'The actual PRE questionaire',
-      div: questions.bind(qs => qs.map(q => q.model))
+      h1: 'PRE questionaire',
+      section: questions.bind(qs => qs.map(q => q.model))
     }]
   }
 };
