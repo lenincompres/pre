@@ -30,10 +30,11 @@ const CSS = {
     }
   },
   h: {
-    fontFamily: "fantasy",
+    fontWeight: "bold",
+    fontFamily: "garamond, serif",
   },
   h1: {
-    fontSize: "3em",
+    fontSize: "4em",
     color: "white",
     textShadow: "0 0 3px black",
   }
@@ -58,7 +59,7 @@ DOM.set({
     
     main: {
       maxWidth: "40em",
-      lineHeight: "2.34em",
+      lineHeight: "2.5em",
       margin: "0 auto 1em",
       onclick: e => window.location.href = "./",
       h1:["The", "Physical • Rational • Emotional", "Spectrum"],
@@ -69,9 +70,9 @@ DOM.set({
       },
       p: {
         textAlign: "left",
-        lineHeight: "1.2em",
+        lineHeight: "1.5em",
         margin: "0 1em",
-        text:"The PRE spectrum is a psychometric tool that helps us visualize our personalities, values or tendencies based on our physical, rational & emotional focus. The following questionaire averages your answers and map them to an archetype in this cube."
+        text:"The PRE spectrum is a psychometric tool that helps us visualize our personalities, values or tendencies based on our physical, rational & emotional focus. The following questionaire averages your answers and map them to an archetype in the cube."
       },
     },
     section: {
