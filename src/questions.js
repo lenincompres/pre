@@ -95,24 +95,24 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "In general, how open are you to these?",
+    question: "On your free time, how open are you to these?",
     options: [{
-        choice: "Activities to perform",
+        choice: "Performing activities",
         hint: "play, chores, exercise"
       },
       {
-        choice: "Concepts to analyze",
+        choice: "Analyzing concepts",
         hint: "ponder, research, clarify"
       },
       {
-        choice: "Feelings to consider",
+        choice: "Considering feelings",
         hint: "affection, appreciation, care"
       }
     ]
   },
   {
     reverse: true,
-    question: "On your free time, where do you go to?",
+    question: "When relaxed, what do you tend to do?",
     options: [{
         choice: "Mental recreation",
         hint: "read, write, converse"
@@ -123,22 +123,22 @@ export const QUESTIONS = [{
       },
       {
         choice: "Practical tasks",
-        hint: "make, work out, organize"
+        hint: "fix/make, work out, organize"
       }
     ]
   },
   {
-    question: "How much are you like this?",
+    question: "In general, how intent are you on these?",
     options: [{
-        choice: "Prompt with duties",
+        choice: "Fulfilling duties",
         hint: "Gotta be done."
       },
       {
-        choice: "Clear about plans",
-        hint: "Will stick to them."
+        choice: "Setting plans",
+        hint: "Want to be clear."
       },
       {
-        choice: "Committed to values",
+        choice: "Upholding values",
         hint: "Won't give them up."
       }
     ]
@@ -164,7 +164,7 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "How much would these terms define you?",
+    question: "How much would these adjectives define you?",
     options: [{
         choice: "Habitual",
         hint: "Do as you always do"
@@ -217,8 +217,8 @@ export const QUESTIONS = [{
         choice: "Enjoy discussions"
       },
       {
-        choice: "Engage with diverse people",
-        hint: "ages, genders, backgrounds"
+        choice: "Engage with diversity",
+        hint: "other genders, ages, backgrounds"
       }
     ]
   }
