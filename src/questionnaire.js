@@ -23,7 +23,7 @@ const sampleQuestions = [{
     }
   ]
 }, {
-  "question": "Adjust your color preference between these tendencies?",
+  "question": "Adjust your color preference given these tendencies?",
   "options": [
     [{
       "choice": "Neutral"

@@ -1,5 +1,5 @@
 export const QUESTIONS = [{
-    question: "When appreciating art, What do you value?",
+    question: "When appreciating art, what do you value?",
     options: [{
         choice: "Execution",
         hint: "magnitude, elaboration, dexterity"
@@ -63,7 +63,7 @@ export const QUESTIONS = [{
     ]
   },
   {
-    question: "When working, What do you focus on?",
+    question: "When working, what do you focus on?",
     options: [{
         choice: "Productivity",
         hint: "execute, deliver, profit"
