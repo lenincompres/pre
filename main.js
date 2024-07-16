@@ -62,7 +62,8 @@ DOM.set({
       lineHeight: "2.5em",
       margin: "0 auto 1em",
       onclick: e => window.location.href = "./",
-      h1:["The", "Physical • Rational • Emotional", "Spectrum"],
+      h1:"The 3DPsyche",
+      h2:"Physical-Rational-Emotional Spectrum",
       a: {
         marginTop: "3em",
         href: "http://lenino.net",
