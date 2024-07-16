@@ -166,15 +166,15 @@ export const QUESTIONS = [{
   {
     question: "How much would these adjectives define you?",
     options: [{
-        choice: "Habitual",
+        choice: "Consistent",
         hint: "Do as you always do"
       },
       {
-        choice: "Resolute",
+        choice: "Determined",
         hint: "Stick to your decisions"
       },
       {
-        choice: "Particular",
+        choice: "Picky",
         hint: "Like it the way you like it"
       }
     ]
