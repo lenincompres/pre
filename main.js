@@ -73,7 +73,7 @@ DOM.set({
         textAlign: "left",
         lineHeight: "1.5em",
         margin: "0 1em",
-        text:"This psychometric tool that helps us visualize personalities, values and tendencies based on their physical, rational & emotional focus. The following questionaire averages your answers and map them to an archetype in the cube."
+        text:"This is psychometric tool that helps us visualize personalities, values and tendencies based on their physical, rational & emotional focus. The following questionaire averages your answers and map them to an archetype in the cube."
       },
     },
     section: {
