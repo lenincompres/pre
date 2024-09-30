@@ -3,6 +3,7 @@ import State from "./State.js";
 import STATES from "./states.js";
 import * as style from "./style.js";
 import * as AUX from "./functions.js";
+import Stats from './Stats.js';
 
 export const mbti = new Binder('- - - -');
 export const feature = new Binder('#808080');
@@ -146,40 +147,19 @@ export const model = {
           },
         }
       },
-      li: [{
-        a: {
-          text: 'PRE',
-          href: './'
-        },
-        div: [bars.r, bars.g, bars.b],
-      }, {
-        a: {
-          text: 'Freud',
-          href: 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego',
-          target: '_blank'
-        },
-        div: [bars.id, bars.ego, bars.sup]
-      }, {
-        a: {
-          text: 'Jung',
-          href: 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions',
-          target: '_blank'
-        },
-        div: [bars.f, bars.s, bars.e],
-      }, {
-        a: {
-          text: 'MBTI',
-          href: 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator',
-          target: '_blank'
-        },
-        div: bars.j,
-        p: {
-          fontSize: '1.5em',
-          fontFamily: 'monospace',
-          margin: '0.5em 0 0 2em',
-          text: mbti
-        }
-      }]
+      li: [new Stats('PRE', './', [bars.r, bars.g, bars.b], true),
+        new Stats('Freud', 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego', [bars.id, bars.ego, bars.sup]),
+        new Stats('Jung', 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions', [bars.f, bars.s, bars.e]),
+        new Stats('MBTI', 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator', [bars.j,
+          {
+            tag: 'p',
+            fontSize: '1.5em',
+            fontFamily: 'monospace',
+            margin: '0.5em 0 0 2em',
+            text: mbti
+          }
+        ])
+      ],
     },
     footer: {
       small: {
