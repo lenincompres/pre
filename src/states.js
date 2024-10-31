@@ -226,7 +226,7 @@ const STATES = {
       adjectivo: "Social",
       concept: "Communication",
       concepto: "Comunicación",
-      archetype: "Messenger",
+      archetype: "Communicator",
       arquetipo: "Comunicador",
       colour: "Neutral",
       colour2: "Gray",
@@ -340,7 +340,7 @@ const STATES = {
       mapa: "Pista, Escenario, Salón De Baile"
   },
   "202": {
-      code: "202",
+      code: "202"
       adjective: "Devotional",
       adjectivo: "Devocional",
       concept: "Passion",
