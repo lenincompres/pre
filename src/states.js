@@ -345,7 +345,7 @@ const STATES = {
       adjectivo: "Devocional",
       concept: "Passion",
       concepto: "Passion",
-      archetype: "Artiste",
+      archetype: "Artist",
       arquetipo: "Artista",
       colour: "Pure Magenta",
       colour2: "Fuchsia",
