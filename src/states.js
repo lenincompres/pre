@@ -340,7 +340,7 @@ const STATES = {
       mapa: "Pista, Escenario, Salón De Baile"
   },
   "202": {
-      code: "202"
+      code: "202",
       adjective: "Devotional",
       adjectivo: "Devocional",
       concept: "Passion",
@@ -362,7 +362,7 @@ const STATES = {
       adjectivo: "Práctico",
       concept: "Aptitude",
       concepto: "Aptitud",
-      archetype: "Maker",
+      archetype: "Fabricator",
       arquetipo: "Fabricante",
       colour: "Yellow Red",
       colour2: "Orange",
