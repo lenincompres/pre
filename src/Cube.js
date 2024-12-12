@@ -166,7 +166,7 @@ function Cube({
       let l = me.lightness(c) < 45 || me.green(c) < 45;
       me.stroke(c);
       me.fill(l ? 255 : 0);
-      me.text(overState.copy.at.field, me.mouseX - me.center[0], me.mouseY - me.center[1] - size);
+      me.text(overState.copy.at.archetype, me.mouseX - me.center[0], me.mouseY - me.center[1] - size);
     }
     if (changePost) {
       states.forEach(s => s.post = s.post === 0 ? nextPost : 0);

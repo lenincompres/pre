@@ -455,7 +455,7 @@ export default {
             es: "Gusto",
         },
         archetype: {
-            en: "Aesthecist",
+            en: "Esthetician",
             es: "Esteticista",
         },
         field: {

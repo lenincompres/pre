@@ -47,7 +47,7 @@ const CSS = {
   h1: {
     paddingBottom: 0,
     textAlign: `center`,
-    fontSize: `4em`,
+    fontSize: `3em`,
     color: `white`,
     textShadow: `0 0 3px black`,
     textTransform: `capitalize`,
@@ -55,7 +55,7 @@ const CSS = {
   h2: {
     paddingTop: `2rem`,
     textAlign: `center`,
-    fontSize: `1.5em`,
+    fontSize: `1.4em`,
     color: `white`,
     textTransform: `capitalize`,
     textShadow: `0 0 3px black`,
@@ -82,15 +82,17 @@ DOM.set({
   fontFamily: `Verdana, Geneva, Tahoma, sans-serif`,
   fontSize: `16px`,
 
-  header: {
-    background: `linear-gradient(to bottom, #fff0 25%, #fffc 100%)`,
+  nav: {
+    textAlign: `right`,
+    padding: `0.5em 1em`,
     menu: {
-      position: `absolute`,
-      right: 0,
-      top: 0,
-      margin: `0.5em 1em`,
       a: Copy.getToggleLink(),
     },
+  },
+
+  header: {
+    height: `8rem`,
+    background: `linear-gradient(to bottom, #fff0 0%, #fffc 100%)`,
     h1: Copy.text({
       en: `The 3DPsyche`,
       es: `La Psiquis 3D`,

@@ -50,7 +50,7 @@ const sampleQuestions = [{
     [{
       choice: Copy.text({
         en: "Neutral",
-        es: "Neutral",
+        es: "Opaco",
       }),
     }, {
       choice: Copy.text({

@@ -178,7 +178,7 @@ export class State {
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         sketch.textLeading(0);
         sketch.textSize(size * 0.25);
-        sketch.text(this.copy.at.field, 0, size * 0.5);
+        sketch.text(this.copy.at.archetype, 0, size * 0.5);
       }
       // top
       sketch.noStroke();

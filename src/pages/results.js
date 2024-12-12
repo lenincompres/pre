@@ -15,7 +15,7 @@ const bars = {
   e: new Bar('Extro/Intro', '6em', 'gray', 'media/extremes.gif'),
   s: new Bar('Sense/iNtuit', '6em', 'red', 'cyan'),
   f: new Bar('Feel/Think', '6em', 'blue', 'lime'),
-  j: new Bar('J/P', '6em', 'white', 'black'),
+  j: new Bar('Judg/Perceiv', '6em', 'white', 'black'),
   id: new Bar('Id', '6em', 'magenta'),
   ego: new Bar('Ego', '6em', 'yellow'),
   sup: new Bar('Superego', '6em', 'cyan'),
@@ -185,8 +185,8 @@ export const model = {
             tag: 'p',
             fontSize: '1.5em',
             fontFamily: 'monospace',
-            margin: '0.5em 0 0 2em',
-            text: _mbti
+            margin: '1em 0',
+            text: _mbti,
           }
         ])
       ],
