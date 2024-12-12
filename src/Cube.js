@@ -1,3 +1,4 @@
+import Copy from "../lib/Copy.js";
 import State from "./State.js";
 
 const [ENG, ESP] = ['eng', 'esp'];
@@ -5,9 +6,59 @@ const WAIT = 4; //seconds between posts
 const POSTS = 5;
 const RADIUS = 40;
 
+Copy.add({
+  actioning: {
+    en: 'Actioning',
+    es: 'Acción',
+  },
+  sensing: {
+    en: 'Sensing',
+    es: 'Sensación',
+  },
+  abstracting: {
+    en: 'Abstracting',
+    es: 'Abstracción',
+  },
+  instincting: {
+    en: 'Instincting',
+    es: 'Instintos',
+  },
+  conceiving: {
+    en: 'Conceiving',
+    es: 'Conceptos',
+  },
+  regulating: {
+    en: 'Regulating',
+    es: 'Reglas',
+  },
+  detaching: {
+    en: 'Detaching',
+    es: 'Objetivos',
+  },
+  empathizing: {
+    en: 'Empathizing',
+    es: 'Empatía',
+  },
+  valuing: {
+    en: 'Valuing',
+    es: 'Valores',
+  },
+  relaxing: {
+    en: 'Disconnection',
+    es: 'Desconexión',
+  },
+  demanding: {
+    en: 'Determination',
+    es: 'Determinación',
+  },
+  periphery: {
+    en: 'Specializing & Normalizing',
+    es: 'Especialización & Normalización',
+  }
+});
+
 function Cube({
   container,
-  lang = ENG,
   ref = undefined,
   noLabels = false,
   onready = () => null,
@@ -32,7 +83,69 @@ function Cube({
   me.setup = function () {
     let canvas = me.createCanvas(me.windowWidth, 400);
     me.center = [me.width * 0.5, me.height * 0.5];
-    if (container) container.set(canvas.elt, "content", onready);
+    if (container) {
+      container.set({
+        select: {
+          display: "block",
+          backgroundColor: "transparent",
+          zIndex: 10,
+          position: "relative",
+          margin: "2em auto -2em",
+          textAlignLast: "center",
+          option: [{
+            value: "none",
+            text: Copy.text({
+              en: "Animated view",
+              es: 'Animación',
+            }),
+          }, {
+            value: 1,
+            text: Copy.text({
+              en: "Physical Plains",
+              es: 'Planos físicos',
+            }),
+          }, {
+            value: 2,
+            text: Copy.text({
+              en: "Rational Plains",
+              es: 'Planos Rationales',
+            }),
+          }, {
+            value: 3,
+            text: Copy.text({
+              en: "Emotional Plains",
+              es: 'Planos Emotionales',
+            }),
+          }, {
+            value: 4,
+            text: Copy.text({
+              en: "Base vs. Top",
+              es: 'Base y Tope',
+            }),
+          }, {
+            value: 0,
+            text: Copy.text({
+              en: "Top View",
+              es: 'Vista del tope',
+            }),
+          }, {
+            value: -1,
+            text: Copy.text({
+              en: "Center View",
+              es: 'Vista del centro',
+            }),
+          }, {
+            value: -2,
+            text: Copy.text({
+              en: "Base View",
+              es: 'Vista de la base',
+            }),
+          }],
+          onchange: e => me.view(e.target.value)
+        },
+        canvas: canvas.elt,
+      }, "content", onready);
+    }
     me.strokeWeight(3);
     me.textFont('Verdana');
     me.textSize(size);
@@ -49,11 +162,11 @@ function Cube({
       s.draw()
     });
     if (overState) {
-      let c = me.color('#' + overState.info.code.codeToHex())
+      let c = me.color('#' + overState.code.codeToHex())
       let l = me.lightness(c) < 45 || me.green(c) < 45;
       me.stroke(c);
       me.fill(l ? 255 : 0);
-      me.text(overState.info.archetype, me.mouseX - me.center[0], me.mouseY - me.center[1] - size);
+      me.text(overState.copy.at.field, me.mouseX - me.center[0], me.mouseY - me.center[1] - size);
     }
     if (changePost) {
       states.forEach(s => s.post = s.post === 0 ? nextPost : 0);
@@ -62,32 +175,32 @@ function Cube({
       changePost = false;
     }
     if (!currentPost || noLabels) return; // not to draw the labels
-    let y = RADIUS * 4.5;
+    let y = RADIUS * 4.3;
     let x = RADIUS * 4.75;
-    const esp = lang === ESP;
     let texts = [
-      [esp ? 'Activo' : 'Active', -x, y],
-      [esp ? 'Atento' : 'Attentive', 0, y],
-      [esp ? 'Introspectivo' : 'Introspective', x, y]
+      [Copy.at.actioning, -x, y],
+      [Copy.at.sensing, 0, y],
+      [Copy.at.abstracting, x, y],
     ];
     if (currentPost === 2) texts = [
-      [esp ? 'Instintivo' : 'Instinctive', -x * 1.12, y],
-      [esp ? 'Informativo' : 'Informative', 0, y],
-      [esp ? 'Regulativo' : 'Regulative', x * 1.12, y]
+      [Copy.at.instincting, -x * 1.12, y],
+      [Copy.at.conceiving, 0, y],
+      [Copy.at.regulating, x * 1.12, y],
     ];
     else if (currentPost === 3) texts = [
-      [esp ? 'Objetivo' : 'Objective', -x, y],
-      [esp ? 'Sensible' : 'Responsive', 0, y],
-      [esp ? 'Affectivo' : 'Affective', x, y]
+      [Copy.at.detaching, -x, y],
+      [Copy.at.empathizing, 0, y],
+      [Copy.at.valuing, x, y],
     ];
     else if (currentPost === 4) texts = [
-      ['Base', -x * 1.28, y],
-      [esp ? 'Periféricos & Neutro' : 'Peripheral & Neutral', 0, y],
-      [esp ? 'Tope' : 'Top', x * 1.28, y]
+      [Copy.at.relaxing, -x * 1.28, y],
+      [Copy.at.periphery, 0, y],
+      [Copy.at.demanding, x * 1.28, y],
     ];
     me.fill(0);
     me.textAlign(me.CENTER, me.CENTER);
     me.textSize(RADIUS * 0.34);
+    me.noStroke();
     texts.forEach(t => me.text(...t));
   }
 

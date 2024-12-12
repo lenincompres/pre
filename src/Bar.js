@@ -11,11 +11,10 @@ export class Bar extends HTMLElement {
     this.set({
       whiteSpace: 'nowrap',
       position: 'relative',
-      label: {
-        display: 'inline-block',
-        minWidth: label ? '3em' : 0,
+      p: {
+        marginBottom: '-0.5em',
         fontFamily: 'monospace',
-        textAlign: 'right',
+        textAlign: 'center',
         marginRight: '0.25em',
         text: label
       },

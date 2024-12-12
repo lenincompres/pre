@@ -1,188 +1,169 @@
-import Cube from "./src/Cube.js";
-import * as questionnaire from "./src/questionnaire.js";
-import * as results from "./src/results.js";
+import * as questionnaire from "./src/pages/questionnaire.js";
+import * as results from "./src/pages/results.js";
 import * as STYLE from "./src/style.js";
+import Copy from "./lib/Copy.js";
+import intro from "./src/pages/intro.js";
 
 const QS = DOM.querystring();
-let rgb = QS.rgb ? "#" + QS.rgb : undefined;
-let fav = QS.color ? "#" + QS.color : undefined;
+let rgb = QS.rgb ? `#${QS.rgb}` : undefined;
+let fav = QS.color ? `#${QS.color}` : undefined;
 
-questionnaire.results.bind(results.feature);
+questionnaire._results.bind(results._feature);
 
-if (rgb) results.feature.value = rgb;
+if (rgb) results._feature.value = rgb;
 
 const CSS = {
   b: {
-    fontWeight: "bold"
+    fontWeight: `bold`,
   },
   a: {
-    color: "white",
-    textDecoration: "none",
-    textShadow: "1px 1px 2px black",
+    color: `white`,
+    textDecoration: `none`,
+    textShadow: `1px 1px 2px black`,
     hover: {
-      textDecoration: "underline",
+      textDecoration: `underline`,
     },
     after: {
-      transition: "ease-in 0.1s",
-      fontSize: "0.68em",
-      verticalAlign: "top",
-      paddingLeft: "0.25em",
+      transition: `ease-in 0.1s`,
+      fontSize: `0.68em`,
+      verticalAlign: `top`,
+      paddingLeft: `0.25em`,
     }
   },
+  p: {
+    margin: `0.5em 0`,
+    lineHeight: `1.5em`,
+  },
+  ul: {
+    margin: `0.5em 0`,
+    lineHeight: `1.5em`,
+  },
   h: {
-    fontWeight: "bold",
-    fontFamily: "garamond, serif",
+    padding: `.5em 0 0.2em`,
+    fontWeight: `bold`,
+    fontFamily: `title`,
+    lineHeight: `1.5em`,
   },
   h1: {
-    fontSize: "4em",
-    color: "white",
-    textShadow: "0 0 3px black",
+    paddingBottom: 0,
+    textAlign: `center`,
+    fontSize: `4em`,
+    color: `white`,
+    textShadow: `0 0 3px black`,
+    textTransform: `capitalize`,
+  },
+  h2: {
+    paddingTop: `2rem`,
+    textAlign: `center`,
+    fontSize: `1.5em`,
+    color: `white`,
+    textTransform: `capitalize`,
+    textShadow: `0 0 3px black`,
+  },
+  h3: {
+    fontSize: `1.2em`,
   }
 };
 
 DOM.set({
-  title: "PRE Spectrum",
-  charset: "UTF-8",
-  viewport: "width=device-width, initial-scale=1, minimum-scale=1",
-  keywords: "3dpsyche, psychology, test, psychology test, personality types, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction, lenino, lenin compres",
-  description: "A psychometric tool to visualize Physical, Rational & Emotional focus.",
-  icon: "media/favicon.gif",
-  textAlign: "center",
-  backgroundColor: rgb ? rgb : questionnaire.favorite,
+  title: `3DPsyche`,
+  charset: `UTF-8`,
+  viewport: `width=device-width, initial-scale=1, minimum-scale=1`,
+  keywords: `3dpsyche, psychology, test, psychology test, personality types, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction, lenino, lenin compres`,
+  description: `A psychometric tool to visualize the Physical, Rational & Emotional spectrum.`,
+  icon: `media/favicon.gif`,
+  textAlign: `center`,
+  backgroundColor: rgb ? rgb : questionnaire._favorite,
+  font: {
+    fontFamily: `title`,
+    src: `assets/PTSerif-Regular.ttf`,
+  },
   css: CSS,
-  fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
-  fontSize: "16px",
+  fontFamily: `Verdana, Geneva, Tahoma, sans-serif`,
+  fontSize: `16px`,
+
   header: {
-    backgroundColor: STYLE.lightSreen,
-    boxShadow: "0 1em 1em " + STYLE.lightSreen,
-    paddingTop: "2em",
-    
-    main: {
-      maxWidth: "40em",
-      lineHeight: "2.5em",
-      margin: "0 auto 1em",
-      onclick: e => window.location.href = "./",
-      h1:"The 3DPsyche",
-      h2:"Physical-Rational-Emotional Spectrum",
-      a: {
-        marginTop: "3em",
-        href: "http://lenino.net",
-        text: "by Lenino"
-      },
-      p: {
-        textAlign: "left",
-        lineHeight: "1.5em",
-        margin: "0 1em",
-        text:"This is psychometric tool that helps us visualize personalities, values and tendencies based on their physical, rational & emotional focus. The following questionaire averages your answers and map them to an archetype in the cube."
-      },
+    background: `linear-gradient(to bottom, #fff0 25%, #fffc 100%)`,
+    menu: {
+      position: `absolute`,
+      right: 0,
+      top: 0,
+      margin: `0.5em 1em`,
+      a: Copy.getToggleLink(),
     },
-    section: {
-      id: "cubeContainer",
-      display: "flex",
-      flexDirection: "column",
-      placeContent: "center",
-      small: "Loading color spectrum…",
-      height: "400px",
-      margin: "-2em auto 0"
+    h1: Copy.text({
+      en: `The 3DPsyche`,
+      es: `La Psiquis 3D`,
+    }),
+    a: {
+      display: `block`,
+      href: `http://lenino.net`,
+      text: `${Copy.text({en: `by`, es: `por`})} Lenin Comprés`,
     },
-    select: {
-      display: "block",
-      backgroundColor: "transparent",
-      zIndex: 10,
-      position: "relative",
-      margin: "-2em auto 3em",
-      textAlignLast: "center",
-      option: [{
-        value: "none",
-        text: "Animated view"
-      }, {
-        value: 1,
-        text: "Physical Plains"
-      }, {
-        value: 2,
-        text: "Rational Plains"
-      }, {
-        value: 3,
-        text: "Emotional Plains"
-      }, {
-        value: 4,
-        text: "Base vs. Top"
-      }, {
-        value: 0,
-        text: "Top View"
-      }, {
-        value: -1,
-        text: "Center View"
-      }, {
-        value: -2,
-        text: "Base View"
-      }],
-      onchange: e => cube.view(e.target.value)
-    },
+  },
+
+  section: intro,
+
+  div: {
+    height: `8em`,
+    background: `linear-gradient(to bottom, #fffc 0%, #fff0 100%)`,
   },
 
   main: rgb ? undefined : questionnaire.questionnaire,
 
+  div_: {
+    height: `8em`,
+    background: rgb ? rgb : results._feature.as(v => `linear-gradient(to bottom, ${questionnaire._favorite.value} 0%, ${v} 100%)`),
+  },
+
   footer: {
-    boxShadow: rgb ? "0 -1em 1em " + rgb : results.feature.bind(v => "0 -1em 1em " + v),
-    backgroundColor: rgb ? rgb : results.feature,
+    backgroundColor: rgb ? rgb : results._feature,
 
     section: {
       style: STYLE.section,
-      display: "flex",
-      flexDirection: "column",
-      h1: rgb && !fav ? "Featured" : "Results",
+      display: `flex`,
+      flexDirection: `column`,
+      h2: rgb && !fav ? `Featured` : `Results`,
       p: !rgb || fav ? {
-        margin: "1em 0 -2.25em -11em",
+        margin: `1em 0 -2.25em -11em`,
         zIndex: 1,
-        text: "Closests:"
+        text: `Closests:`
       } : undefined,
 
       div: results.model,
 
       a: {
-        target: "_blank",
+        target: `_blank`,
         content: [{
-          display: rgb ? "none" : "block",
-          href: DOM.bind([results.feature, questionnaire.favorite], (r, f) => "./?rgb=" + r.substr(1) + "&color=" + f.substr(1)),
-          text: "Link to these results for you to save or share."
+          display: rgb ? `none` : `block`,
+          href: DOM.bind([results._feature, questionnaire._favorite], (r, f) => `./?rgb=${r.substr(1)}&color=${f.substr(1)}`),
+          text: `Link to these results for you to save or share.`
         }, !fav ? undefined : {
-          margin: "0 auto",
-          padding: "0.5em 1em",
-          width: "fit-content",
-          borderRadius: "0.5em",
-          boxShadow: "1px 1px 2px black",
+          margin: `0 auto`,
+          padding: `0.5em 1em`,
+          width: `fit-content`,
+          borderRadius: `0.5em`,
+          boxShadow: `1px 1px 2px black`,
           backgroundColor: fav,
-          href: "./?rgb=" + fav.substr(1),
-          text: "This is the result of your favorite color: " + fav
+          href: `./?rgb=${fav.substr(1)}`,
+          text: `This is the result of your favorite color: ${fav}`,
         }, {
-          fontSize: "1.25em",
-          marginTop: "2em",
-          href: "./",
-          text: "Take the questionnaire."
+          fontSize: `1.25em`,
+          marginTop: `2em`,
+          href: `./`,
+          text: `${rgb ? `Take` : `Restart`} the questionnaire.`,
         }, {
-          fontSize: "small",
-          marginTop: "3em",
-          href: "http://lenino.net",
-          text: "Created by Lenin Compres"
+          fontSize: `small`,
+          marginTop: `3em`,
+          href: `http://lenino.net`,
+          text: `Created by Lenin Comprés`,
         }, {
-          fontSize: "small",
-          marginTop: "0.68em",
-          href: "https://github.com/lenincompres/DOM.js",
-          text: "Developed with DOM.js"
+          fontSize: `small`,
+          marginTop: `0.68em`,
+          href: `https://github.com/lenincompres/DOM.js`,
+          text: `Developed with DOM.js`,
         }]
       }
     }
   }
 });
-
-let cube = new Cube({
-  noLabels: true,
-  container: cubeContainer,
-  onclick: loadState,
-});
-
-function loadState(state){
-  if(!state) return;
-  window.location.href = "./?rgb=" + state.code.codeToHex();
-}

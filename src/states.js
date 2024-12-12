@@ -1,463 +1,1034 @@
-const STATES = {
-  "000": {
-      code: "000",
-      adjective: "Elemental",
-      adjectivo: "Elemental",
-      concept: "Serenity",
-      concepto: "Serenidad",
-      archetype: "Monk",
-      arquetipo: "Monge",
-      colour: "Dark",
-      colour2: "Charcoal",
-      color: "Negro",
-      mbti: "I--P",
-      location: "Wilderness",
-      localidad: "Naturaleza",
-      map: "Retreat, Open Range, Getaway",
-      mapa: "Camp Abierto, Retiro, Excursion"
-  },
-  "001": {
-      code: "001",
-      adjective: "Inspirational",
-      adjectivo: "Inspiracional",
-      concept: "Empathy",
-      concepto: "Empatía",
-      archetype: "Aide",
-      arquetipo: "Acompañante",
-      colour: "Dark Blue",
-      colour2: "Navy",
-      color: "Azul Oscuro",
-      mbti: "-NFP",
-      location: "Garden",
-      localidad: "Jardín",
-      map: "Botanical Garden, Zoo, Fair",
-      mapa: "Jardín Botánico, Zoológico, Feria"
-  },
-  "002": {
-      code: "002",
-      adjective: "Sentimental",
-      adjectivo: "Sentimental",
-      concept: "Feeling",
-      concepto: "Sentimiento",
-      archetype: "Poet",
-      arquetipo: "Poeta",
-      colour: "Pure Blue",
-      colour2: "Indigo",
-      color: "Azul Puro",
-      mbti: "INFP",
-      location: "Auditorium",
-      localidad: "Auditorio",
-      map: "Concert Hall, Theatre, Opera House",
-      mapa: "Recital, Teatro, Ópera"
-  },
-  "010": {
-      code: "010",
-      adjective: "Conceptual",
-      adjectivo: "Conceptual",
-      concept: "Knowledge",
-      concepto: "Conocimiento",
-      archetype: "Researcher",
-      arquetipo: "Investigador",
-      colour: "Dark Green",
-      colour2: "Forest",
-      color: "Verde Oscuro",
-      mbti: "-NTP",
-      location: "Field",
-      localidad: "Campo",
-      map: "Research Center, Journal, Excursion",
-      mapa: "Centro de Investigación, Excursión"
-  },
-  "011": {
-      code: "011",
-      adjective: "Ideational",
-      adjectivo: "Ideacional",
-      concept: "Creativity",
-      concepto: "Creatividad",
-      archetype: "Storyteller",
-      arquetipo: "Cuentacuentos",
-      colour: "Dark Cyan",
-      colour2: "Teal",
-      color: "Verde Azulado",
-      mbti: "EN-P",
-      location: "Cafe",
-      localidad: "Café",
-      map: "Dialogue, Lecture, Publication",
-      mapa: "Diálogo, Lectura, Publicación"
-  },
-  "012": {
-      code: "012",
-      adjective: "Existential",
-      adjectivo: "Existencial",
-      concept: "Meaning",
-      concepto: "Significado",
-      archetype: "Counselor",
-      arquetipo: "Consejero",
-      colour: "Cyan Blue",
-      colour2: "Aqua",
-      color: "Azul Ciano",
-      mbti: "-NF-",
-      location: "Sanctuary",
-      localidad: "Santuario",
-      map: "Temple, Memorial, Museum",
-      mapa: "Templo, Memorial, Museo"
-  },
-  "020": {
-      code: "020",
-      adjective: "Analytical",
-      adjectivo: "Analítico",
-      concept: "Reason",
-      concepto: "Raciocinio",
-      archetype: "Scientist",
-      arquetipo: "Científico",
-      colour: "Pure Green",
-      colour2: "Lime",
-      color: "Verde Puro",
-      mbti: "INTP",
-      location: "Study",
-      localidad: "Estudio",
-      map: "Desk, Board, Observatory",
-      mapa: "Escritorio, Pizzarra, Observatorio"
-  },
-  "021": {
-      code: "021",
-      adjective: "Theoretical",
-      adjectivo: "Teórica",
-      concept: "Plans",
-      concepto: "Planeación",
-      archetype: "Instructor",
-      arquetipo: "Instructor",
-      colour: "Cyan Green",
-      colour2: "Emerald",
-      color: "Verde Ciano",
-      mbti: "-NT-",
-      location: "Seminar",
-      localidad: "Seminario",
-      map: "Forum, Expo, Classroom",
-      mapa: "Forum, Expo, Aula"
-  },
-  "022": {
-      code: "022",
-      adjective: "Ethical",
-      adjectivo: "Ético",
-      concept: "Morals",
-      concepto: "Moralidad",
-      archetype: "Philosopher",
-      arquetipo: "Filosófo",
-      colour: "Pure Cyan",
-      colour2: "Turquoise",
-      color: "Ciano Puro",
-      mbti: "IN-J",
-      location: "Library",
-      localidad: "Biblioteca",
-      map: "Rectory, Seminar, History",
-      mapa: "Archivos, Mentoría, Historia"
-  },
-  "100": {
-      code: "100",
-      adjective: "Sensorial",
-      adjectivo: "Sensorial",
-      concept: "Alertness",
-      concepto: "Alerta",
-      archetype: "Scout",
-      arquetipo: "Explorador",
-      colour: "Dark Red",
-      colour2: "Maroon",
-      color: "Rojo Oscuro",
-      mbti: "-S-P",
-      location: "Field",
-      localidad: "Campo",
-      map: "Park, Hunting Ground, Yard",
-      mapa: "Deportes De Campo, Cacería, Parque"
-  },
-  "101": {
-      code: "101",
-      adjective: "Jovial",
-      adjectivo: "Jovial",
-      concept: "Mood",
-      concepto: "Humor",
-      archetype: "Entertainer",
-      arquetipo: "Animador",
-      colour: "Dark Magenta",
-      colour2: "Purple",
-      color: "Magenta Oscuro",
-      mbti: "ESFP",
-      location: "Club",
-      localidad: "Club",
-      map: "Cafeteria, Bar, Party Area",
-      mapa: "Cafetería, Bar, Salón De Fiestas"
-  },
-  "102": {
-      code: "102",
-      adjective: "Sensual",
-      adjectivo: "Sensual",
-      concept: "Taste",
-      concepto: "Gusto",
-      archetype: "Designer",
-      arquetipo: "Diseñador",
-      colour: "Magenta Blue",
-      colour2: "Violet",
-      color: "Magenta Azul",
-      mbti: "--F-",
-      location: "Gallery",
-      localidad: "Galería",
-      map: "Restaurant, Art Exhibit, Runway",
-      mapa: "Exhibición De Arte, Restaurant, Pasarela"
-  },
-  "110": {
-      code: "110",
-      adjective: "Factual",
-      adjectivo: "Factual",
-      concept: "Objectivity",
-      concepto: "Objetividad",
-      archetype: "Dealer",
-      arquetipo: "Negociante",
-      colour: "Dark Yellow",
-      colour2: "Mustard",
-      color: "Amarillo Oscuro",
-      mbti: "ESTP",
-      location: "Shop",
-      localidad: "Tienda",
-      map: "Market, Trading Floor, Casino",
-      mapa: "Comercio, Banca, Casino"
-  },
-  "111": {
-      code: "111",
-      adjective: "Social",
-      adjectivo: "Social",
-      concept: "Communication",
-      concepto: "Comunicación",
-      archetype: "Communicator",
-      arquetipo: "Comunicador",
-      colour: "Neutral",
-      colour2: "Gray",
-      color: "Gris",
-      mbti: "E---",
-      location: "Plaza",
-      localidad: "Plaza",
-      map: "Hallway, Media, Main Hub",
-      mapa: "Pasillo, Medios De Comunciación, Centro"
-  },
-  "112": {
-      code: "112",
-      adjective: "Congenial",
-      adjectivo: "Congenial",
-      concept: "Relationships",
-      concepto: "Vínculos",
-      archetype: "Diplomat",
-      arquetipo: "Diplomático",
-      colour: "Light Blue",
-      colour2: "Lavender",
-      color: "Azul Claro",
-      mbti: "ENFJ",
-      location: "Community Center",
-      localidad: "Centro Comunitario",
-      map: "Cultural Center, Embassy, Hospitality",
-      mapa: "Centro Cultural, Embajada, Hotelería"
-  },
-  "120": {
-      code: "120",
-      adjective: "Technical",
-      adjectivo: "Técnico",
-      concept: "Functionality",
-      concepto: "Funcionalidad",
-      archetype: "Technitian",
-      arquetipo: "Técnico",
-      colour: "Yellow Green",
-      colour2: "Chartreuse",
-      color: "Verde Amarillo",
-      mbti: "--T-",
-      location: "Lab",
-      localidad: "Laboratorio",
-      map: "Systems, Technology, Accounting",
-      mapa: "Sistemas, Tecnología, Contabilidad"
-  },
-  "121": {
-      code: "121",
-      adjective: "Organizational",
-      adjectivo: "Organizacional",
-      concept: "Logistics",
-      concepto: "Logística",
-      archetype: "Coordinator",
-      arquetipo: "Coordinador",
-      colour: "Light Green",
-      colour2: "Mint",
-      color: "Verde Claro",
-      mbti: "ENTJ",
-      location: "Civic Center",
-      localidad: "Centro Civil",
-      map: "Organization, Club, Politic Arena",
-      mapa: "Organización, Club, Arena Política"
-  },
-  "122": {
-      code: "122",
-      adjective: "Critical",
-      adjectivo: "Crítico",
-      concept: "Order",
-      concepto: "Orden",
-      archetype: "Judge",
-      arquetipo: "Juez",
-      colour: "Light Cyan",
-      colour2: "Sky",
-      color: "Ciano Claro",
-      mbti: "-N-J",
-      location: "Court",
-      localidad: "Corte",
-      map: "Assembly, Advisory, Congress",
-      mapa: "Asamblea, Consejería, Congreso"
-  },
-  "200": {
-      code: "200",
-      adjective: "Martial",
-      adjectivo: "Marcial",
-      concept: "Action",
-      concepto: "Acción",
-      archetype: "Athlete",
-      arquetipo: "Atleta",
-      colour: "Pure Red",
-      colour2: "Scarlet",
-      color: "Rojo Puro",
-      mbti: "IS-P",
-      location: "Arena",
-      localidad: "Arena",
-      map: "Stadium, Dojo, Track & Field",
-      mapa: "Estadio, Dojo, Campo Y Pista"
-  },
-  "201": {
-      code: "201",
-      adjective: "Sensational",
-      adjectivo: "Sensacional",
-      concept: "Attitude",
-      concepto: "Actitud",
-      archetype: "Performer",
-      arquetipo: "Estrella",
-      colour: "Magenta Red",
-      colour2: "Pink",
-      color: "Rojo Magenta",
-      mbti: "-SF-",
-      location: "Gym",
-      localidad: "Gimnasio",
-      map: "Ring, Stage, Dance Floor",
-      mapa: "Pista, Escenario, Salón De Baile"
-  },
-  "202": {
-      code: "202",
-      adjective: "Devotional",
-      adjectivo: "Devocional",
-      concept: "Passion",
-      concepto: "Passion",
-      archetype: "Artist",
-      arquetipo: "Artista",
-      colour: "Pure Magenta",
-      colour2: "Fuchsia",
-      color: "Magenta Puro",
-      mbti: "ISFJ",
-      location: "Studio",
-      localidad: "Atelier",
-      map: "Atelier, Crafts, Kitchen",
-      mapa: "Artesanía, Cocina, Manualidades"
-  },
-  "210": {
-      code: "210",
-      adjective: "Practical",
-      adjectivo: "Práctico",
-      concept: "Aptitude",
-      concepto: "Aptitud",
-      archetype: "Fabricator",
-      arquetipo: "Fabricante",
-      colour: "Yellow Red",
-      colour2: "Orange",
-      color: "Rojo Amarillo",
-      mbti: "-ST-",
-      location: "Workshop",
-      localidad: "Taller",
-      map: "Warehouse, Garage, Construction",
-      mapa: "Almacen, Garage, Construcción"
-  },
-  "211": {
-      code: "211",
-      adjective: "Diligent",
-      adjectivo: "Diligente",
-      concept: "Service",
-      concepto: "Servicio",
-      archetype: "Agent",
-      arquetipo: "Agente",
-      colour: "Light Red",
-      colour2: "Coral",
-      color: "Rojo Claro",
-      mbti: "ES-J",
-      location: "Service Center",
-      localidad: "Centro De Servicio",
-      map: "Security, Life Guarding, Agency",
-      mapa: "Seguridad, Agencia, Superintendencia"
-  },
-  "212": {
-      code: "212",
-      adjective: "Protectoral",
-      adjectivo: "Protectoral",
-      concept: "Security",
-      concepto: "Seguridad",
-      archetype: "Guardian",
-      arquetipo: "Guardian",
-      colour: "Light Magenta",
-      colour2: "Rose",
-      color: "Magenta Claro",
-      mbti: "-SFJ",
-      location: "Clinic",
-      localidad: "Clínica",
-      map: "Aid, Health, Care Center",
-      mapa: "Asistencia, Centro De Salud, Guardería"
-  },
-  "220": {
-      code: "220",
-      adjective: "Industrial",
-      adjectivo: "Industrial",
-      concept: "Productivity",
-      concepto: "Productividad",
-      archetype: "Engineer",
-      arquetipo: "Ingeniero",
-      colour: "Pure Yellow",
-      colour2: "Canary",
-      color: "Amarillo Puro",
-      mbti: "ISTJ",
-      location: "Industry",
-      localidad: "Industria",
-      map: "Factory, Engineering, Manufactoring",
-      mapa: "Fábrica, Ingeniería, Manufactura"
-  },
-  "221": {
-      code: "221",
-      adjective: "Motivational",
-      adjectivo: "Motivacional",
-      concept: "Goals",
-      concepto: "Propósitos",
-      archetype: "Manager",
-      arquetipo: "Manager",
-      colour: "Light Yellow",
-      colour2: "Cream",
-      color: "Amarillo Claro",
-      mbti: "-STJ",
-      location: "Company",
-      localidad: "Compañía",
-      map: "Venture, Business, Enterprise",
-      mapa: "Projectos, Negocios, Empresas"
-  },
-  "222": {
-      code: "222",
-      adjective: "Imperial",
-      adjectivo: "Imperial",
-      concept: "Control",
-      concepto: "Control",
-      archetype: "Cheif",
-      arquetipo: "Jefe",
-      colour: "Light",
-      colour2: "Pearl",
-      color: "Blanco",
-      mbti: "I--J",
-      location: "Management",
-      localidad: "Gerencia",
-      map: "Palace, Tribune, Government",
-      mapa: "Palacio, Tribunal, Gobierno"
-  }
-}
-
-export default STATES;
+export default {
+    "000": {
+        code: "NNN",
+        coords: "000",
+        quality: {
+            en: "Ethereal",
+            es: "Ethereal",
+        },
+        adjective: {
+            en: "Pacifist",
+            es: "Pacifista",
+        },
+        concept: {
+            en: "Serenity",
+            es: "Serenidad",
+        },
+        archetype: {
+            en: "Monk",
+            es: "Monje",
+        },
+        field: {
+            en: "Nature",
+            es: "Naturaleza",
+        },
+        color: {
+            en: "Dark",
+            es: "Negro",
+        },
+        tone: {
+            en: "Charcoal",
+            es: "Negro",
+        },
+        mbti: "I--P",
+        location: {
+            en: "Nature",
+            es: "Naturaleza",
+        },
+        map: {
+            en: "Retreat, Open Range, Getaway",
+            es: "Camp Abierto, Retiro, Excursion",
+        },
+    },
+    "001": {
+        code: "001",
+        quality: {
+            en: "Inspirational",
+            es: "Inspiracional",
+        },
+        adjective: {
+            en: "Humanist",
+            es: "Humanista",
+        },
+        field: {
+            en: "Humanity",
+            es: "Humanidad",
+        },
+        concept: {
+            en: "Empathy",
+            es: "Empatía",
+        },
+        archetype: {
+            en: "Aide",
+            es: "Ayudante",
+        },
+        colour: {
+            en: "Dark Blue",
+            es: "Azul Oscuro",
+        },
+        tone: {
+            en: "Navy",
+            es: "Marino",
+        },
+        mbti: "-NFP",
+        location: {
+            en: "Garden",
+            es: "Jardín",
+        },
+        map: {
+            en: "Botanical Garden, Zoo, Fair",
+            es: "Jardín Botánico, Zoológico, Feria",
+        },
+    },
+    "002": {
+        code: "002",
+        quality: {
+            en: "Sentimental",
+            es: "Sentimental",
+        },
+        adjective: {
+            en: "Romanticist",
+            es: "Romanticista",
+        },
+        concept: {
+            en: "Feelings",
+            es: "Sentimientos",
+        },
+        archetype: {
+            en: "Poet",
+            es: "Poeta",
+        },
+        field: {
+            en: "Poetry",
+            es: "Poesía",
+        },
+        colour: {
+            en: "Pure Blue",
+            es: "Azul Puro",
+        },
+        tone: {
+            en: "Indigo",
+            es: "Índigo",
+        },
+        mbti: "INFP",
+        location: {
+            en: "Auditorium",
+            es: "Auditorio",
+        },
+        map: {
+            en: "Concert Hall, Theatre, Opera House",
+            es: "Recital, Teatro, Ópera",
+        },
+    },
+    "010": {
+        code: "010",
+        quality: {
+            en: "Conceptual",
+            es: "Conceptual",
+        },
+        adjective: {
+            en: "Empiricist",
+            es: "Empiricista",
+        },
+        concept: {
+            en: "Inquiry",
+            es: "Curiosidad",
+        },
+        archetype: {
+            en: "Researcher",
+            es: "Investigador",
+        },
+        field: {
+            en: "Investigation",
+            es: "Invetigación",
+        },
+        colour: {
+            en: "Dark Green",
+            es: "erde Oscuro",
+        },
+        tone: {
+            en: "Forest",
+            es: "Elmo",
+        },
+        mbti: "-NTP",
+        location: {
+            en: "Field",
+            es: "Campo",
+        },
+        map: {
+            en: "Research Center, Journal, Excursion",
+            es: "Centro de Investigación, Excursión",
+        },
+    },
+    "011": {
+        code: "011",
+        quality: {
+            en: "Ideational",
+            es: "Ideacional",
+        },
+        adjective: {
+            en: "Idealist",
+            es: "Idealista",
+        },
+        concept: {
+            en: "Creativity",
+            es: "Creatividad",
+        },
+        archetype: {
+            en: "Storyteller",
+            es: "Narrador",
+        },
+        field: {
+            en: "Literature",
+            es: "Literatura",
+        },
+        colour: {
+            en: "Dark Cyan",
+            es: "Verde Azulado",
+        },
+        tone: {
+            en: "Teal",
+            es: "Menta",
+        },
+        mbti: "EN-P",
+        location: {
+            en: "Cafe",
+            es: "Café",
+        },
+        map: {
+            en: "Dialogue, Lecture, Publication",
+            es: "Diálogo, Charla, Publicación",
+        },
+    },
+    "012": {
+        code: "012",
+        adjective: {
+            en: "Existential",
+            es: "Existencial",
+        },
+        adjective: {
+            en: "Existentialist",
+            es: "Existentialista",
+        },
+        concept: {
+            en: "Meaning",
+            es: "Significado",
+        },
+        archetype: {
+            en: "Counselor",
+            es: "Consejero",
+        },
+        field: {
+            en: "Counseling",
+            es: "Consejería",
+        },
+        colour: {
+            en: "Cyan Blue",
+            es: "Azul Ciano",
+        },
+        tone: {
+            en: "Azure",
+            es: "Azurita",
+        },
+        mbti: "-NF-",
+        location: {
+            en: "Sanctuary",
+            es: "Santuario",
+        },
+        map: {
+            en: "Temple, Memorial, Museum",
+            es: "Templo, Memorial, Museo",
+        },
+    },
+    "020": {
+        code: "020",
+        quality: {
+            en: "Analytical",
+            es: "Analítico",
+        },
+        adjective: {
+            en: "Rationalist",
+            es: "Racionalista",
+        },
+        concept: {
+            en: "Logic",
+            es: "Lógica",
+        },
+        archetype: {
+            en: "Analyst",
+            es: "Analista",
+        },
+        field: {
+            en: "Science",
+            es: "Ciencia",
+        },
+        colour: {
+            en: "Pure Green",
+            es: "Verde Puro",
+        },
+        tone: {
+            en: "Emerald",
+            es: "Emeralda",
+        },
+        mbti: "INTP",
+        location: {
+            en: "Study",
+            es: "Estudio",
+        },
+        map: {
+            en: "Desk, Board, Observatory",
+            es: "Escritorio, Pizzarra, Observatorio",
+        },
+    },
+    "021": {
+        code: "021",
+        quality: {
+            en: "Theoretical",
+            es: "Teórica",
+        },
+        adjective: {
+            en: "Intellectualist",
+            es: "Intellectualista",
+        },
+        concept: {
+            en: "Ideas",
+            es: "Ideas",
+        },
+        archetype: {
+            en: "Instructor",
+            es: "Instructor",
+        },
+        field: {
+            en: "Educacion",
+            es: "Educación",
+        },
+        colour: {
+            en: "Cyan Green",
+            es: "Verde Ciano",
+        },
+        tone: {
+            en: "Jade",
+            es: "Jade",
+        },
+        mbti: "-NT-",
+        location: {
+            en: "Seminar",
+            es: "Seminario",
+        },
+        map: {
+            en: "Forum, Expo, Classroom",
+            es: "Foro, Expo, Aula",
+        },
+    },
+    "022": {
+        code: "022",
+        quality: {
+            en: "Ethical",
+            es: "Ético",
+        },
+        adjective: {
+            en: "Moralist",
+            es: "Moralista",
+        },
+        concept: {
+            en: "Morals",
+            es: "Moralidad",
+        },
+        archetype: {
+            en: "Philosopher",
+            es: "Filósofo",
+        },
+        field: {
+            en: "Philosophy",
+            es: "Filosofía",
+        },
+        colour: {
+            en: "Pure Cyan",
+            es: "Ciano Puro",
+        },
+        tone: {
+            en: "Aqua",
+            es: "Aqua",
+        },
+        mbti: "IN-J",
+        location: {
+            en: "Library",
+            es: "Biblioteca",
+        },
+        map: {
+            en: "Rectory, Seminar, History",
+            es: "Archivos, Mentoría, Historia",
+        },
+    },
+    "100": {
+        code: "100",
+        quality: {
+            en: "Sensorial",
+            es: "Sensorial",
+        },
+        adjective: {
+            en: "Realist",
+            es: "Realista",
+        },
+        concept: {
+            en: "Alertness",
+            es: "Alerta",
+        },
+        archetype: {
+            en: "Scout",
+            es: "Vigilante",
+        },
+        field: {
+            en: "Exploration",
+            es: "Exploración",
+        },
+        colour: {
+            en: "Dark Red",
+            es: "Rojo Oscuro",
+        },
+        colour: {
+            en: "Maroon",
+            es: "Vino",
+        },
+        mbti: "-S-P",
+        location: {
+            en: "Field",
+            es: "Campo",
+        },
+        map: {
+            en: "Park, Hunting Ground, Yard",
+            es: "Campo deportivo, Excursión, Parque",
+        },
+    },
+    "101": {
+        code: "101",
+        quality: {
+            en: "Jovial",
+            es: "Jovial",
+        },
+        adjective: {
+            en: "Hedonist",
+            es: "Hedonista",
+        },
+        concept: {
+            en: "Mood",
+            es: "Humor",
+        },
+        archetype: {
+            en: "Entertainer",
+            es: "Comediante",
+        },
+        field: {
+            en: "Entretainment",
+            es: "Entretenimineto",
+        },
+        colour: {
+            en: "Dark Magenta",
+            es: "Magenta Oscuro",
+        },
+        tone: {
+            en: "Purple",
+            es: "Púrpura",
+        },
+        mbti: "ESFP",
+        location: {
+            en: "Club",
+            es: "Club",
+        },
+        map: {
+            en: "Cafeteria, Bar, Disco",
+            es: "Cafetería, Bar, Salón De Fiestas",
+        },
+    },
+    "102": {
+        code: "102",
+        quality: {
+            en: "Sensual",
+            es: "Sensual",
+        },
+        adjective: {
+            en: "Aestheticist",
+            es: "Esteticista",
+        },
+        concept: {
+            en: "Taste",
+            es: "Gusto",
+        },
+        archetype: {
+            en: "Aesthecist",
+            es: "Esteticista",
+        },
+        field: {
+            en: "Fashion",
+            es: "Moda",
+        },
+        colour: {
+            en: "StylMagenta Blueist",
+            es: "Magenta Azul",
+        },
+        tone: {
+            en: "Violet",
+            es: "Violeta",
+        },
+        mbti: "--F-",
+        location: {
+            en: "Gallery",
+            es: "Galería",
+        },
+        map: {
+            en: "Restaurant, Art Exhibit, Runway",
+            es: "Exhibición De Arte, Restaurant, Pasarela",
+        },
+    },
+    "110": {
+        code: "110",
+        quality: {
+            en: "Factual",
+            es: "Factual",
+        },
+        adjective: {
+            en: "Pragmatist",
+            es: "Pragmatista",
+        },
+        concept: {
+            en: "Objectivity",
+            es: "Objetividad",
+        },
+        archetype: {
+            en: "Merchant",
+            es: "Mercader",
+        },
+        field: {
+            en: "Market",
+            es: "Mercado",
+        },
+        colour: {
+            en: "Dark Yellow",
+            es: "Amarillo Oscuro",
+        },
+        tone: {
+            en: "Olive",
+            es: "Oliva",
+        },
+        mbti: "ESTP",
+        location: {
+            en: "Market",
+            es: "Mercado",
+        },
+        map: {
+            en: "Market, Trading Floor, Casino",
+            es: "Comercio, Banca, Casino",
+        },
+    },
+    "111": {
+        code: "111",
+        quality: {
+            en: "Social",
+            es: "Social",
+        },
+        adjective: {
+            en: "Mediatist",
+            es: "Mediatista",
+        },
+        concept: {
+            en: "Communication",
+            es: "Comunicación",
+        },
+        archetype: {
+            en: "Messenger",
+            es: "Mensajero",
+        },
+        field: {
+            en: "Communications",
+            es: "Comunicación",
+        },
+        colour: {
+            en: "Gray",
+            es: "Gris",
+        },
+        tone: {
+            en: "Slate",
+            es: "Gris",
+        },
+        mbti: "E---",
+        location: {
+            en: "Plaza",
+            es: "Plaza",
+        },
+        map: {
+            en: "Hallway, Media, Main Hub",
+            es: "Pasillo, Medios De Comunciación, Centro",
+        },
+    },
+    "112": {
+        code: "112",
+        quality: {
+            en: "Congenial",
+            es: "Congenial",
+        },
+        adjective: {
+            en: "Activist",
+            es: "Activista",
+        },
+        concept: {
+            en: "Relationships",
+            es: "Vínculos",
+        },
+        archetype: {
+            en: "Diplomat",
+            es: "Diplomático",
+        },
+        field: {
+            en: "Diplomacy",
+            es: "Diplomacia",
+        },
+        colour: {
+            en: "Light Blue",
+            es: "Azul Claro",
+        },
+        tone: {
+            en: "Periwinkle",
+            es: "Lavanda",
+        },
+        mbti: "ENFJ",
+        location: {
+            en: "Community Center",
+            es: "Centro Comunitario",
+        },
+        map: {
+            en: "Cultural Center, Embassy, Hospitality",
+            es: "Centro Cultural, Embajada, Hotelería",
+        },
+    },
+    "120": {
+        code: "120",
+        adjective: {
+            en: "Technical",
+            es: "Técnico",
+        },
+        concept: {
+            en: "Functionality",
+            es: "Funcionalidad",
+        },
+        archetype: {
+            en: "Technician",
+            es: "Técnico",
+        },
+        field: {
+            en: "Technology",
+            es: "Tecnología",
+        },
+        colour: {
+            en: "Yellow Green",
+            es: "Verde Amarillo",
+        },
+        tone: {
+            en: "Lime",
+            es: "Lima",
+        },
+        mbti: "--T-",
+        location: {
+            en: "Lab",
+            es: "Laboratorio",
+        },
+        map: {
+            en: "Systems, Technology, Accounting",
+            es: "Sistemas, Tecnología, Contabilidad",
+        },
+    },
+    "121": {
+        code: "121",
+        adjective: {
+            en: "Organizational",
+            es: "Organizacional",
+        },
+        concept: {
+            en: "Logistics",
+            es: "Logística",
+        },
+        archetype: {
+            en: "Coordinador",
+            es: "Coordinador",
+        },
+        field: {
+            en: "Logistics",
+            es: "Logística",
+        },
+        colour: {
+            en: "Light Green",
+            es: "Verde Claro",
+        },
+        tone: {
+            en: "Mint",
+            es: "Menta",
+        },
+        location: {
+            en: "Civic Center",
+            es: "Centro Civil",
+        },
+        map: {
+            en: "Organization, Club, Politic Arena",
+            es: "Organización, Club, Arena Política",
+        },
+    },
+    "122": {
+        code: "122",
+        adjective: {
+            en: "Critical",
+            es: "Crítico",
+        },
+        concept: {
+            en: "Order",
+            es: "Orden",
+        },
+        archetype: {
+            en: "Arbiter",
+            es: "Juez",
+        },
+        field: {
+            en: "Law",
+            es: "Leyes",
+        },
+        colour: {
+            en: "Light Cyan",
+            es: "Ciano Claro",
+        },
+        tone: {
+            en: "Sky",
+            es: "Cielo",
+        },
+        mbti: "-N-J",
+        location: {
+            en: "Court",
+            es: "Corte",
+        },
+        map: {
+            en: "Assembly, Advisory, Congress",
+            es: "Asamblea, Consejería, Congreso",
+        },
+    },
+    "200": {
+        code: "200",
+        adjective: {
+            en: "Martial",
+            es: "Marcial",
+        },
+        concept: {
+            en: "Action",
+            es: "Acción",
+        },
+        archetype: {
+            en: "Athlete",
+            es: "Atleta",
+        },
+        field: {
+            en: "Athletism",
+            es: "Atletismo",
+        },
+        colour: {
+            en: "Pure Red",
+            es: "Rojo Puro",
+        },
+        tone: {
+            en: "Scarlet",
+            es: "Escarlata",
+        },
+        mbti: "IS-P",
+        location: {
+            en: "Arena",
+            es: "Arena",
+        },
+        map: {
+            en: "Stadium, Dojo, Track & Field",
+            es: "Estadio, Dojo, Campo Y Pista",
+        },
+    },
+    "201": {
+        code: "201",
+        adjective: {
+            en: "Sensational",
+            es: "Sensacional",
+        },
+        concept: {
+            en: "Attitude",
+            es: "Actitud",
+        },
+        archetype: {
+            en: "Performer",
+            es: "Intérprete",
+        },
+        field: {
+            en: "Histrionism",
+            es: "Histrionismo",
+        },
+        colour: {
+            en: "Magenta Red",
+            es: "Rojo Magenta",
+        },
+        tone: {
+            en: "Fuchsia",
+            es: "Fuchsia",
+        },
+        mbti: "-SF-",
+        location: {
+            en: "Gym",
+            es: "Gimnasio",
+        },
+        map: {
+            en: "Ring, Stage, Dance Floor",
+            es: "Pista, Escenario, Salón De Baile",
+        },
+    },
+    "202": {
+        code: "202",
+        adjective: {
+            en: "Devotional",
+            es: "Devocional",
+        },
+        concept: {
+            en: "Passion",
+            es: "Passion",
+        },
+        archetype: {
+            en: "Artist",
+            es: "Artista",
+        },
+        field: {
+            en: "Artistry",
+            es: "Artesanía",
+        },
+        colour: {
+            en: "Pure Magenta",
+            es: "Magenta Puro",
+        },
+        tone: {
+            en: "Magenta",
+            es: "Magenta",
+        },
+        mbti: "ISFJ",
+        location: {
+            en: "Studio",
+            es: "Atelier",
+        },
+        map: {
+            en: "Atelier, Crafts, Kitchen",
+            es: "Artesanía, Cocina, Manualidades",
+        },
+    },
+    "210": {
+        code: "210",
+        adjective: {
+            en: "Practical",
+            es: "Práctico",
+        },
+        concept: {
+            en: "Aptitude",
+            es: "Aptitud",
+        },
+        archetype: {
+            en: "Builder",
+            es: "Fabricante",
+        },
+        field: {
+            en: "Fabrication",
+            es: "Fabricación",
+        },
+        colour: {
+            en: "Yellow Red",
+            es: "Rojo Amarillo",
+        },
+        tone: {
+            en: "Orange",
+            es: "Naranja",
+        },
+        mbti: "-ST-",
+        location: {
+            en: "Workshop",
+            es: "Taller",
+        },
+        map: {
+            en: "Warehouse, Garage, Construction",
+            es: "Almacen, Garage, Construcción",
+        },
+    },
+    "211": {
+        code: "211",
+        adjective: {
+            en: "Diligent",
+            es: "Diligente",
+        },
+        concept: {
+            en: "Service",
+            es: "Servicio",
+        },
+        archetype: {
+            en: "Agent",
+            es: "Agente",
+        },
+        field: {
+            en: "Service",
+            es: "Servicio",
+        },
+        colour: {
+            en: "Light Red",
+            es: "Rojo Claro",
+        },
+        tone: {
+            en: "Coral",
+            es: "Coral",
+        },
+        mbti: "ES-J",
+        location: {
+            en: "Service Center",
+            es: "Centro De Servicio",
+        },
+        map: {
+            en: "Security, Life Guarding, Agency",
+            es: "Seguridad, Agencia, Superintendencia",
+        },
+    },
+    "212": {
+        code: "212",
+        adjective: {
+            en: "Protectoral",
+            es: "Protectoral",
+        },
+        concept: {
+            en: "Security",
+            es: "Seguridad",
+        },
+        archetype: {
+            en: "Caretaker",
+            es: "Guardián",
+        },
+        field: {
+            en: "Caregiving",
+            es: "Cuidado",
+        },
+        colour: {
+            en: "Light Magenta",
+            es: "Magenta Claro",
+        },
+        tone: {
+            en: "Pink",
+            es: "Rosado",
+        },
+        mbti: "-SFJ",
+        location: {
+            en: "Clinic",
+            es: "Clínica",
+        },
+        map: {
+            en: "Aid, Health, Care Center",
+            es: "Asistencia, Centro De Salud, Guardería",
+        },
+    },
+    "220": {
+        code: "220",
+        adjective: {
+            en: "Industrial",
+            es: "Industrial",
+        },
+        concept: {
+            en: "Productivity",
+            es: "Productividad",
+        },
+        archetype: {
+            en: "Engineer",
+            es: "Ingeniero",
+        },
+        field: {
+            en: "Ingeniering",
+            es: "Ingeniería",
+        },
+        colour: {
+            en: "Pure Yellow",
+            es: "Amarillo Puro",
+        },
+        tone: {
+            en: "Yellow",
+            es: "Amarillo",
+        },
+        mbti: "ISTJ",
+        location: {
+            en: "Industry",
+            es: "Industria",
+        },
+        map: {
+            en: "Factory, Engineering, Manufactoring",
+            es: "Fábrica, Ingeniería, Manufactura",
+        },
+    },
+    "221": {
+        code: "221",
+        adjective: {
+            en: "Motivational",
+            es: "Motivacional",
+        },
+        concept: {
+            en: "Goals",
+            es: "Propósitos",
+        },
+        archetype: {
+            en: "Manager",
+            es: "Manager",
+        },
+        field: {
+            en: "Management",
+            es: "Gestión",
+        },
+        colour: {
+            en: "Light Yellow",
+            es: "Amarillo Claro",
+        },
+        tone: {
+            en: "Cream",
+            es: "Crema",
+        },
+        mbti: "-STJ",
+        location: {
+            en: "Company",
+            es: "Compañía",
+        },
+        map: {
+            en: "Venture, Business, Enterprise",
+            es: "Projectos, Negocios, Empresas",
+        },
+    },
+    "222": {
+        code: "222",
+        adjective: {
+            en: "Imperial",
+            es: "Imperial",
+        },
+        concept: {
+            en: "Control",
+            es: "Control",
+        },
+        archetype: {
+            en: "Cheif",
+            es: "Jefe",
+        },
+        field: {
+            en: "Government",
+            es: "Gobierno",
+        },
+        colour: {
+            en: "Pure Light",
+            es: "Claro puro",
+        },
+        tone: {
+            en: "Platinum",
+            es: "Platino",
+        },
+        mbti: "I--J",
+        location: {
+            en: "Management",
+            es: "Gerencia",
+        },
+        map: {
+            en: "Palace, Tribune, Government",
+            es: "Palacio, Tribunal, Gobierno",
+        },
+    }
+};

@@ -1,8 +1,8 @@
+import Copy from "../lib/Copy.js";
 import STATES from "./states.js";
 
 const STATE_ICON_GRID = 36;
 const CENTERCODE = '111';
-const [ENG, ESP] = ['eng', 'esp'];
 const [COS30, SIN30] = [Math.cos(Math.PI / 6), Math.sin(Math.PI / 6)];
 
 /* -------------------------- // Auxiliary general -------------------------- */
@@ -94,7 +94,6 @@ export class State {
     index = false,
     animate = false,
     radius = 40,
-    lang = ENG,
     onupdate = s => s,
     noText
   }) {
@@ -143,24 +142,23 @@ export class State {
     this.coords = animate ? [0, 0] : this.posts[0];
     this.hex = code.codeToHex();
     this.value = 1;
-    this.info = STATES[code];
+    this.copy = new Copy(STATES[code]);
+    this.code = code;
 
-    sketch.loadImage('media/symbolspritenew.png', img => {
-      this.symbolSprite = img;
-      this.draw();
-    });
+    sketch.loadImage('media/symbolsprite.png', img => this.symbolSprite = img);
 
-    this.draw = _ => {
+    this.draw = (bool) => {
       let x = this.value;
       let opacity = !this.interact ? 1 : 0.5 + Math.cos(3 * Math.cos(1.57 * x)) / 2;
       let size = this.radius;// * (!this.interact ?  1 : this.sketch.map(opacity,0,1,0.68,1.14));
-      if (!this.symbolSprite) return;
+      if (!this.symbolSprite) return console.error("No icon png found");
       this.onupdate(this);
       if (isNaN(this.post)) this.post = 0;
       let end = this.posts[this.post];
       let ended = sketch.dist(...end, ...this.coords) < 0.25;
       if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
       if (this.hidden) return;
+      if(!sketch) return;
       sketch.push();
       sketch.noStroke();
       sketch.translate(...this.coords);
@@ -180,7 +178,7 @@ export class State {
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         sketch.textLeading(0);
         sketch.textSize(size * 0.25);
-        sketch.text(this.info.archetype, 0, size * 0.5);
+        sketch.text(this.copy.at.field, 0, size * 0.5);
       }
       // top
       sketch.noStroke();
