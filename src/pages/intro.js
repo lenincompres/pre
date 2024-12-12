@@ -1,10 +1,7 @@
 import Copy from "../../lib/Copy.js";
 import Collabsable from "../components/Collapsable.js";
-import Cube from "../Cube.js";
-
-
-
-const _opened = new Binder(false);
+import CubeSection from "../components/Cube.js";
+import * as STYLE from "../style.js";
 
 const colorBullet = (c = "black", b = "#0006") => DOM.html({
   display: "inline-block",
@@ -25,7 +22,7 @@ export default {
       textShadow: '0 0 3px white',
     }
   },
-  backgroundColor: "#fffc",
+  backgroundColor: STYLE.lightScreen,
   padding: "2em 0",
 
   header: {
@@ -42,11 +39,9 @@ export default {
     display: "flex",
     flexDirection: "column",
     placeContent: "center",
-    small: "Loading color spectrum…",
     height: "400px",
     margin: "-1em auto 0",
-    onready: elt => new Cube({
-      container: elt,
+    content: new CubeSection({
       onclick: state => state && (window.location.href = "./?rgb=" + state.code.codeToHex()),
     }),
   },
@@ -141,7 +136,7 @@ export default {
     }),
     p_: Copy.text({
       en: [`We engage and disengage with these dimensions to perform tasks, focus, and even relax. In subjects like math, we benefit from physical abstraction to focus on logic. Emotional detachment enhances objectivity in decision-making. And, keen instincts require bypassing rational overthinking.`, `Some tasks are multidimensional. A dance performance engages both physical and emotional attention. Car repair calls for physical and rational engagement.`, `These combinations create the dynamic spectrum illustrated above. Each cube represents an archetype that embodies its unique combination. We may be multifaceted, but gravitate to some spaces with more ease than others.`],
-      es: [`Nos involucramos y desconectamos de estas dimensiones para realizar tareas, concentrarnos o relajarnos. En materias como matemáticas, nos beneficiamos de la abstracción física para centrarnos en la lógica. El desapego emocional mejora la objetividad en la toma de decisiones. Y agudizar el instinto requiere pasar por alto el pensamiento racional.`, `Algunas tareas son multidimensionales. Un espectáculo de danza, por ejemplo, demanda tanto la atención física como la emocional. La reparación de automóviles requiere un compromiso físico y racional.`, `Estas combinaciones crean el espectro dinámico ilustrado arriba. Cada cubo representa un arquetipo que encarna su combinación única. Puede que seamos multifacéticos, pero tenemos tendencia a unos roles con más que a otros.`],
+      es: [`Nos involucramos y desconectamos de estas dimensiones para realizar tareas, concentrarnos o relajarnos. En materias como matemáticas, nos beneficiamos de la abstracción física para centrarnos en la lógica. El desapego emocional mejora la objetividad en la toma de decisiones. Y agudizar el instinto requiere pasar por alto el pensamiento racional.`, `Algunas tareas son multidimensionales. Un espectáculo de danza, por ejemplo nos demanda tanto atención física como emocional. La reparación de automóviles requiere un compromiso físico y racional.`, `Estas combinaciones crean el espectro dinámico ilustrado arriba. Cada cubo representa un arquetipo que encarna su combinación única. Puede que seamos multifacéticos, pero tenemos tendencia a unos roles más que a otros.`],
     }),
   },
 };

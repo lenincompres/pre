@@ -1,5 +1,5 @@
-import Copy from "../lib/Copy.js";
-import STATES from "./states.js";
+import Copy from "../../lib/Copy.js";
+import STATES from "../states.js";
 
 const STATE_ICON_GRID = 36;
 const CENTERCODE = '111';
@@ -177,8 +177,8 @@ export class State {
         sketch.textFont('Verdana');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         sketch.textLeading(0);
-        sketch.textSize(size * 0.25);
-        sketch.text(this.copy.at.archetype, 0, size * 0.5);
+        sketch.textSize(size * 0.2);
+        sketch.text(this.copy.at.archetype.toUpperCase(), 0, size * 0.5);
       }
       // top
       sketch.noStroke();

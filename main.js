@@ -92,7 +92,7 @@ DOM.set({
 
   header: {
     height: `8rem`,
-    background: `linear-gradient(to bottom, #fff0 0%, #fffc 100%)`,
+    background: `linear-gradient(to bottom, #fff0 0%, ${STYLE.lightScreen} 100%)`,
     h1: Copy.text({
       en: `The 3DPsyche`,
       es: `La Psiquis 3D`,
@@ -104,16 +104,16 @@ DOM.set({
     },
   },
 
-  section: intro,
+  section: rgb ? undefined : intro,
 
   div: {
     height: `8em`,
-    background: `linear-gradient(to bottom, #fffc 0%, #fff0 100%)`,
+    background: `linear-gradient(to bottom, ${STYLE.lightScreen} 0%, #fff0 100%)`,
   },
 
   main: rgb ? undefined : questionnaire.questionnaire,
 
-  div_: {
+  div_: rgb ? undefined : {
     height: `8em`,
     background: rgb ? rgb : results._feature.as(v => `linear-gradient(to bottom, ${questionnaire._favorite.value} 0%, ${v} 100%)`),
   },
@@ -125,21 +125,29 @@ DOM.set({
       style: STYLE.section,
       display: `flex`,
       flexDirection: `column`,
-      h2: rgb && !fav ? `Featured` : `Results`,
-      p: !rgb || fav ? {
+      h2: rgb && !fav ? undefined : Copy.text({
+        en: `Results`,
+        es: `Resultados`,
+      }),
+      p: rgb && !fav ? undefined : {
         margin: `1em 0 -2.25em -11em`,
         zIndex: 1,
-        text: `Closests:`
-      } : undefined,
+        text: Copy.text({
+          en: `Closests:`,
+          es: `Más cercano:`,
+        }),
+      },
 
-      div: results.model,
+      main: results.model,
 
       a: {
-        target: `_blank`,
         content: [{
           display: rgb ? `none` : `block`,
           href: DOM.bind([results._feature, questionnaire._favorite], (r, f) => `./?rgb=${r.substr(1)}&color=${f.substr(1)}`),
-          text: `Link to these results for you to save or share.`
+          text: Copy.text({
+            en: `Link to these results for you to save or share.`,
+            es: `Enlace a estos resultados para guardarlos o compartirlos.`,
+          }),
         }, !fav ? undefined : {
           margin: `0 auto`,
           padding: `0.5em 1em`,
@@ -148,20 +156,29 @@ DOM.set({
           boxShadow: `1px 1px 2px black`,
           backgroundColor: fav,
           href: `./?rgb=${fav.substr(1)}`,
-          text: `This is the result of your favorite color: ${fav}`,
+          target: `_blank`,
+          text: Copy.text({
+            en: `This is the result of your favorite color: ${fav}`,
+            es: `Este es el resultado para tu color favorito: ${fav}`,
+          }),
         }, {
           fontSize: `1.25em`,
           marginTop: `2em`,
           href: `./`,
-          text: `${rgb ? `Take` : `Restart`} the questionnaire.`,
+          text: Copy.text({
+            en: `${rgb ? `Take` : `Restart`} the questionnaire.`,
+            es: `${rgb ? `Tomar` : `Reiniciar`} el cuestionario.`,
+          }),
         }, {
           fontSize: `small`,
           marginTop: `3em`,
+          target: `_blank`,
           href: `http://lenino.net`,
           text: `Created by Lenin Comprés`,
         }, {
           fontSize: `small`,
           marginTop: `0.68em`,
+          target: `_blank`,
           href: `https://github.com/lenincompres/DOM.js`,
           text: `Developed with DOM.js`,
         }]

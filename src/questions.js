@@ -8,7 +8,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Execution",
-          es: "La ejecución",
+          es: "Ejecución",
         }),
         hint: Copy.text({
           en: "magnitude, elaboration, dexterity",
@@ -18,7 +18,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Concept",
-          es: "El Concepto",
+          es: "Concepto",
         }),
         hint: Copy.text({
           en: "meaning, idea, message",
@@ -28,7 +28,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Feeling",
-          es: "El sentimiento",
+          es: "Sentimiento",
         }),
         hint: Copy.text({
           en: "sentiment, emotion, nostalgia",
@@ -45,7 +45,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Practice",
-          es: "La práctica",
+          es: "Práctica",
         }),
         hint: Copy.text({
           en: "training, challenge, competition",
@@ -55,7 +55,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Knowledge",
-          es: "El conocimiento",
+          es: "Conocimiento",
         }),
         hint: Copy.text({
           en: "records, stats, strategies",
@@ -65,7 +65,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Camaraderie",
-          es: "La camaradería",
+          es: "Camaradería",
         }),
         hint: Copy.text({
           en: "fandom, environment, team",
@@ -82,7 +82,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Industry",
-          es: "La industria",
+          es: "Industria",
         }),
         hint: Copy.text({
           en: "application, commerce, production",
@@ -92,7 +92,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Science",
-          es: "La ciencia",
+          es: "Ciencia",
         }),
         hint: Copy.text({
           en: "logic, structure, functionality",
@@ -102,7 +102,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Culture",
-          es: "La cultura",
+          es: "Cultura",
         }),
         hint: Copy.text({
           en: "art, literature, history",
@@ -119,7 +119,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Feast",
-          es: "El festín",
+          es: "Festín",
         }),
         hint: Copy.text({
           en: "abundance, indulgence, treats",
@@ -129,7 +129,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Nutrition",
-          es: "La nutrición",
+          es: "Nutrición",
         }),
         hint: Copy.text({
           en: "diet, balance, timing",
@@ -139,7 +139,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Ceremony",
-          es: "La ceremonia",
+          es: "Ceremonia",
         }),
         hint: Copy.text({
           en: "setting, presentation, company",
@@ -156,7 +156,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Productivity",
-          es: "La productividad",
+          es: "Productividad",
         }),
         hint: Copy.text({
           en: "execute, deliver, profit",
@@ -166,7 +166,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Methodology",
-          es: "La metodología",
+          es: "Metodología",
         }),
         hint: Copy.text({
           en: "anylisis, process, assessment",
@@ -176,7 +176,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Service",
-          es: "El servicio",
+          es: "Servicio",
         }),
         hint: Copy.text({
           en: "help, support, contribute",
@@ -192,7 +192,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Action",
-          es: "La acción",
+          es: "Acción",
         }),
         hint: Copy.text({
           en: "thrill, pace, audiovisuals",
@@ -202,7 +202,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Plot",
-          es: "La trama",
+          es: "Trama",
         }),
         hint: Copy.text({
           en: "development, intrigue, sense",
@@ -212,7 +212,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Drama",
-          es: "El drama",
+          es: "Drama",
         }),
         hint: Copy.text({
           en: "romance, misfortune, joy",
@@ -248,7 +248,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Considering feelings",
-          es: "Considerar los sentimientos",
+          es: "Considerar sentimientos",
         }),
         hint: Copy.text({
           en: "affection, appreciation, care",
@@ -274,7 +274,7 @@ export default [{
     }, {
       choice: Copy.text({
         en: "Carefree fun",
-        es: "Diversión depreocupada",
+        es: "Diversión despreocupada",
       }),
       hint: Copy.text({
         en: "play, party, indulge",
@@ -283,7 +283,7 @@ export default [{
     }, {
       choice: Copy.text({
         en: "Practical tasks",
-        es: "Tareas practicas",
+        es: "Tareas prácticas",
       }),
       hint: Copy.text({
         en: "fix/make, work out, organize",
@@ -312,7 +312,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Want to be clear.",
-          es: "Quiero ser claro.",
+          es: "Que queden claro.",
         }),
       },
       {
@@ -322,7 +322,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Won't give them up.",
-          es: "No los rendiré.",
+          es: "No los rendiras.",
         }),
       }
     ]
@@ -378,7 +378,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Do as you always do.",
-          es: "Hacer lo que siempre haces.",
+          es: "Haces lo que siempre haces.",
         }),
       },
       {
@@ -388,7 +388,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Stick to your decisions.",
-          es: "Cíñete a tus decisiones.",
+          es: "Te ciñes a tus decisiones.",
         }),
       }, {
         choice: Copy.text({
@@ -410,7 +410,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Aware of your surroundings",
-          es: "Consciente de tu entorno",
+          es: "Consciente de tu entorno.",
         }),
       },
       {
@@ -420,7 +420,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Look to understand and clarify",
-          es: "Buscar comprender y aclarar",
+          es: "Buscas comprender y aclarar.",
         }),
       },
       {
@@ -430,7 +430,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Even with strangers or critters.",
-          es: "Incluso con extraños o bichos.",
+          es: "Incluso con extraños o alimañas.",
         }),
       }
     ]
@@ -442,7 +442,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Rather work alone",
-          es: "Prefiero trabajar solo/a",
+          es: "Prefieres trabajar a solas",
         }),
       },
       {
@@ -454,7 +454,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Avoid drama and gossip",
-          es: "Evita el drama y los chismes",
+          es: "Evitas el drama y los chismes",
         }),
       }
     ]
@@ -463,7 +463,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Seek group activities",
-          es: "buscas actividades grupales",
+          es: "Buscas actividades grupales",
         }),
       },
       {

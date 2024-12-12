@@ -1,5 +1,5 @@
 import * as style from "../style.js";
-import * as AUX from "../functions.js";
+import * as AUX from "../../lib/auxiliary.js";
 import QUESTIONS from "../questions.js";
 import Copy from "../../lib/Copy.js";
 
