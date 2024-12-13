@@ -2,18 +2,9 @@ import Copy from "../../lib/Copy.js";
 import Collabsable from "../components/Collapsable.js";
 import CubeSection from "../components/Cube.js";
 import * as STYLE from "../style.js";
-
-const colorBullet = (c = "black", b = "#0006") => DOM.html({
-  display: "inline-block",
-  height: "0.7em",
-  width: "0.7em",
-  margin: "0 0.3em",
-  backgroundColor: c,
-  color: "transparent",
-  border: "solid 1px " + b,
-  text: "*",
-  verticalAlign: "middle",
-}, 'b');
+import {
+  colorBullet
+} from "../../lib/auxiliary.js";
 
 export default {
   css: {

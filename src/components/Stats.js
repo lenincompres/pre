@@ -5,14 +5,19 @@ export class Stats extends HTMLElement {
     this.set({
       display: 'flex',
       flexDirection: 'column',
-      h6: {
+      heading: {
         a: {
           text: title,
           href: link,
           target: blank === true ? '_blank' : undefined,
         }
       },
-      div: bars,
+      ul: {
+        li: bars.map(b => ({
+          margin: 0,
+          bar: b,
+        })),
+      }
     });
   }
 

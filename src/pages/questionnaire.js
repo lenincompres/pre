@@ -106,7 +106,7 @@ const modelQuestion = q => {
       overflow: 'hidden',
       h3: !q.question ? undefined : {
         color: '#fff',
-        backgroundColor: style.darkSreen,
+        backgroundColor: style.darkScreen,
         text: q.question
       },
       ul: {
@@ -119,7 +119,7 @@ const modelQuestion = q => {
           var answer = new Binder(50);
           q.answers.push(answer);
           return {
-            backgroundColor: style.whiteSreen,
+            backgroundColor: style.whiteScreen,
             margin: '1px 0',
             padding: '0.68em',
             position: 'relative',
@@ -140,7 +140,6 @@ const modelQuestion = q => {
                 },
                 p: {
                   fontSize: 'small',
-                  color: '#777',
                   text: option.hint,
                 }
               }))
@@ -194,12 +193,8 @@ export const questionnaire = {
   style: style.section,
   header: {
     style: style.floatingSign,
-    backgroundColor: '#0008',
+    backgroundColor: style.darkScreen,
     color: 'white',
-    h4: Copy.text({
-      en: 'Questionnaire Instructions',
-      es: 'Instrucciones del Cuestionario'
-    }),
     p: Copy.text({
       en: 'The following questionaire averages your answers and map them to a color archetype in the cube. To answer it, you must rate each option individually, but compare them to others in the same group.',
       es: 'El siguiente cuestionario promedia tus respuestas y las asigna a un arquetipo de color en el cubo. Para responderla, debes calificar cada opción individualmente, pero compararlas con otras del mismo grupo.'

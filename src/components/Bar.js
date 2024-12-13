@@ -5,8 +5,13 @@ export class Bar extends HTMLElement {
   constructor(label, width = '100%', barColor = 'white', baseColor = 'black', value = 50) {
     super();
     this.single = !baseColor;
-    this.percent = new Binder(value);
-    this.showPercent = new Binder(false);
+    this._percent = new Binder(value);
+    this._showPercent = new Binder(false);
+    const _hue = new Binder(50);
+    const hueL = () => 10 * (_hue.value % 60) / 6;
+    if (baseColor === true) setInterval(() => {
+      _hue.value = (_hue.value + 2) % 360;
+    }, 24);
 
     this.set({
       whiteSpace: 'nowrap',
@@ -20,8 +25,8 @@ export class Bar extends HTMLElement {
       },
       div: {
         position: 'relative',
-        backgroundColor: baseColor.includes('.') ? 'black' : baseColor,
-        backgroundImage: baseColor.includes('.') ? `url(${baseColor})` : undefined,
+        backgroundColor: baseColor === true ? _hue.as(v => `hsl(${v} 100 ${hueL()})`) : baseColor.includes('.') ? 'black' : baseColor,
+        backgroundImage: baseColor !== true && baseColor.includes('.') ? `url(${baseColor})` : undefined,
         backgroundSize: '6.66%',
         display: 'inline-block',
         width: width,
@@ -37,7 +42,7 @@ export class Bar extends HTMLElement {
           backgroundImage: barColor.includes('.') ? `url(${barColor})` : undefined,
           backgroundSize: '100%',
           position: 'absolute',
-          width: this.percent.as(v => v + '%'),
+          width: this._percent.as(v => `${v}%`),
           margin: 0,
           height: '100%',
           transition: '0.5s',
@@ -45,7 +50,7 @@ export class Bar extends HTMLElement {
       },
       i: {
         backgroundColor: 'white',
-        display: this.showPercent.as('none', 'block'),
+        display: this._showPercent.as('none', 'block'),
         position: 'absolute',
         boxShadow: '1px 1px 2px black',
         borderRadius: '1em',
@@ -56,20 +61,20 @@ export class Bar extends HTMLElement {
         zIndex: 10,
         minWidth: 'fit-content',
         left: '-2em',
-        text: this.percent.as(v => Math.round(v) + '%'),
+        text: this._percent.as(v => `${Math.round(v)}%`),
       },
-      onmouseover: e => this.showPercent.value = true,
-      onmouseout: e => this.showPercent.value = false
+      onmouseover: e => this._showPercent.value = true,
+      onmouseout: e => this._showPercent.value = false
     });
   }
 
   set value(val) {
     if (isNaN(val)) return;
-    this.percent.value = val;
+    this._percent.value = val;
   }
 
   get value() {
-    return this.percent.value;
+    return this._percent.value;
   }
 
 }
