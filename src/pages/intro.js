@@ -10,7 +10,7 @@ import p5Cube from "../components/p5Cube.js";
 
 const cube = new p5Cube({
   animated: true,
-  onclick: state => state && (window.location.href = "./?rgb=" + state.code.codeToHex()),
+  onclick: state => state && state.code && (window.location.href = "./?rgb=" + state.code.codeToHex()),
 });
 
 export default {

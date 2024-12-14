@@ -138,7 +138,7 @@ class p5Cube extends p5Element {
 
   mouseReleased() {
     if (!this.isHover) return;
-    onclick(this.overState);
+    this.onclick(this.overState);
   }
 
   view(view) {
