@@ -1,12 +1,13 @@
 import Copy from "../../lib/Copy.js";
 import State from "../classes/State.js";
+import p5Element from "./p5Element.js";
 
 const WAIT = 4; //seconds between posts
 const POSTS = 5;
 const RADIUS = 40;
 
-class p5Cube extends p5 {
-  constructor(sketch, node, {
+class p5Cube extends p5Element {
+  constructor({
     ref = undefined,
     noLabels = false,
     onready = () => null,
@@ -17,96 +18,66 @@ class p5Cube extends p5 {
     center = '111',
     animated,
     view,
+    textSize = 12,
   }) {
-    super(sketch, node);
-
-    let isHover = false;
-    let nextPost = Math.floor(Math.random() * POSTS);
-    let currentPost = 0;
-    let changePost = false;
-    let overState;
-
-    if (width === undefined) width = this.windowWidth;
-
-    let states = new Array(27).fill().map((_, i) => new State({
-      sketch: this,
-      center: center,
-      index: i,
-    })).filter(state => !vicinity || state.isNear()).sort(state => state.tier);
-
-    if (ref) states.forEach(state => state.setRef(ref));
-
-    let textSize = 0.4 * states[0].radius;
-
-    this.setup = function () {
-      this._canvas.value = this.createCanvas(width, height).elt;
-      this.strokeWeight(3);
-      this.textFont('Verdana');
-      this.textSize(textSize);
-      this.center = [width * 0.5, height * 0.5];
-      this.textAlign(this.CENTER, this.CENTER);
-      if (animated) this.animate();
-    }
-
-    this.animate = function (wait = 1000) {
-      if (this.timeOut) clearTimeout(this.timeOut);
-      if (this.freeze && currentPost === nextPost) return;
-      let isIni = currentPost !== 0 || nextPost === 0;
-      this.timeOut = setTimeout(() => changePost = !isHover, wait * (isIni ? WAIT : 0.5));
-      if (isIni) nextPost = (nextPost + 1) % POSTS;
-    }
-
-    this.mouseMoved = function () {
-      if (!this.canvas || !animated) return;
-      isHover = !!parseInt(this.get(this.mouseX, this.mouseY).join('')); // any pixel color under the mouse
-      this.cursor(isHover ? this.HAND : this.ARROW);
-      if (isHover) {
-        let newOver = states.filter(s => !s.hidden && this.dist(this.mouseX - this.center[0], this.mouseY - this.center[1], ...s.coords) < s.radius).pop();
-        if (newOver === overState) return;
-        if (overState) overState.selected = false;
-        overState = newOver;
-        if (overState) overState.selected = true;
-        if (this.onmouseover) this.onmouseover(overState);
-      } else {
-        if (overState) {
-          overState.selected = false;
-          if (this.onmouseout) this.onmouseout(overState);
-          this.animate();
-        }
-        overState = false;
-      }
-    }
-
-    this.mouseReleased = function () {
-      if (!isHover) return;
-      onclick(overState);
-    }
-
+    super(width, height);
+    this.ref = ref;
+    this.noLabels = noLabels;
+    this.onready = onready;
+    this.onclick = onclick;
+    this.vicinity = vicinity;
+    this.width = width;
+    this.height = height;
+    this.center = center;
+    this.animated = animated;
+    this.textSize = textSize;
+    this.isHover = false;
+    this.nextPost = Math.floor(Math.random() * POSTS);
+    this.currentPost = 0;
+    this.changePost = false;
+    this.overState;
+    this.innerHTML = `Loading color spectrum…`;
+    this.states = [];
     if (view !== undefined) this.view(view);
   }
 
+  setup() {
+    this.sketch.strokeWeight(3);
+    this.sketch.textFont('Verdana');
+    this.sketch.textSize(this.textSize);
+    this.sketch.center = [this.sketch.width * 0.5, this.sketch.height * 0.5];
+    this.sketch.textAlign(this.sketch.CENTER, this.sketch.CENTER);
+    if (this.animated) this.animate();
+    this.states = new Array(27).fill().map((_, i) => new State({
+      sketch: this.sketch,
+      center: this.center,
+      index: i,
+    })).filter(state => !this.vicinity || state.isNear()).sort(state => state.tier);
+    if (this.ref) this.states.forEach(state => state.setRef(this.ref));
+  }
+
   draw() {
-    this.clear();
-    this.translate(...this.center);
-    states.forEach(s => {
-      s.setRef(overState);
-      s.interact = !!overState;
+    this.sketch.clear();
+    this.sketch.translate(...this.sketch.center);
+    this.states.forEach(s => {
+      s.setRef(this.overState);
+      s.interact = !!this.overState;
       s.draw()
     });
-    if (overState) {
-      let c = this.color('#' + overState.code.codeToHex())
-      let l = this.lightness(c) < 45 || this.green(c) < 45;
-      this.stroke(c);
-      this.fill(l ? 255 : 0);
-      this.text(overState.copy.at.archetype.toUpperCase(), this.mouseX - this.center[0], this.mouseY - this.center[1] - textSize);
+    if (this.overState) {
+      let c = this.sketch.color('#' + this.overState.code.codeToHex())
+      let l = this.sketch.lightness(c) < 45 || this.sketch.green(c) < 45;
+      this.sketch.stroke(c);
+      this.sketch.fill(l ? 255 : 0);
+      this.sketch.text(this.overState.copy.at.archetype.toUpperCase(), this.sketch.mouseX - this.sketch.center[0], this.sketch.mouseY - this.sketch.center[1] - this.textSize);
     }
-    if (changePost) {
-      states.forEach(s => s.post = s.post === 0 ? nextPost : 0);
-      currentPost = states[0].post;
+    if (this.changePost) {
+      this.states.forEach(s => s.post = s.post === 0 ? this.nextPost : 0);
+      this.currentPost = this.states[0].post;
       this.animate();
-      changePost = false;
+      this.changePost = false;
     }
-    if (!currentPost || noLabels) return;
+    if (!this.currentPost || this.noLabels) return;
     let y = RADIUS * 4.3;
     let x = RADIUS * 4.75;
     let texts = [
@@ -114,41 +85,76 @@ class p5Cube extends p5 {
       [Copy.at.sensing, 0, y],
       [Copy.at.abstracting, x, y],
     ];
-    if (currentPost === 2) texts = [
+    if (this.currentPost === 2) texts = [
       [Copy.at.instincting, -x * 1.12, y],
       [Copy.at.conceiving, 0, y],
       [Copy.at.regulating, x * 1.12, y],
     ];
-    else if (currentPost === 3) texts = [
+    else if (this.currentPost === 3) texts = [
       [Copy.at.detaching, -x, y],
       [Copy.at.empathizing, 0, y],
       [Copy.at.valuing, x, y],
     ];
-    else if (currentPost === 4) texts = [
+    else if (this.currentPost === 4) texts = [
       [Copy.at.relaxing, -x * 1.28, y],
       [Copy.at.periphery, 0, y],
       [Copy.at.demanding, x * 1.28, y],
     ];
-    this.fill(0);
-    this.textAlign(this.CENTER, this.CENTER);
-    this.textSize(RADIUS * 0.34);
-    this.noStroke();
-    texts.forEach(t => this.text(...t));
+    this.sketch.fill(0);
+    this.sketch.textAlign(this.sketch.CENTER, this.sketch.CENTER);
+    this.sketch.textSize(RADIUS * 0.34);
+    this.sketch.noStroke();
+    texts.forEach(t => this.sketch.text(...t));
+  }
+
+  animate(wait = 1000) {
+    if (this.timeOut) clearTimeout(this.timeOut);
+    if (this.freeze && this.currentPost === this.nextPost) return;
+    let isIni = this.currentPost !== 0 || this.nextPost === 0;
+    this.timeOut = setTimeout(() => this.changePost = !this.isHover, wait * (isIni ? WAIT : 0.5));
+    if (isIni) this.nextPost = (this.nextPost + 1) % POSTS;
+  }
+
+  mouseMoved() {
+    if (!this.animated) return;
+    this.isHover = !!parseInt(this.sketch.get(this.sketch.mouseX, this.sketch.mouseY).join('')); // any pixel color under the mouse
+    this.sketch.cursor(this.isHover ? this.sketch.HAND : this.sketch.ARROW);
+    if (this.isHover) {
+      let newOver = this.states.filter(s => !s.hidden && this.sketch.dist(this.sketch.mouseX - this.sketch.center[0], this.sketch.mouseY - this.sketch.center[1], ...s.coords) < s.radius).pop();
+      if (newOver === this.overState) return;
+      if (this.overState) this.overState.selected = false;
+      this.overState = newOver;
+      if (this.overState) this.overState.selected = true;
+      if (this.sketch.onmouseover) this.sketch.onmouseover(this.overState);
+    } else {
+      if (this.overState) {
+        this.overState.selected = false;
+        if (this.sketch.onmouseout) this.sketch.onmouseout(this.overState);
+        this.animate();
+      }
+      this.overState = false;
+    }
+  }
+
+  mouseReleased() {
+    if (!this.isHover) return;
+    onclick(this.overState);
   }
 
   view(view) {
-    changePost = true;
+    this.changePost = true;
     if (isNaN(view) && animated) {
       states.forEach(s => s.hidden = false);
       this.freeze = false;
-      nextPost = (nextPost + 1) % POSTS;
-      p5Sketch.animate();
+      this.nextPost = (this.nextPost + 1) % POSTS;
+      this.sketch.animate();
       return;
     }
     this.freeze = true;
-    states.forEach(s => s.hidden = view < 0 && !s.isRim && s.level - 3 > 2 * view);
-    nextPost = view < 0 ? 0 : parseInt(view);
+    this.states.forEach(s => s.hidden = view < 0 && !s.isRim && s.level - 3 > 2 * view);
+    this.nextPost = view < 0 ? 0 : parseInt(view);
   }
 }
 
+customElements.define('p5-cube', p5Cube);
 export default p5Cube;

@@ -75,21 +75,21 @@ function drawBox(radius = 40, colour = [128, 128, 128], alpha = 1, inside = true
   if (inside) sketch.rotate(Math.PI);
 }
 
-function polygon(x, y, radius, npoints, p5Sketch) {
-  if (!p5Sketch) p5Sketch = this;
+function polygon(x, y, radius, npoints, sketch) {
+  if (!sketch) sketch = this;
   let angle = Math.TWO_PI / npoints;
-  p5Sketch.beginShape();
+  sketch.beginShape();
   for (let a = 0; a < Math.TWO_PI; a += angle) {
     let sx = x + cos(a) * radius;
     let sy = y + sin(a) * radius;
-    p5Sketch.vertex(sx, sy);
+    sketch.vertex(sx, sy);
   }
-  p5Sketch.endShape(p5Sketch.CLOSE);
+  sketch.endShape(sketch.CLOSE);
 }
 
 export class State {
   constructor({
-    sketch: p5Sketch,
+    sketch,
     center,
     index = false,
     animate = false,
@@ -99,7 +99,7 @@ export class State {
   }) {
     this.noText = noText;
     this.onupdate = onupdate;
-    this.p5Sketch = p5Sketch;
+    this.sketch = sketch;
     let base = center !== undefined ? center : CENTERCODE;
     if (index === false) index = CENTERCODE.codeToOrdinal();
     this.inCoords = index.codeToCoords();
@@ -145,7 +145,7 @@ export class State {
     this.copy = new Copy(STATES[code]);
     this.code = code;
 
-    p5Sketch.loadImage('media/symbolsprite.png', img => this.symbolSprite = img);
+    sketch.loadImage('media/symbolsprite.png', img => this.symbolSprite = img);
 
     this.draw = (bool) => {
       let x = this.value;
@@ -154,46 +154,46 @@ export class State {
       this.onupdate(this);
       if (isNaN(this.post)) this.post = 0;
       let end = this.posts[this.post];
-      let ended = p5Sketch.dist(...end, ...this.coords) < 0.25;
+      let ended = sketch.dist(...end, ...this.coords) < 0.25;
       if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
       if (this.hidden) return;
-      if(!p5Sketch) return;
-      p5Sketch.push();
-      p5Sketch.noStroke();
-      p5Sketch.translate(...this.coords);
+      if(!sketch) return;
+      sketch.push();
+      sketch.noStroke();
+      sketch.translate(...this.coords);
       // base
-      drawBox(size, this.color, 0.86 * opacity, true, p5Sketch);
+      drawBox(size, this.color, 0.86 * opacity, true, sketch);
       // icon
-      p5Sketch.tint(...this.color, opacity * 255);
+      sketch.tint(...this.color, opacity * 255);
       var iSize = size * 0.86;
-      if (this.symbolSprite) p5Sketch.image(this.symbolSprite, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
+      if (this.symbolSprite) sketch.image(this.symbolSprite, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
       // text
       if (!this.noText) {
-        let l = p5Sketch.lightness(this.color) < 45 || p5Sketch.green(this.color) < 45;
-        p5Sketch.fill(l ? 255 : 0, opacity * 255);
-        p5Sketch.strokeWeight(2.5);
-        if(!this.interact) p5Sketch.stroke(l ? 0 : 255,  opacity * 100);
-        p5Sketch.textFont('Verdana');
-        p5Sketch.textAlign(p5Sketch.CENTER, p5Sketch.CENTER);
-        p5Sketch.textLeading(0);
-        p5Sketch.textSize(size * 0.2);
-        p5Sketch.text(this.copy.at.archetype.toUpperCase(), 0, size * 0.5);
+        let l = sketch.lightness(this.color) < 45 || sketch.green(this.color) < 45;
+        sketch.fill(l ? 255 : 0, opacity * 255);
+        sketch.strokeWeight(2.5);
+        if(!this.interact) sketch.stroke(l ? 0 : 255,  opacity * 100);
+        sketch.textFont('Verdana');
+        sketch.textAlign(sketch.CENTER, sketch.CENTER);
+        sketch.textLeading(0);
+        sketch.textSize(size * 0.2);
+        sketch.text(this.copy.at.archetype.toUpperCase(), 0, size * 0.5);
       }
       // top
-      p5Sketch.noStroke();
-      drawBox(size, this.color, 0.34 * opacity, false, p5Sketch);
+      sketch.noStroke();
+      drawBox(size, this.color, 0.34 * opacity, false, sketch);
       //
       if (this.selected) {
-        p5Sketch.fill(0, 0);
-        p5Sketch.rotate(Math.PI / 6);
-        p5Sketch.strokeWeight(6);
-        p5Sketch.stroke(0, 140);
-        polygon(1, 1, size, 6, p5Sketch);
-        p5Sketch.strokeWeight(4);
-        p5Sketch.stroke(255);
-        polygon(0, 0, size, 6, p5Sketch);
+        sketch.fill(0, 0);
+        sketch.rotate(Math.PI / 6);
+        sketch.strokeWeight(6);
+        sketch.stroke(0, 140);
+        polygon(1, 1, size, 6, sketch);
+        sketch.strokeWeight(4);
+        sketch.stroke(255);
+        polygon(0, 0, size, 6, sketch);
       }
-      p5Sketch.pop();
+      sketch.pop();
     }
   }
 
@@ -214,7 +214,7 @@ export class State {
       let d = v - p2[i];
       return Math.abs(d) <= 0.5 ? v : Math.abs(d + 1) < Math.abs(d - 1) ? v + 1 : v - 1;
     });
-    return this.p5Sketch.dist(...p2, ...p1);
+    return this.sketch.dist(...p2, ...p1);
   };
 
 }

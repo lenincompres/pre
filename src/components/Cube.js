@@ -68,8 +68,17 @@ class CubeSection extends HTMLElement {
     center = '111',
     animated,
     view,
+    textSize = 12,
   }) {
     super();
+
+    const t = this;
+
+    this.isHover = false;
+    this.nextPost = Math.floor(Math.random() * POSTS);
+    this.currentPost = 0;
+    this.changePost = false;
+    this.overState;
 
     const _canvas = new Binder();
 
@@ -136,12 +145,6 @@ class CubeSection extends HTMLElement {
       figure: _canvas,
     });
 
-    let isHover = false;
-    let nextPost = Math.floor(Math.random() * POSTS);
-    let currentPost = 0;
-    let changePost = false;
-    let overState;
-
     this.sketch = new p5(p => {
 
       p.setup = function () {
@@ -159,24 +162,24 @@ class CubeSection extends HTMLElement {
         p.clear();
         p.translate(...p.center);
         states.forEach(s => {
-          s.setRef(overState);
-          s.interact = !!overState;
+          s.setRef(t.overState);
+          s.interact = !!t.overState;
           s.draw()
         });
-        if (overState) {
-          let c = p.color('#' + overState.code.codeToHex())
+        if (t.overState) {
+          let c = p.color('#' + t.overState.code.codeToHex())
           let l = p.lightness(c) < 45 || p.green(c) < 45;
           p.stroke(c);
           p.fill(l ? 255 : 0);
-          p.text(overState.copy.at.archetype.toUpperCase(), p.mouseX - p.center[0], p.mouseY - p.center[1] - textSize);
+          p.text(t.overState.copy.at.archetype.toUpperCase(), p.mouseX - p.center[0], p.mouseY - p.center[1] - textSize);
         }
-        if (changePost) {
-          states.forEach(s => s.post = s.post === 0 ? nextPost : 0);
-          currentPost = states[0].post;
+        if (t.changePost) {
+          states.forEach(s => s.post = s.post === 0 ? t.nextPost : 0);
+          t.currentPost = states[0].post;
           p.animate();
-          changePost = false;
+          t.changePost = false;
         }
-        if (!currentPost || noLabels) return;
+        if (!t.currentPost || noLabels) return;
         let y = RADIUS * 4.3;
         let x = RADIUS * 4.75;
         let texts = [
@@ -184,17 +187,17 @@ class CubeSection extends HTMLElement {
           [Copy.at.sensing, 0, y],
           [Copy.at.abstracting, x, y],
         ];
-        if (currentPost === 2) texts = [
+        if (t.currentPost === 2) texts = [
           [Copy.at.instincting, -x * 1.12, y],
           [Copy.at.conceiving, 0, y],
           [Copy.at.regulating, x * 1.12, y],
         ];
-        else if (currentPost === 3) texts = [
+        else if (t.currentPost === 3) texts = [
           [Copy.at.detaching, -x, y],
           [Copy.at.empathizing, 0, y],
           [Copy.at.valuing, x, y],
         ];
-        else if (currentPost === 4) texts = [
+        else if (t.currentPost === 4) texts = [
           [Copy.at.relaxing, -x * 1.28, y],
           [Copy.at.periphery, 0, y],
           [Copy.at.demanding, x * 1.28, y],
@@ -208,36 +211,36 @@ class CubeSection extends HTMLElement {
 
       p.animate = function (wait = 1000) {
         if (p.timeOut) clearTimeout(p.timeOut);
-        if (this.freeze && currentPost === nextPost) return;
-        let isIni = currentPost !== 0 || nextPost === 0;
-        p.timeOut = setTimeout(() => changePost = !isHover, wait * (isIni ? WAIT : 0.5));
-        if (isIni) nextPost = (nextPost + 1) % POSTS;
+        if (this.freeze && t.currentPost === t.nextPost) return;
+        let isIni = t.currentPost !== 0 || t.nextPost === 0;
+        p.timeOut = setTimeout(() => t.changePost = !t.isHover, wait * (isIni ? WAIT : 0.5));
+        if (isIni) t.nextPost = (t.nextPost + 1) % POSTS;
       }
 
       p.mouseMoved = function () {
         if (!animated) return;
-        isHover = !!parseInt(p.get(p.mouseX, p.mouseY).join('')); // any pixel color under the mouse
-        p.cursor(isHover ? p.HAND : p.ARROW);
-        if (isHover) {
+        t.isHover = !!parseInt(p.get(p.mouseX, p.mouseY).join('')); // any pixel color under the mouse
+        p.cursor(t.isHover ? p.HAND : p.ARROW);
+        if (t.isHover) {
           let newOver = states.filter(s => !s.hidden && p.dist(p.mouseX - p.center[0], p.mouseY - p.center[1], ...s.coords) < s.radius).pop();
-          if (newOver === overState) return;
-          if (overState) overState.selected = false;
-          overState = newOver;
-          if (overState) overState.selected = true;
-          if (p.onmouseover) p.onmouseover(overState);
+          if (newOver === t.overState) return;
+          if (t.overState) t.overState.selected = false;
+          t.overState = newOver;
+          if (t.overState) t.overState.selected = true;
+          if (p.onmouseover) p.onmouseover(t.overState);
         } else {
-          if (overState) {
-            overState.selected = false;
-            if (p.onmouseout) p.onmouseout(overState);
+          if (t.overState) {
+            t.overState.selected = false;
+            if (p.onmouseout) p.onmouseout(t.overState);
             p.animate();
           }
-          overState = false;
+          t.overState = false;
         }
       }
 
       p.mouseReleased = function () {
-        if (!isHover) return;
-        onclick(overState);
+        if (!t.isHover) return;
+        onclick(t.overState);
       }
     });
 
@@ -249,24 +252,21 @@ class CubeSection extends HTMLElement {
 
     if (ref) states.forEach(state => state.setRef(ref));
 
-    let textSize = 0.4 * states[0].radius;
-
-
-    this.view = (view) => {
-      changePost = true;
-      if (isNaN(view) && animated) {
-        states.forEach(s => s.hidden = false);
-        this.freeze = false;
-        nextPost = (nextPost + 1) % POSTS;
-        this.sketch.animate();
-        return;
-      }
-      this.freeze = true;
-      states.forEach(s => s.hidden = view < 0 && !s.isRim && s.level - 3 > 2 * view);
-      nextPost = view < 0 ? 0 : parseInt(view);
-    }
-
     if (view !== undefined) this.view(view);
+  }
+
+  view(view) {
+    this.changePost = true;
+    if (isNaN(view) && animated) {
+      states.forEach(s => s.hidden = false);
+      this.freeze = false;
+      this.nextPost = (this.nextPost + 1) % POSTS;
+      this.sketch.animate();
+      return;
+    }
+    this.freeze = true;
+    states.forEach(s => s.hidden = view < 0 && !s.isRim && s.level - 3 > 2 * view);
+    this.nextPost = view < 0 ? 0 : parseInt(view);
   }
 }
 

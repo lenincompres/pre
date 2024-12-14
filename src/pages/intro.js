@@ -5,6 +5,13 @@ import * as STYLE from "../style.js";
 import {
   colorBullet
 } from "../../lib/auxiliary.js";
+import p5Element from "../components/p5Element.js";
+import p5Cube from "../components/p5Cube.js";
+
+const cube = new p5Cube({
+  animated: true,
+  onclick: state => state && (window.location.href = "./?rgb=" + state.code.codeToHex()),
+});
 
 export default {
   css: {
@@ -26,16 +33,71 @@ export default {
     }),
   },
 
+  select: {
+    position: "relative",
+    backgroundColor: "transparent",
+    zIndex: 10,
+    margin: "-2em auto",
+    textAlignLast: "center",
+    option: [{
+      value: "none",
+      text: Copy.text({
+        en: "Animated view",
+        es: 'Cubo Animado',
+      }),
+    }, {
+      value: 1,
+      text: Copy.text({
+        en: "Physical Plains",
+        es: 'Planos Físicos',
+      }),
+    }, {
+      value: 2,
+      text: Copy.text({
+        en: "Rational Plains",
+        es: 'Planos Rationales',
+      }),
+    }, {
+      value: 3,
+      text: Copy.text({
+        en: "Emotional Plains",
+        es: 'Planos Emotionales',
+      }),
+    }, {
+      value: 4,
+      text: Copy.text({
+        en: "Base vs. Top",
+        es: 'Base y Tope',
+      }),
+    }, {
+      value: 0,
+      text: Copy.text({
+        en: "Top View",
+        es: 'Vista de Tope',
+      }),
+    }, {
+      value: -1,
+      text: Copy.text({
+        en: "Center View",
+        es: 'Vista de Centro',
+      }),
+    }, {
+      value: -2,
+      text: Copy.text({
+        en: "Base View",
+        es: 'Vista de Base',
+      }),
+    }],
+    onchange: e => cube.view(e.target.value),
+  },
+
   figure: {
     display: "flex",
     flexDirection: "column",
     placeContent: "center",
     height: "400px",
     margin: "-1em auto 0",
-    content: new CubeSection({
-      animated: true,
-      onclick: state => state && (window.location.href = "./?rgb=" + state.code.codeToHex()),
-    }),
+    content: cube,
   },
 
   main: {
