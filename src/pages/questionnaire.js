@@ -124,12 +124,12 @@ const modelQuestion = q => {
             padding: '0.68em',
             position: 'relative',
             order: Math.floor(100 * Math.random()),
-            div: {
+            label: {
               margin: '0 1em',
               display: 'flex',
               flexDirection: 'row',
               placeContent: 'space-around',
-              label: o.map(option => new Object({
+              div: o.map(option => new Object({
                 span: {
                   fontSize: '1.2rem',
                   fontWeight: 'bold',
@@ -192,23 +192,22 @@ const questions = new Binder(QUESTIONS.map(modelQuestion));
 export const questionnaire = {
   style: style.section,
   header: {
-    style: style.floatingSign,
-    backgroundColor: style.darkScreen,
-    color: 'white',
-    p: Copy.text({
-      en: 'The following questionaire averages your answers and map them to a color archetype in the cube. To answer it, you must rate each option individually, but compare them to others in the same group.',
-      es: 'El siguiente cuestionario promedia tus respuestas y las asigna a un arquetipo de color en el cubo. Para responderla, debes calificar cada opción individualmente, pero compararlas con otras del mismo grupo.'
+    p: {
+      style: style.floatingSign,
+      backgroundColor: style.darkScreen,
+      color: 'white',
+      text: Copy.text({
+        en: 'The following questionaire averages your answers and map them to a color archetype in the cube. To answer it, you must rate each option individually, but compare them to others in the same group.',
+        es: 'El siguiente cuestionario promedia tus respuestas y las asigna a un arquetipo de color en el cubo. Para responderla, debes calificar cada opción individualmente, pero compararlas con otras del mismo grupo.'
+      })
+    },
+    h2: Copy.text({
+      en: 'Example',
+      es: "Ejemplo",
     }),
-  },
-  main: {
-    content: [{
-      h2: Copy.text({
-        en: 'Example',
-        es: "Ejemplo",
-      }),
-      section: sampleQuestions.map(q => modelQuestion(q).model),
-    }, {
-      marginTop: '1em',
+    section: sampleQuestions.map(q => modelQuestion(q).model),
+    small: {
+      marginTop: '4em',
       a: {
         fontSize: '1.14em',
         target: '_blank',
@@ -217,15 +216,16 @@ export const questionnaire = {
           es: "El código RGB para el color promedio resultante es:",
         }) + v),
         href: _favorite.as(v => './?rgb=' + v.substr(1)),
-      }
-    }, {
-      marginTop: '4em',
-      h2: Copy.text({
-        en: 'Questionaire',
-        es: "Cuestionario",
-      }),
-      section: questions.as(qs => qs.map(q => q.model))
-    }]
+      },
+    }
+  },
+  main: {
+    marginTop: '4em',
+    h2: Copy.text({
+      en: 'Questionaire',
+      es: "Cuestionario",
+    }),
+    section: questions.as(qs => qs.map(q => q.model))
   }
 };
 
@@ -244,13 +244,19 @@ const updateResults = _ => {
   );
   //PRE results
   let rgb = getAverage(0, 5).map(v => v * 255 / 100);
-  let lights = getAverage(6, 9);
   let sats = getAverage(10, 13);
+  let lights = getAverage(6, 9);
   //console.log(rgb, sats, lights, );
-  _results.value = AUX.hex(...rgb,
+  let R = AUX.rgb(AUX.hex(...rgb, sats[0], lights[0]))[0];
+  let G = AUX.rgb(AUX.hex(...rgb, sats[1], lights[1]))[1];
+  let B = AUX.rgb(AUX.hex(...rgb, sats[2], lights[2]))[2];
+  //_results.value = AUX.hex(R, G, B);
+  let [r,g,b] = AUX.rgb(AUX.hex(...rgb,
     sats.reduce((o, v) => v + o, 0) / 3,
-    lights.reduce((o, v) => v + o, 0) / 3
-  );
+    lights.reduce((o, v) => v + o, 0) / 3,
+  ));
+  //_results.value = AUX.hex(r, g, b);
+  _results.value = AUX.hex((R+r)/2, (G+g)/2, (B+b)/2);
 }
 
 export default questionnaire;

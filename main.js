@@ -19,7 +19,7 @@ const CSS = {
   a: {
     color: `white`,
     textDecoration: `none`,
-    textShadow: `1px 1px 2px black`,
+    textShadow: `0 0 1px black, 1px 1px 2px black`,
     hover: {
       textDecoration: `underline`,
     },
@@ -33,6 +33,7 @@ const CSS = {
   p: {
     margin: `0.5em 0`,
     lineHeight: `1.5em`,
+    textAlign: 'left',
   },
   ul: {
     margin: `0.5em 0`,
@@ -47,21 +48,24 @@ const CSS = {
   h1: {
     paddingBottom: 0,
     textAlign: `center`,
-    fontSize: `3em`,
+    fontSize: `3rem`,
     color: `white`,
-    textShadow: `0 0 3px black`,
+    textShadow: `0 0 3px black, 0 0 3px black`,
     textTransform: `capitalize`,
   },
   h2: {
-    paddingTop: `2rem`,
+    fontSize: `1.5rem`,
+    paddingTop: `1em`,
     textAlign: `center`,
-    fontSize: `1.4em`,
     color: `white`,
     textTransform: `capitalize`,
-    textShadow: `0 0 3px black`,
+    textShadow: `0 0 3px black, 0 0 3px black`,
   },
   h3: {
-    fontSize: `1.2em`,
+    fontSize: `1.25rem`,
+  },
+  h4: {
+    fontSize: `1.1rem`,
   }
 };
 
@@ -129,7 +133,7 @@ DOM.set({
         en: `Results`,
         es: `Resultados`,
       }),
-      p: rgb && !fav ? undefined : {
+      small: rgb && !fav ? undefined : {
         margin: `1em 0 -2.25em -11em`,
         zIndex: 1,
         text: Copy.text({

@@ -8,17 +8,19 @@ import Copy from '../../lib/Copy.js';
 import {
   colorBullet
 } from "../../lib/auxiliary.js";
+import StateElement from '../components/StateElement.js';
+import CubeSection from '../components/Cube.js';
 
 export const _mbti = new Binder('- - - -');
 export const _feature = new Binder('#808080');
 export const _copy = new Binder();
-const _stateElement = new Binder();
+const _cubeState = new Binder();
 
 const bars = {
   e: new Bar('Extro/Intro', '6em', 'gray', true),
   s: new Bar('Sense/iNtuit', '6em', 'red', 'cyan'),
   t: new Bar('Think/Feel', '6em', 'lime', 'blue'),
-  j: new Bar('Judg/Perceiv', '6em', 'white', 'black'),
+  j: new Bar('Judge/Perceive', '6em', 'white', 'black'),
   id: new Bar('Id', '6em', 'magenta'),
   ego: new Bar('Ego', '6em', 'yellow'),
   sup: new Bar('Superego', '6em', 'cyan'),
@@ -69,26 +71,11 @@ const level = (d, i) => {
   };
 };
 
-var stateP5 = new p5(function (me) {
-  me.setup = () => {
-    _stateElement.value = me.createCanvas(140, 120).elt;
-    me.translate(me.width / 2, me.height / 2);
-    me.update = code => {
-      me.clear();
-      let state = new State({
-        sketch: me,
-        center: code,
-        radius: me.height / 2,
-      });
-      setTimeout(() => state.draw(true), 50);;
-    };
-    me.update(_feature.value.hexToCode());
-  };
-});
+var stateElt = new StateElement();
 
 _feature.onChange(hex => {
   if (!hex) return;
-  if (stateP5.update) stateP5.update(hex.hexToCode());
+  if (stateElt.update) stateElt.update(hex.hexToCode());
   let [r, g, b] = AUX.rgb(hex).map(v => v * 100 / 255);
   let getI = n => 100 * Math.pow(Math.abs(n - 50) / 50, 0.68);
   let j = (r + g + b) / 3;
@@ -98,7 +85,7 @@ _feature.onChange(hex => {
   //let e = 100 - (getI(r) + getI(g) + getI(b)) / 3;
 
   const binar = (v, A, B, N = '-', T = 100, D = 1) => v > T / 2 + D ? A : v < T / 2 - D ? B : N;
-  _mbti.value = [binar(e, 'E', 'I'), binar(s, 'S', 'N'), binar(t, 'F', 'T'), binar(j, 'J', 'P')].join(' ');
+  _mbti.value = [binar(e, 'E', 'I'), binar(s, 'S', 'N'), binar(t, 'T', 'F'), binar(j, 'J', 'P')].join(' ');
 
   bars.r.value = r;
   bars.g.value = g;
@@ -112,73 +99,73 @@ _feature.onChange(hex => {
   bars.sup.value = 0.5 * (g + b);
 
   _copy.value = new Copy(STATES[hex.hexToCode()]);
+
+  _cubeState.value = new CubeSection({
+    vicinity: true,
+    center: hex.hexToCode(),
+    width: 200,
+    height: 200,
+  });
 });
 
+const _fixed = new Binder(false);
+
 export const model = {
-  div: {
-    backgroundColor: '#eee',
-    margin: '0 auto',
-    borderRadius: '0.5em',
-    boxShadow: '1px 1px 2px black',
+  main: {
+    style: style.floatingSign,
     position: 'relative',
-    maxWidth: '30em',
     padding: '1.5em',
-    figure: _stateElement,
+    figure: stateElt,
     h3: {
       textTransform: 'capitalize',
       margin: '0.5em 0',
       text: _copy.as(copy => copy.at.archetype),
     },
-    small: {
-      display: 'block',
-      width: 'fit-content',
-      margin: '0 auto',
-      div: _feature.as(v => ({
-        textAlign: 'left',
-        p: _copy.as(copy => Copy.text({
-          en: `The ${copy.at.tone} (${copy.at.colour}) color is ${copy.at.adjective}; a psyche focused on ${copy.at.concept} as an archetypical ${copy.at.archetype}. It fits comfortably at a ${copy.at.location} (${copy.at.map}).`,
-          es: `El color ${copy.at.tone} (${copy.at.colour}) es ${copy.at.adjective}; una psiquis efocada en ${copy.at.concept}, como el arquetipo de ${copy.at.archetype}. Se manifiesta a gusto en ${copy.at.location}s (${copy.at.map}).`,
-        })),
-        ul: {
-          textAlign: 'left',
-          margin: '1em auto 0',
-          width: 'fit-content',
-          li: [...STATES[v.hexToCode()].code].map((n, i) => level(i, parseInt(n))),
-        }
+    div: _feature.as(v => ({
+      p: _copy.as(copy => Copy.text({
+        en: `The ${copy.at.tone} (${copy.at.colour}) color is ${copy.at.adjective}; a psyche focused on ${copy.at.concept} as an archetypical ${copy.at.archetype}. It fits comfortably at a ${copy.at.location} (${copy.at.map}).`,
+        es: `El color ${copy.at.tone} (${copy.at.colour}) es ${copy.at.adjective}; una psiquis efocada en ${copy.at.concept}, como el arquetipo de ${copy.at.archetype}. Se manifiesta a gusto en ${copy.at.location}s (${copy.at.map}).`,
       })),
-    }
+      ul: {
+        textAlign: 'left',
+        margin: '1em auto 0',
+        width: 'fit-content',
+        li: [...STATES[v.hexToCode()].code].map((n, i) => level(i, parseInt(n))),
+      },
+      //aside: _cubeState,
+    })),
   },
-  section: {
-    style: style.floatingSign,
-    css: {
-      a: {
-        color: 'black',
-        textDecoration: 'underline',
-        textShadow: 'none',
-      }
-    },
+  aside: {
+    css: style.floatingSign,
     margin: '1em 0',
     header: {
-      h3: Copy.text({
+      h4: Copy.text({
         en: 'Break down and extrapolation to other frameworks',
         es: 'Desglose y extrapolación a otros sistemas.',
       }),
     },
     ul: {
-      fontSize: 'small',
       css: {
+        fontSize: 'small',
         display: 'flex',
         flexWrap: 'wrap',
         placeContent: 'space-evenly',
-        li: {
+        li_: {
           display: 'inline-block ',
           margin: '0.5em 0',
           width: '9em',
           p: {
             margin: '.75em 0 0.25em'
           },
-        }
+        },
       },
+      position: _fixed.as('relative', 'fixed'),
+      backgroundColor: _fixed.as('none', style.lightScreen),
+      padding: _fixed.as(0, '1rem'),
+      flexDirection: _fixed.as('row', 'column'),
+      top: 0,
+      left: 0,
+      margin: 0,
       li: [
         new Stats('3DPsyche', './', [bars.r, bars.g, bars.b], true),
         new Stats('Freudian', 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego', [bars.id, bars.ego, bars.sup], true),
@@ -200,8 +187,9 @@ export const model = {
         es: `* La extroversión aquí se refiere a la sociabilidad (${Copy.text(STATES['111'].colour)} color): empatía, apertura, amabilidad.`,
       }),*/
     },
+    dragstart: () => _fixed.value = !_fixed.value,
     footer: {
-      p: _feature.as(v => Copy.text({
+      small: _feature.as(v => Copy.text({
         en: `RGB color code: ${v}`,
         es: `Código de color RGB: ${v}`,
       })),

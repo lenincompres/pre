@@ -5,7 +5,7 @@ const STATE_ICON_GRID = 36;
 const CENTERCODE = '111';
 const [COS30, SIN30] = [Math.cos(Math.PI / 6), Math.sin(Math.PI / 6)];
 
-/* -------------------------- // Auxiliary general -------------------------- */
+/* Auxiliary general */
 
 String.prototype.toRGB = function () {
   return /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this).filter((v, i) => i > 0 && 1 < 4).map(v => parseInt(v, 16));
@@ -75,41 +75,41 @@ function drawBox(radius = 40, colour = [128, 128, 128], alpha = 1, inside = true
   if (inside) sketch.rotate(Math.PI);
 }
 
-function polygon(x, y, radius, npoints, sketch) {
-  if (!sketch) sketch = this;
+function polygon(x, y, radius, npoints, p5Sketch) {
+  if (!p5Sketch) p5Sketch = this;
   let angle = Math.TWO_PI / npoints;
-  sketch.beginShape();
+  p5Sketch.beginShape();
   for (let a = 0; a < Math.TWO_PI; a += angle) {
     let sx = x + cos(a) * radius;
     let sy = y + sin(a) * radius;
-    sketch.vertex(sx, sy);
+    p5Sketch.vertex(sx, sy);
   }
-  sketch.endShape(sketch.CLOSE);
+  p5Sketch.endShape(p5Sketch.CLOSE);
 }
 
 export class State {
   constructor({
-    sketch,
+    sketch: p5Sketch,
     center,
     index = false,
     animate = false,
     radius = 40,
     onupdate = s => s,
-    noText
+    noText = false,
   }) {
     this.noText = noText;
     this.onupdate = onupdate;
-    this.sketch = sketch;
+    this.p5Sketch = p5Sketch;
     let base = center !== undefined ? center : CENTERCODE;
     if (index === false) index = CENTERCODE.codeToOrdinal();
-    let inCoords = index.codeToCoords();
+    this.inCoords = index.codeToCoords();
     let baseCode = base.codeToCoords().plus(2).codeToCoords();
     let code = index.ordinalToCode(baseCode);
     this.ordinal = code.codeToOrdinal();
     this.color = code.codeToColor();
     let diff = index.ordinalToCode().codeToCoords().plus(-1);
     let [spacing, spread] = [radius * 1.5, 3.68];
-    this.isRim = inCoords.includes(2) && inCoords.includes(0);
+    this.isRim = this.inCoords.includes(2) && this.inCoords.includes(0);
     this.level = diff.reduce((o, v) => o + v, 0);
     this.tier = this.isRim || !this.level ? 1 : this.level < 0 ? 0 : 2;
     this.posts = [
@@ -145,61 +145,60 @@ export class State {
     this.copy = new Copy(STATES[code]);
     this.code = code;
 
-    sketch.loadImage('media/symbolsprite.png', img => this.symbolSprite = img);
+    p5Sketch.loadImage('media/symbolsprite.png', img => this.symbolSprite = img);
 
     this.draw = (bool) => {
       let x = this.value;
       let opacity = !this.interact ? 1 : 0.5 + Math.cos(3 * Math.cos(1.57 * x)) / 2;
       let size = this.radius;// * (!this.interact ?  1 : this.sketch.map(opacity,0,1,0.68,1.14));
-      if (!this.symbolSprite) return console.error("No icon png found");
       this.onupdate(this);
       if (isNaN(this.post)) this.post = 0;
       let end = this.posts[this.post];
-      let ended = sketch.dist(...end, ...this.coords) < 0.25;
+      let ended = p5Sketch.dist(...end, ...this.coords) < 0.25;
       if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
       if (this.hidden) return;
-      if(!sketch) return;
-      sketch.push();
-      sketch.noStroke();
-      sketch.translate(...this.coords);
+      if(!p5Sketch) return;
+      p5Sketch.push();
+      p5Sketch.noStroke();
+      p5Sketch.translate(...this.coords);
       // base
-      drawBox(size, this.color, 0.86 * opacity, true, sketch);
+      drawBox(size, this.color, 0.86 * opacity, true, p5Sketch);
       // icon
-      sketch.tint(...this.color, opacity * 255);
+      p5Sketch.tint(...this.color, opacity * 255);
       var iSize = size * 0.86;
-      sketch.image(this.symbolSprite, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
+      if (this.symbolSprite) p5Sketch.image(this.symbolSprite, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
       // text
       if (!this.noText) {
-        let l = sketch.lightness(this.color) < 45 || sketch.green(this.color) < 45;
-        sketch.fill(l ? 255 : 0, opacity * 255);
-        sketch.strokeWeight(2.5);
-        if(!this.interact) sketch.stroke(l ? 0 : 255,  opacity * 100);
-        sketch.textFont('Verdana');
-        sketch.textAlign(sketch.CENTER, sketch.CENTER);
-        sketch.textLeading(0);
-        sketch.textSize(size * 0.2);
-        sketch.text(this.copy.at.archetype.toUpperCase(), 0, size * 0.5);
+        let l = p5Sketch.lightness(this.color) < 45 || p5Sketch.green(this.color) < 45;
+        p5Sketch.fill(l ? 255 : 0, opacity * 255);
+        p5Sketch.strokeWeight(2.5);
+        if(!this.interact) p5Sketch.stroke(l ? 0 : 255,  opacity * 100);
+        p5Sketch.textFont('Verdana');
+        p5Sketch.textAlign(p5Sketch.CENTER, p5Sketch.CENTER);
+        p5Sketch.textLeading(0);
+        p5Sketch.textSize(size * 0.2);
+        p5Sketch.text(this.copy.at.archetype.toUpperCase(), 0, size * 0.5);
       }
       // top
-      sketch.noStroke();
-      drawBox(size, this.color, 0.34 * opacity, false, sketch);
+      p5Sketch.noStroke();
+      drawBox(size, this.color, 0.34 * opacity, false, p5Sketch);
       //
       if (this.selected) {
-        sketch.fill(0, 0);
-        sketch.rotate(Math.PI / 6);
-        sketch.strokeWeight(6);
-        sketch.stroke(0, 140);
-        polygon(1, 1, size, 6, sketch);
-        sketch.strokeWeight(4);
-        sketch.stroke(255);
-        polygon(0, 0, size, 6, sketch);
+        p5Sketch.fill(0, 0);
+        p5Sketch.rotate(Math.PI / 6);
+        p5Sketch.strokeWeight(6);
+        p5Sketch.stroke(0, 140);
+        polygon(1, 1, size, 6, p5Sketch);
+        p5Sketch.strokeWeight(4);
+        p5Sketch.stroke(255);
+        polygon(0, 0, size, 6, p5Sketch);
       }
-      sketch.pop();
+      p5Sketch.pop();
     }
   }
 
   isNear() {
-    inCoords.filter(v => v === 1).length >= 2;
+    return this.inCoords.filter(v => v === 1).length >= 2;
   }
 
   setRef(hexRef) {
@@ -215,7 +214,7 @@ export class State {
       let d = v - p2[i];
       return Math.abs(d) <= 0.5 ? v : Math.abs(d + 1) < Math.abs(d - 1) ? v + 1 : v - 1;
     });
-    return this.sketch.dist(...p2, ...p1);
+    return this.p5Sketch.dist(...p2, ...p1);
   };
 
 }

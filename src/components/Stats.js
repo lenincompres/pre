@@ -1,6 +1,6 @@
 export class Stats extends HTMLElement {
 
-  constructor(title, link, bars, blank) {
+  constructor(title, link, bars, blank, ) {
     super();
     this.set({
       display: 'flex',
@@ -13,11 +13,12 @@ export class Stats extends HTMLElement {
         }
       },
       ul: {
+        margin: '0 0 1em',
         li: bars.map(b => ({
           margin: 0,
           bar: b,
         })),
-      }
+      },
     });
   }
 

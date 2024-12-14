@@ -1,16 +1,17 @@
-export const lightSreen = 'rgba(255,255,255,0.5)';
-export const graySreen = 'rgba(128,128,128,0.5)';
-export const darkSreen = 'rgba(0,0,0,0.42)';
-export const whiteSreen = 'rgba(255,255,255,0.86)';
 export const lightScreen = '#fffb';
 export const darkScreen = '#0008';
 export const whiteScreen = '#fffd';
 export const grayScreen = '#777c';
 
 export const floatingSign = {
+  a: {
+    color: 'black',
+    textDecoration: 'underline',
+    textShadow: 'none',
+  },
   color: 'black',
   padding: '1em',
-  backgroundColor: whiteSreen,
+  backgroundColor: whiteScreen,
   borderRadius: '1em',
 }
 

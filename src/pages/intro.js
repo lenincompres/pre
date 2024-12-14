@@ -10,8 +10,8 @@ export default {
   css: {
     h2: {
       color: 'black',
-      textShadow: '0 0 3px white',
-    }
+      textShadow: `none`,
+    },
   },
   backgroundColor: STYLE.lightScreen,
   padding: "2em 0",
@@ -33,6 +33,7 @@ export default {
     height: "400px",
     margin: "-1em auto 0",
     content: new CubeSection({
+      animated: true,
       onclick: state => state && (window.location.href = "./?rgb=" + state.code.codeToHex()),
     }),
   },
@@ -94,7 +95,7 @@ export default {
           },
         }, {
           h3: Copy.text({
-            en: `Disengament: How we neglect one dimension to focus on others.`,
+            en: `Disengagement: How we neglect one dimension to focus on others.`,
             es: `Desconexión: cómo ignoramos una dimensión para centrarnos en otras.`,
           }),
           ul: {
@@ -126,7 +127,7 @@ export default {
       es: `Entender el cubo`,
     }),
     p_: Copy.text({
-      en: [`We engage and disengage with these dimensions to perform tasks, focus, and even relax. In subjects like math, we benefit from physical abstraction to focus on logic. Emotional detachment enhances objectivity in decision-making. And, keen instincts require bypassing rational overthinking.`, `Some tasks are multidimensional. A dance performance engages both physical and emotional attention. Car repair calls for physical and rational engagement.`, `These combinations create the dynamic spectrum illustrated above. Each cube represents an archetype that embodies its unique combination. We may be multifaceted, but gravitate to some spaces with more ease than others.`],
+      en: [`We engage and disengage with these dimensions to perform tasks, focus, and even relax. In subjects like math, we benefit from physical abstraction to focus on logic. Emotional detachment enhances objectivity in decision-making. And, keen instincts require bypassing rational overthinking.`, `Some tasks are multidimensional. For instance, a dance performance needs physical and emotional focus; car repair calls for physical and rational engagement.`, `These combinations create the dynamic spectrum illustrated above. Each cube represents an archetype that embodies its unique combination. We may be multifaceted, but gravitate to some spaces with more ease than others.`],
       es: [`Nos involucramos y desconectamos de estas dimensiones para realizar tareas, concentrarnos o relajarnos. En materias como matemáticas, nos beneficiamos de la abstracción física para centrarnos en la lógica. El desapego emocional mejora la objetividad en la toma de decisiones. Y agudizar el instinto requiere pasar por alto el pensamiento racional.`, `Algunas tareas son multidimensionales. Un espectáculo de danza, por ejemplo nos demanda tanto atención física como emocional. La reparación de automóviles requiere un compromiso físico y racional.`, `Estas combinaciones crean el espectro dinámico ilustrado arriba. Cada cubo representa un arquetipo que encarna su combinación única. Puede que seamos multifacéticos, pero tenemos tendencia a unos roles más que a otros.`],
     }),
   },

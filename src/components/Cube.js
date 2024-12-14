@@ -62,16 +62,21 @@ class CubeSection extends HTMLElement {
     noLabels = false,
     onready = () => null,
     onclick = () => null,
+    vicinity = false,
+    width = undefined,
+    height = 400,
+    center = '111',
+    animated,
+    view,
   }) {
     super();
 
     const _canvas = new Binder();
-    const thisP5 = new p5(function () {});
 
     this.set({
       small: _canvas.as(`Loading color spectrum…`, ''),
       select: {
-        display: _canvas.as("none", "block"),
+        display: animated ? _canvas.as("none", "block") : "none",
         backgroundColor: "transparent",
         zIndex: 10,
         position: "relative",
@@ -126,9 +131,9 @@ class CubeSection extends HTMLElement {
             es: 'Vista de Base',
           }),
         }],
-        onchange: e => thisP5.view(e.target.value),
+        onchange: e => this.view(e.target.value),
       },
-      figure: _canvas,
+      content: _canvas,
     });
 
     let isHover = false;
@@ -137,25 +142,28 @@ class CubeSection extends HTMLElement {
     let changePost = false;
     let overState;
 
+    const thisP5 = new p5(function () {});
+    if(width === undefined) width = thisP5.windowWidth;
+
     let states = new Array(27).fill().map((_, i) => new State({
       sketch: thisP5,
-      index: i
-    })).filter(state => !thisP5.vicinity || state.isNear()).sort(state => state.tier);
+      center: center,
+      index: i,
+    })).filter(state => !vicinity || state.isNear()).sort(state => state.tier);
 
     if (ref) states.forEach(state => state.setRef(ref));
 
     let size = 0.4 * states[0].radius;
+    
+    thisP5.center = [width * 0.5, height * 0.5];
 
     thisP5.setup = function () {
-      let canvas = thisP5.createCanvas(thisP5.windowWidth, 400);
-      thisP5.center = [thisP5.width * 0.5, thisP5.height * 0.5];
-      console.log(canvas);
-      _canvas.value = canvas.elt;
+      _canvas.value = thisP5.createCanvas(width, height).elt;
       thisP5.strokeWeight(3);
       thisP5.textFont('Verdana');
       thisP5.textSize(size);
       thisP5.textAlign(thisP5.CENTER, thisP5.CENTER);
-      thisP5.animate();
+      if(animated) thisP5.animate();
     }
 
     thisP5.draw = function () {
@@ -211,28 +219,29 @@ class CubeSection extends HTMLElement {
 
     thisP5.animate = function (wait = 1000) {
       if (thisP5.timeOut) clearTimeout(thisP5.timeOut);
-      if (thisP5.freeze && currentPost === nextPost) return;
+      if (this.freeze && currentPost === nextPost) return;
       let isIni = currentPost !== 0 || nextPost === 0;
       thisP5.timeOut = setTimeout(() => changePost = !isHover, wait * (isIni ? WAIT : 0.5));
       if (isIni) nextPost = (nextPost + 1) % POSTS;
     }
 
-    thisP5.view = function (view) {
+    this.view = function (view) {
       changePost = true;
-      if (isNaN(view)) {
+      if (isNaN(view) && animated) {
         states.forEach(s => s.hidden = false);
-        thisP5.freeze = false;
+        this.freeze = false;
         nextPost = (nextPost + 1) % POSTS;
         thisP5.animate();
         return;
       }
-      thisP5.freeze = true;
+      this.freeze = true;
       states.forEach(s => s.hidden = view < 0 && !s.isRim && s.level - 3 > 2 * view);
       nextPost = view < 0 ? 0 : parseInt(view);
     }
+    if(view !== undefined) this.view(view);
 
     thisP5.mouseMoved = function () {
-      if (!thisP5.canvas) return;
+      if (!thisP5.canvas || !animated) return;
       isHover = !!parseInt(thisP5.get(thisP5.mouseX, thisP5.mouseY).join('')); // any pixel color under the mouse
       thisP5.cursor(isHover ? thisP5.HAND : thisP5.ARROW);
       if (isHover) {
@@ -260,7 +269,5 @@ class CubeSection extends HTMLElement {
 }
 
 customElements.define('cube-section', CubeSection);
-
-
 
 export default CubeSection;
