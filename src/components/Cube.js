@@ -76,7 +76,7 @@ class CubeSection extends HTMLElement {
     this.set({
       small: _canvas.as(`Loading color spectrum…`, ''),
       select: {
-        display: animated ? _canvas.as("none", "block") : "none",
+        display: _canvas.as("none", "block"),
         backgroundColor: "transparent",
         zIndex: 10,
         position: "relative",
@@ -133,7 +133,7 @@ class CubeSection extends HTMLElement {
         }],
         onchange: e => this.view(e.target.value),
       },
-      content: _canvas,
+      figure: _canvas,
     });
 
     let isHover = false;
@@ -142,129 +142,131 @@ class CubeSection extends HTMLElement {
     let changePost = false;
     let overState;
 
-    const thisP5 = new p5(function () {});
-    if(width === undefined) width = thisP5.windowWidth;
+    this.sketch = new p5(p => {
+
+      p.setup = function () {
+        if (width === undefined) width = p.windowWidth;
+        _canvas.value = p.createCanvas(width, height).elt;
+        p.strokeWeight(3);
+        p.textFont('Verdana');
+        p.textSize(textSize);
+        p.center = [width * 0.5, height * 0.5];
+        p.textAlign(p.CENTER, p.CENTER);
+        if (animated) p.animate();
+      }
+
+      p.draw = function () {
+        p.clear();
+        p.translate(...p.center);
+        states.forEach(s => {
+          s.setRef(overState);
+          s.interact = !!overState;
+          s.draw()
+        });
+        if (overState) {
+          let c = p.color('#' + overState.code.codeToHex())
+          let l = p.lightness(c) < 45 || p.green(c) < 45;
+          p.stroke(c);
+          p.fill(l ? 255 : 0);
+          p.text(overState.copy.at.archetype.toUpperCase(), p.mouseX - p.center[0], p.mouseY - p.center[1] - textSize);
+        }
+        if (changePost) {
+          states.forEach(s => s.post = s.post === 0 ? nextPost : 0);
+          currentPost = states[0].post;
+          p.animate();
+          changePost = false;
+        }
+        if (!currentPost || noLabels) return;
+        let y = RADIUS * 4.3;
+        let x = RADIUS * 4.75;
+        let texts = [
+          [Copy.at.actioning, -x, y],
+          [Copy.at.sensing, 0, y],
+          [Copy.at.abstracting, x, y],
+        ];
+        if (currentPost === 2) texts = [
+          [Copy.at.instincting, -x * 1.12, y],
+          [Copy.at.conceiving, 0, y],
+          [Copy.at.regulating, x * 1.12, y],
+        ];
+        else if (currentPost === 3) texts = [
+          [Copy.at.detaching, -x, y],
+          [Copy.at.empathizing, 0, y],
+          [Copy.at.valuing, x, y],
+        ];
+        else if (currentPost === 4) texts = [
+          [Copy.at.relaxing, -x * 1.28, y],
+          [Copy.at.periphery, 0, y],
+          [Copy.at.demanding, x * 1.28, y],
+        ];
+        p.fill(0);
+        p.textAlign(p.CENTER, p.CENTER);
+        p.textSize(RADIUS * 0.34);
+        p.noStroke();
+        texts.forEach(t => p.text(...t));
+      }
+
+      p.animate = function (wait = 1000) {
+        if (p.timeOut) clearTimeout(p.timeOut);
+        if (this.freeze && currentPost === nextPost) return;
+        let isIni = currentPost !== 0 || nextPost === 0;
+        p.timeOut = setTimeout(() => changePost = !isHover, wait * (isIni ? WAIT : 0.5));
+        if (isIni) nextPost = (nextPost + 1) % POSTS;
+      }
+
+      p.mouseMoved = function () {
+        if (!animated) return;
+        isHover = !!parseInt(p.get(p.mouseX, p.mouseY).join('')); // any pixel color under the mouse
+        p.cursor(isHover ? p.HAND : p.ARROW);
+        if (isHover) {
+          let newOver = states.filter(s => !s.hidden && p.dist(p.mouseX - p.center[0], p.mouseY - p.center[1], ...s.coords) < s.radius).pop();
+          if (newOver === overState) return;
+          if (overState) overState.selected = false;
+          overState = newOver;
+          if (overState) overState.selected = true;
+          if (p.onmouseover) p.onmouseover(overState);
+        } else {
+          if (overState) {
+            overState.selected = false;
+            if (p.onmouseout) p.onmouseout(overState);
+            p.animate();
+          }
+          overState = false;
+        }
+      }
+
+      p.mouseReleased = function () {
+        if (!isHover) return;
+        onclick(overState);
+      }
+    });
 
     let states = new Array(27).fill().map((_, i) => new State({
-      sketch: thisP5,
+      sketch: this.sketch,
       center: center,
       index: i,
     })).filter(state => !vicinity || state.isNear()).sort(state => state.tier);
 
     if (ref) states.forEach(state => state.setRef(ref));
 
-    let size = 0.4 * states[0].radius;
-    
-    thisP5.center = [width * 0.5, height * 0.5];
+    let textSize = 0.4 * states[0].radius;
 
-    thisP5.setup = function () {
-      _canvas.value = thisP5.createCanvas(width, height).elt;
-      thisP5.strokeWeight(3);
-      thisP5.textFont('Verdana');
-      thisP5.textSize(size);
-      thisP5.textAlign(thisP5.CENTER, thisP5.CENTER);
-      if(animated) thisP5.animate();
-    }
 
-    thisP5.draw = function () {
-      thisP5.clear();
-      thisP5.translate(...thisP5.center);
-      states.forEach(s => {
-        s.setRef(overState);
-        s.interact = !!overState;
-        s.draw()
-      });
-      if (overState) {
-        let c = thisP5.color('#' + overState.code.codeToHex())
-        let l = thisP5.lightness(c) < 45 || thisP5.green(c) < 45;
-        thisP5.stroke(c);
-        thisP5.fill(l ? 255 : 0);
-        thisP5.text(overState.copy.at.archetype.toUpperCase(), thisP5.mouseX - thisP5.center[0], thisP5.mouseY - thisP5.center[1] - size);
-      }
-      if (changePost) {
-        states.forEach(s => s.post = s.post === 0 ? nextPost : 0);
-        currentPost = states[0].post;
-        thisP5.animate();
-        changePost = false;
-      }
-      if (!currentPost || noLabels) return; // not to draw the labels
-      let y = RADIUS * 4.3;
-      let x = RADIUS * 4.75;
-      let texts = [
-        [Copy.at.actioning, -x, y],
-        [Copy.at.sensing, 0, y],
-        [Copy.at.abstracting, x, y],
-      ];
-      if (currentPost === 2) texts = [
-        [Copy.at.instincting, -x * 1.12, y],
-        [Copy.at.conceiving, 0, y],
-        [Copy.at.regulating, x * 1.12, y],
-      ];
-      else if (currentPost === 3) texts = [
-        [Copy.at.detaching, -x, y],
-        [Copy.at.empathizing, 0, y],
-        [Copy.at.valuing, x, y],
-      ];
-      else if (currentPost === 4) texts = [
-        [Copy.at.relaxing, -x * 1.28, y],
-        [Copy.at.periphery, 0, y],
-        [Copy.at.demanding, x * 1.28, y],
-      ];
-      thisP5.fill(0);
-      thisP5.textAlign(thisP5.CENTER, thisP5.CENTER);
-      thisP5.textSize(RADIUS * 0.34);
-      thisP5.noStroke();
-      texts.forEach(t => thisP5.text(...t));
-    }
-
-    thisP5.animate = function (wait = 1000) {
-      if (thisP5.timeOut) clearTimeout(thisP5.timeOut);
-      if (this.freeze && currentPost === nextPost) return;
-      let isIni = currentPost !== 0 || nextPost === 0;
-      thisP5.timeOut = setTimeout(() => changePost = !isHover, wait * (isIni ? WAIT : 0.5));
-      if (isIni) nextPost = (nextPost + 1) % POSTS;
-    }
-
-    this.view = function (view) {
+    this.view = (view) => {
       changePost = true;
       if (isNaN(view) && animated) {
         states.forEach(s => s.hidden = false);
         this.freeze = false;
         nextPost = (nextPost + 1) % POSTS;
-        thisP5.animate();
+        this.sketch.animate();
         return;
       }
       this.freeze = true;
       states.forEach(s => s.hidden = view < 0 && !s.isRim && s.level - 3 > 2 * view);
       nextPost = view < 0 ? 0 : parseInt(view);
     }
-    if(view !== undefined) this.view(view);
 
-    thisP5.mouseMoved = function () {
-      if (!thisP5.canvas || !animated) return;
-      isHover = !!parseInt(thisP5.get(thisP5.mouseX, thisP5.mouseY).join('')); // any pixel color under the mouse
-      thisP5.cursor(isHover ? thisP5.HAND : thisP5.ARROW);
-      if (isHover) {
-        let newOver = states.filter(s => !s.hidden && thisP5.dist(thisP5.mouseX - thisP5.center[0], thisP5.mouseY - thisP5.center[1], ...s.coords) < s.radius).pop();
-        if (newOver === overState) return;
-        if (overState) overState.selected = false;
-        overState = newOver;
-        if (overState) overState.selected = true;
-        if (thisP5.onmouseover) thisP5.onmouseover(overState);
-      } else {
-        if (overState) {
-          overState.selected = false;
-          if (thisP5.onmouseout) thisP5.onmouseout(overState);
-          thisP5.animate();
-        }
-        overState = false;
-      }
-    }
-
-    thisP5.mouseReleased = function () {
-      if (!isHover) return;
-      onclick(overState);
-    }
+    if (view !== undefined) this.view(view);
   }
 }
 

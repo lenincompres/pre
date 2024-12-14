@@ -51,7 +51,7 @@ export default {
       }
     },
     p: Copy.text({
-      en: `This psychometric tool maps personality archetypes onto three dimensions of focus: <b style="color:darkred">physical</b> (↙), <b style="color:darkgreen">rational</b> (↑) & <b style="color:darkblue">emotional</b> (↘). In each, we interact with the world through perception, determination, and disengagement.`,
+      en: `This psychometric tool maps personality archetypes onto three dimensions of focus: <b style="color:darkred">physical</b> (${STYLE.getIcon('arrowDL')}), <b style="color:darkgreen">rational</b> (${STYLE.getIcon('arrowU')}) & <b style="color:darkblue">emotional</b> (${STYLE.getIcon('arrowD')}). In each, we interact with the world through perception, determination, and disengagement.`,
       es: `Esta herramienta psicométrica asigna arquetipos a tres dimensiones de enfoque: <b style="color:darkred">física</b> (↙), <b style="color:darkgreen">racional</b> ( ↑) y <b style="color:darkblue">emocional</b> (↘). En cada una de estas, interactuamos a través de la percepción, la determinación y la desconexión.`,
     }),
     section: new Collabsable({

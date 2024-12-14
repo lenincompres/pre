@@ -99,13 +99,6 @@ _feature.onChange(hex => {
   bars.sup.value = 0.5 * (g + b);
 
   _copy.value = new Copy(STATES[hex.hexToCode()]);
-
-  _cubeState.value = new CubeSection({
-    vicinity: true,
-    center: hex.hexToCode(),
-    width: 200,
-    height: 200,
-  });
 });
 
 const _fixed = new Binder(false);
