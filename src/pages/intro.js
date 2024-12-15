@@ -1,17 +1,10 @@
 import Copy from "../../lib/Copy.js";
 import Collabsable from "../components/Collapsable.js";
-import CubeSection from "../components/Cube.js";
 import * as STYLE from "../style.js";
 import {
   colorBullet
 } from "../../lib/auxiliary.js";
-import p5Element from "../components/p5Element.js";
-import p5Cube from "../components/p5Cube.js";
-
-const cube = new p5Cube({
-  animated: true,
-  onclick: state => state && state.code && (window.location.href = "./?rgb=" + state.code.codeToHex()),
-});
+import Cube from "../components/Cube.js";
 
 export default {
   css: {
@@ -21,74 +14,15 @@ export default {
     },
   },
   backgroundColor: STYLE.lightScreen,
-  padding: "2em 0",
 
   header: {
     maxWidth: "40em",
-    width: "calc(100%- 2rem)",
-    margin: "-2rem auto 1em",
+    width: "calc(100% - 2rem)",
+    margin: "0 auto 1rem",
     h2: Copy.text({
       en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
       es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
     }),
-  },
-
-  select: {
-    position: "relative",
-    backgroundColor: "transparent",
-    zIndex: 10,
-    margin: "-2em auto",
-    textAlignLast: "center",
-    option: [{
-      value: "none",
-      text: Copy.text({
-        en: "Animated view",
-        es: 'Cubo Animado',
-      }),
-    }, {
-      value: 1,
-      text: Copy.text({
-        en: "Physical Plains",
-        es: 'Planos Físicos',
-      }),
-    }, {
-      value: 2,
-      text: Copy.text({
-        en: "Rational Plains",
-        es: 'Planos Rationales',
-      }),
-    }, {
-      value: 3,
-      text: Copy.text({
-        en: "Emotional Plains",
-        es: 'Planos Emotionales',
-      }),
-    }, {
-      value: 4,
-      text: Copy.text({
-        en: "Base vs. Top",
-        es: 'Base y Tope',
-      }),
-    }, {
-      value: 0,
-      text: Copy.text({
-        en: "Top View",
-        es: 'Vista de Tope',
-      }),
-    }, {
-      value: -1,
-      text: Copy.text({
-        en: "Center View",
-        es: 'Vista de Centro',
-      }),
-    }, {
-      value: -2,
-      text: Copy.text({
-        en: "Base View",
-        es: 'Vista de Base',
-      }),
-    }],
-    onchange: e => cube.view(e.target.value),
   },
 
   figure: {
@@ -97,14 +31,17 @@ export default {
     placeContent: "center",
     height: "400px",
     margin: "-1em auto 0",
-    content: cube,
+    content: new Cube({
+      animated: true,
+      onclick: state => state && state.code && (window.location.href = "./?rgb=" + state.code.codeToHex()),
+    }),
   },
 
   main: {
     maxWidth: "40em",
     width: "calc(100% - 2rem)",
     lineHeight: "2.5em",
-    margin: "0 auto 1em",
+    margin: "0 auto",
     textAlign: "left",
     lineHeight: "1.5em",
     css: {
@@ -113,7 +50,7 @@ export default {
       }
     },
     p: Copy.text({
-      en: `This psychometric tool maps personality archetypes onto three dimensions of focus: <b style="color:darkred">physical</b> (${STYLE.getIcon('arrowDL')}), <b style="color:darkgreen">rational</b> (${STYLE.getIcon('arrowU')}) & <b style="color:darkblue">emotional</b> (${STYLE.getIcon('arrowD')}). In each, we interact with the world through perception, determination, and disengagement.`,
+      en: `This psychometric tool maps personality archetypes onto three dimensions of focus: <b style="color:darkred">physical</b> (${STYLE.getIcon('arrowDL')}), <b style="color:darkgreen">rational</b> (${STYLE.getIcon('arrowU')}) & <b style="color:darkblue">emotional</b> (${STYLE.getIcon('arrowDR')}). In each, we interact with the world through perception, determination, and disengagement.`,
       es: `Esta herramienta psicométrica asigna arquetipos a tres dimensiones de enfoque: <b style="color:darkred">física</b> (↙), <b style="color:darkgreen">racional</b> ( ↑) y <b style="color:darkblue">emocional</b> (↘). En cada una de estas, interactuamos a través de la percepción, la determinación y la desconexión.`,
     }),
     section: new Collabsable({

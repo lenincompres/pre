@@ -31,22 +31,21 @@ const CSS = {
     }
   },
   p: {
-    margin: `0.5em 0`,
+    padding: `0.5em 0`,
     lineHeight: `1.5em`,
     textAlign: 'left',
   },
   ul: {
-    margin: `0.5em 0`,
+    padding: `0.5em 0`,
     lineHeight: `1.5em`,
   },
   h: {
     padding: `.5em 0 0.2em`,
     fontWeight: `bold`,
     fontFamily: `title`,
-    lineHeight: `1.5em`,
   },
   h1: {
-    paddingBottom: 0,
+    padding: `0.3rem 0 0`,
     textAlign: `center`,
     fontSize: `3rem`,
     color: `white`,
@@ -54,7 +53,7 @@ const CSS = {
     textTransform: `capitalize`,
   },
   h2: {
-    fontSize: `1.5rem`,
+    fontSize: `1.3rem`,
     paddingTop: `1em`,
     textAlign: `center`,
     color: `white`,
@@ -62,7 +61,7 @@ const CSS = {
     textShadow: `0 0 3px black, 0 0 3px black`,
   },
   h3: {
-    fontSize: `1.25rem`,
+    fontSize: `1.2rem`,
   },
   h4: {
     fontSize: `1.1rem`,
@@ -95,7 +94,6 @@ DOM.set({
   },
 
   header: {
-    height: `8rem`,
     background: `linear-gradient(to bottom, #fff0 0%, ${STYLE.lightScreen} 100%)`,
     h1: Copy.text({
       en: `The 3DPsyche`,
@@ -111,14 +109,14 @@ DOM.set({
   section: rgb ? undefined : intro,
 
   div: {
-    height: `8em`,
+    height: `6rem`,
     background: `linear-gradient(to bottom, ${STYLE.lightScreen} 0%, #fff0 100%)`,
   },
 
   main: rgb ? undefined : questionnaire.questionnaire,
 
   div_: rgb ? undefined : {
-    height: `8em`,
+    height: `6rem`,
     background: rgb ? rgb : results._feature.as(v => `linear-gradient(to bottom, ${questionnaire._favorite.value} 0%, ${v} 100%)`),
   },
 

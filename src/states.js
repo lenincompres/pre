@@ -179,8 +179,8 @@ export default {
             es: "narrador",
         },
         field: {
-            en: "literature",
-            es: "literatura",
+            en: "narrative",
+            es: "narrativa",
         },
         colour: {
             en: "dark cyan",
@@ -499,8 +499,8 @@ export default {
             es: "mercader",
         },
         field: {
-            en: "market",
-            es: "mercado",
+            en: "marketing",
+            es: "mercadeo",
         },
         colour: {
             en: "dark yellow",

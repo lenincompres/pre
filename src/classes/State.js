@@ -89,7 +89,6 @@ function polygon(x, y, radius, npoints, sketch) {
 
 export class State {
   constructor({
-    sketch,
     center,
     index = false,
     animate = false,
@@ -99,16 +98,26 @@ export class State {
   }) {
     this.noText = noText;
     this.onupdate = onupdate;
-    this.sketch = sketch;
+    this.index = index;
+    this.radius = radius;
+    this.center = center;
+    this.post = 0;
+    this.coords = animate ? [0, 0] : this.posts[0];
+    this.value = 1;
+  };
+
+  set center(center){
     let base = center !== undefined ? center : CENTERCODE;
-    if (index === false) index = CENTERCODE.codeToOrdinal();
-    this.inCoords = index.codeToCoords();
+    if (this.index === false) this.index = CENTERCODE.codeToOrdinal();
+    this.inCoords = this.index.codeToCoords();
     let baseCode = base.codeToCoords().plus(2).codeToCoords();
-    let code = index.ordinalToCode(baseCode);
-    this.ordinal = code.codeToOrdinal();
-    this.color = code.codeToColor();
-    let diff = index.ordinalToCode().codeToCoords().plus(-1);
-    let [spacing, spread] = [radius * 1.5, 3.68];
+    this.code = this.index.ordinalToCode(baseCode);
+    this.hex = this.code.codeToHex();
+    this.copy = new Copy(STATES[this.code]);
+    this.ordinal = this.code.codeToOrdinal();
+    this.color = this.code.codeToColor();
+    let diff = this.index.ordinalToCode().codeToCoords().plus(-1);
+    let [spacing, spread] = [this.radius * 1.5, 3.68];
     this.isRim = this.inCoords.includes(2) && this.inCoords.includes(0);
     this.level = diff.reduce((o, v) => o + v, 0);
     this.tier = this.isRim || !this.level ? 1 : this.level < 0 ? 0 : 2;
@@ -134,67 +143,58 @@ export class State {
         -diff[1] * spacing + diff[0] * spacing * SIN30 + diff[2] * spacing * SIN30
       ]
     ];
+  }
 
-    this.code = code;
-    this.index = index;
-    this.radius = radius;
-    this.post = 0;
-    this.coords = animate ? [0, 0] : this.posts[0];
-    this.hex = code.codeToHex();
-    this.value = 1;
-    this.copy = new Copy(STATES[code]);
-    this.code = code;
-
-    sketch.loadImage('media/symbolsprite.png', img => this.symbolSprite = img);
-
-    this.draw = (bool) => {
-      let x = this.value;
-      let opacity = !this.interact ? 1 : 0.5 + Math.cos(3 * Math.cos(1.57 * x)) / 2;
-      let size = this.radius;// * (!this.interact ?  1 : this.sketch.map(opacity,0,1,0.68,1.14));
-      this.onupdate(this);
-      if (isNaN(this.post)) this.post = 0;
-      let end = this.posts[this.post];
-      let ended = sketch.dist(...end, ...this.coords) < 0.25;
-      if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
-      if (this.hidden) return;
-      if(!sketch) return;
-      sketch.push();
-      sketch.noStroke();
-      sketch.translate(...this.coords);
-      // base
-      drawBox(size, this.color, 0.86 * opacity, true, sketch);
-      // icon
-      sketch.tint(...this.color, opacity * 255);
-      var iSize = size * 0.86;
-      if (this.symbolSprite) sketch.image(this.symbolSprite, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
-      // text
-      if (!this.noText) {
-        let l = sketch.lightness(this.color) < 45 || sketch.green(this.color) < 45;
-        sketch.fill(l ? 255 : 0, opacity * 255);
-        sketch.strokeWeight(2.5);
-        if(!this.interact) sketch.stroke(l ? 0 : 255,  opacity * 100);
-        sketch.textFont('Verdana');
-        sketch.textAlign(sketch.CENTER, sketch.CENTER);
-        sketch.textLeading(0);
-        sketch.textSize(size * 0.2);
-        sketch.text(this.copy.at.archetype.toUpperCase(), 0, size * 0.5);
-      }
-      // top
-      sketch.noStroke();
-      drawBox(size, this.color, 0.34 * opacity, false, sketch);
-      //
-      if (this.selected) {
-        sketch.fill(0, 0);
-        sketch.rotate(Math.PI / 6);
-        sketch.strokeWeight(6);
-        sketch.stroke(0, 140);
-        polygon(1, 1, size, 6, sketch);
-        sketch.strokeWeight(4);
-        sketch.stroke(255);
-        polygon(0, 0, size, 6, sketch);
-      }
-      sketch.pop();
+  draw(sketch){
+    if(sketch) this.sketch = sketch;
+    if(!this.sketch) return;
+    if(!this.image) this.sketch.loadImage('media/symbolsprite.png', img => this.image = img);
+    let x = this.value;
+    let opacity = !this.interact ? 1 : 0.5 + Math.cos(3 * Math.cos(1.57 * x)) / 2;
+    let size = this.radius;// * (!this.interact ?  1 : this.sketch.map(opacity,0,1,0.68,1.14));
+    this.onupdate(this);
+    if (isNaN(this.post)) this.post = 0;
+    let end = this.posts[this.post];
+    let ended = this.sketch.dist(...end, ...this.coords) < 0.25;
+    if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
+    if (this.hidden) return;
+    if(!this.sketch) return;
+    this.sketch.push();
+    this.sketch.noStroke();
+    this.sketch.translate(...this.coords);
+    // base
+    drawBox(size, this.color, 0.86 * opacity, true, this.sketch);
+    // icon
+    this.sketch.tint(...this.color, opacity * 255);
+    var iSize = size * 0.86;
+    if (this.image) this.sketch.image(this.image, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
+    // text
+    if (!this.noText) {
+      let l = this.sketch.lightness(this.color) < 45 || this.sketch.green(this.color) < 45;
+      this.sketch.fill(l ? 255 : 0, opacity * 255);
+      this.sketch.strokeWeight(2.5);
+      if(!this.interact) this.sketch.stroke(l ? 0 : 255,  opacity * 100);
+      this.sketch.textFont('Verdana');
+      this.sketch.textAlign(this.sketch.CENTER, this.sketch.CENTER);
+      this.sketch.textLeading(0);
+      this.sketch.textSize(size * 0.2);
+      this.sketch.text(this.copy.at.archetype.toUpperCase(), 0, size * 0.5);
     }
+    // top
+    this.sketch.noStroke();
+    drawBox(size, this.color, 0.34 * opacity, false, this.sketch);
+    //
+    if (this.selected) {
+      this.sketch.fill(0, 0);
+      this.sketch.rotate(Math.PI / 6);
+      this.sketch.strokeWeight(6);
+      this.sketch.stroke(0, 140);
+      polygon(1, 1, size, 6, this.sketch);
+      this.sketch.strokeWeight(4);
+      this.sketch.stroke(255);
+      polygon(0, 0, size, 6, this.sketch);
+    }
+    this.sketch.pop();
   }
 
   isNear() {

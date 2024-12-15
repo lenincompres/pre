@@ -9,13 +9,13 @@ class p5Element extends HTMLElement {
     new p5(p => {
       t.p5 = t.sketch = p;
       p.setup = () => {
-        t.innerHTML = '';
-        t.append(p.createCanvas(t.width ? t.width : p.windowWidth, t.height).elt);
-        t.setup(p);
+        t.canvas = p.createCanvas(t.width ? t.width : p.windowWidth, t.height).elt;
+        t.append(t.canvas);
+        if(t.setup) t.setup(p);
       }
-      p.draw = () => t.draw(p);
-      p.mouseReleased = () => t.mouseReleased(p);
-      p.mouseMoved = () => t.mouseMoved(p);
+      if(t.draw) p.draw = () => t.draw(p);
+      if(t.mouseReleased) p.mouseReleased = () => t.mouseReleased(p);
+      if(t.mouseMoved) p.mouseMoved = () => t.mouseMoved(p);
     });
   }
 }

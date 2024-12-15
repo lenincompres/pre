@@ -75,7 +75,7 @@ var stateElt = new StateElement();
 
 _feature.onChange(hex => {
   if (!hex) return;
-  if (stateElt.update) stateElt.update(hex.hexToCode());
+  stateElt.code = hex.hexToCode();
   let [r, g, b] = AUX.rgb(hex).map(v => v * 100 / 255);
   let getI = n => 100 * Math.pow(Math.abs(n - 50) / 50, 0.68);
   let j = (r + g + b) / 3;

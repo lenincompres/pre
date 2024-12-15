@@ -1,34 +1,32 @@
 import State from "../classes/State.js";
+import p5Element from "./p5Element.js";
 
-class StateElement extends HTMLElement {
+class StateElement extends p5Element {
   constructor(code = '111', w = 140, h = 120) {
-    super();
-
-    const _canvas = new Binder();;
-
-    this.set({
-      small: _canvas.as(`Loading color spectrum…`, ''),
-      figure: _canvas,
+    super(w, h);
+    this.state = new State({
+      center: code,
+      radius: h / 2,
     });
-
-    const me = new p5(function () {});
-    me.setup = () => {
-      _canvas.value = me.createCanvas(w, h).elt;
-      me.translate(me.width / 2, me.height / 2);
-      me.update = code => {
-        me.clear();
-        let state = new State({
-          sketch: me,
-          center: code,
-          radius: me.height / 2,
-        });
-        setTimeout(() => state.draw(true), 50);
-      }
-      me.update(code);
-      this.update = code => me.update(code);
-    };
-
+    this.updated = true;
   }
+
+  draw(){
+    if(!this.updated) return;
+    this.sketch.clear();
+    this.sketch.push();
+    this.sketch.translate(this.width / 2, this.height / 2);
+    this.state.draw(this.sketch);
+    this.sketch.pop();
+    if(!this.state.image) return;
+    this.updated = false;
+  }
+
+  set code(code){
+    this.state.center = code;
+    this.updated = true;
+  }
+
 }
 
 customElements.define('state-element', StateElement);
