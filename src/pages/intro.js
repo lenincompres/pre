@@ -19,10 +19,13 @@ export default {
     maxWidth: "40em",
     width: "calc(100% - 2rem)",
     margin: "0 auto 1rem",
-    h2: Copy.text({
-      en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
-      es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
-    }),
+    label: {
+      for: "Cube",
+      h2: Copy.text({
+        en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
+        es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
+      })
+    },
   },
 
   figure: {

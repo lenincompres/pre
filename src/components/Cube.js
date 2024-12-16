@@ -124,6 +124,7 @@ class Cube extends p5Element {
     if (this.animated) this.set({
       position: "relative",
       select: {
+        name: "Cube",
         position: "relative",
         backgroundColor: "transparent",
         zIndex: 10,
