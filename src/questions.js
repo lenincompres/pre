@@ -2,8 +2,8 @@ import Copy from "../lib/Copy.js";
 
 export default [{
     question: Copy.text({
-      en: "When appreciating art, what do you value?",
-      es: "Al apreciar el arte, ¿qué valoras?",
+      en: "In art appreciating, what do you value?",
+      es: "En la aprecion del arte, ¿qué valoras?",
     }),
     options: [{
         choice: Copy.text({
@@ -76,8 +76,8 @@ export default [{
   },
   {
     question: Copy.text({
-      en: "When studying, what peaks your interest?",
-      es: "Al estudiar, ¿qué es lo que despierta tu interés?",
+      en: "In studies, what peaks your interest?",
+      es: "En los estudios, ¿qué es lo que despierta tu interés?",
     }),
     options: [{
         choice: Copy.text({
@@ -150,8 +150,8 @@ export default [{
   },
   {
     question: Copy.text({
-      en: "When working, what do you focus on?",
-      es: "Cuando trabajas, ¿en qué te concentras?",
+      en: "In the work environment, what do you focus on?",
+      es: "En el ambiente laboral, ¿en qué te concentras?",
     }),
     options: [{
         choice: Copy.text({
@@ -223,7 +223,7 @@ export default [{
   }, {
     question: Copy.text({
       en: "On your free time, how open are you to these?",
-      es: "En tu tiempo libre, ¿qué tan abierto estás a esto?",
+      es: "En el tiempo libre, ¿qué tan abierto estás a esto?",
     }),
     options: [{
         choice: Copy.text({

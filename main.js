@@ -53,7 +53,7 @@ const CSS = {
     textTransform: `capitalize`,
   },
   h2: {
-    fontSize: `1.3rem`,
+    fontSize: `1.4rem`,
     paddingTop: `1em`,
     textAlign: `center`,
     color: `white`,

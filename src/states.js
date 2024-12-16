@@ -60,7 +60,7 @@ export default {
         },
         archetype: {
             en: "aide",
-            es: "ayudante",
+            es: "asistente",
         },
         colour: {
             en: "dark blue",
@@ -790,8 +790,8 @@ export default {
             es: "passion",
         },
         archetype: {
-            en: "artist",
-            es: "artista",
+            en: "artisan",
+            es: "artesano",
         },
         field: {
             en: "artistry",

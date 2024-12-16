@@ -54,15 +54,33 @@ Copy.add({
     en: 'intense',
     es: 'intenso',
   },
+  disconnected: {
+    en: 'disconnected',
+    es: 'desconectado',
+  },
+  perceptible: {
+    en: 'perceptible',
+    es: 'perceptible',
+  },
+  determined: {
+    en: 'determined',
+    es: 'determinado',
+  },
 });
 
 const level = (d, i) => {
   const vals = ['2a', '80', 'd5'];
-  const bullet = [
+  const blank = colorBullet(`transparent`);
+  let bullet = [
     colorBullet(`#${vals[i]}0000`),
     colorBullet(`#00${vals[i]}00`),
     colorBullet(`#0000${vals[i]}`),
   ][d];
+  bullet = [
+    `${bullet}${blank}${blank}`,
+    `${blank}${bullet}${blank}`,
+    `${blank}${blank}${bullet}`,
+  ][i];
   const dimension = [Copy.at.physically, Copy.at.rationally, Copy.at.emotionally][d];
   const level = [Copy.at.relaxed, Copy.at.flexible, Copy.at.intense][i];
   return {
@@ -75,7 +93,9 @@ var stateElt = new StateElement();
 
 _feature.onChange(hex => {
   if (!hex) return;
-  stateElt.code = hex.hexToCode();
+  let code = hex.hexToCode();
+  stateElt.code = code;
+  _copy.value = new Copy(STATES[code]);
   let [r, g, b] = AUX.rgb(hex).map(v => v * 100 / 255);
   let getI = n => 100 * Math.pow(Math.abs(n - 50) / 50, 0.68);
   let j = (r + g + b) / 3;
@@ -98,7 +118,6 @@ _feature.onChange(hex => {
   bars.ego.value = 0.5 * (g + r);
   bars.sup.value = 0.5 * (g + b);
 
-  _copy.value = new Copy(STATES[hex.hexToCode()]);
 });
 
 const _fixed = new Binder(false);
@@ -114,19 +133,29 @@ export const model = {
       margin: '0.5em 0',
       text: _copy.as(copy => copy.at.archetype),
     },
-    div: _feature.as(v => ({
-      p: _copy.as(copy => Copy.text({
-        en: `The ${copy.at.tone} (${copy.at.colour}) color is ${copy.at.adjective}; a psyche focused on ${copy.at.concept} as an archetypical ${copy.at.archetype}. It fits comfortably at a ${copy.at.location} (${copy.at.map}).`,
-        es: `El color ${copy.at.tone} (${copy.at.colour}) es ${copy.at.adjective}; una psiquis efocada en ${copy.at.concept}, como el arquetipo de ${copy.at.archetype}. Se manifiesta a gusto en ${copy.at.location}s (${copy.at.map}).`,
-      })),
-      ul: {
-        textAlign: 'left',
-        margin: '1em auto 0',
-        width: 'fit-content',
-        li: [...STATES[v.hexToCode()].code].map((n, i) => level(i, parseInt(n))),
-      },
-      //aside: _cubeState,
+    section: _copy.as(copy => ({
+      p: Copy.text({
+        en: [`The ${copy.at.tone} (${copy.at.colour}) color is ${copy.at.adjective}; a psyche focused on ${copy.at.concept} as an archetypical ${copy.at.archetype}. It fits comfortably at a ${copy.at.location} (${copy.at.map}).`,
+          `The following are the levels or coordinates for this state in the three dimensions of the 3D Psyche. Each dimenssion could be ${Copy.at.relaxed}, ${Copy.at.flexible} or ${Copy.at.intense}:`
+        ],
+        es: [`El color ${copy.at.tone} (${copy.at.colour}) es ${copy.at.adjective}; una psiquis enfocada en ${copy.at.concept}. Como su arquetipo de ${copy.at.archetype}, se manifiesta a gusto en ${copy.at.location}s (${copy.at.map}).`,
+          `Los siguientes son los niveles o coordenadas de este estado en las tres dimentiones de la Psiquis 3D. El nivel de cada dimensión puede ser ${Copy.at.relaxed}, ${Copy.at.flexible} o ${Copy.at.intense}:`
+        ],
+      })
     })),
+    ul: _feature.as(v => ({
+      textAlign: 'left',
+      margin: '0 auto',
+      width: 'fit-content',
+      li: [...STATES[v.hexToCode()].code].map((n, i) => level(i, parseInt(n))),
+    })),
+    footer: {
+      p: Copy.text({
+        en: `The middle point (${Copy.at.flexible}) is equivalent to perception. The 3D Psyche considers a combination of this in all three dimensions as the point of greatest extroversion or greatest external focus.`,
+        es: `El punto medio (${Copy.at.flexible}) equivale a la percepción. La Psiquis 3D considera que una combinación de este en las tres dimenciones es el punto de mayor extroversión o enfoque externo.`,
+      })
+    }
+    //aside: _cubeState,
   },
   aside: {
     css: style.floatingSign,
@@ -163,14 +192,14 @@ export const model = {
         new Stats('3DPsyche', './', [bars.r, bars.g, bars.b], true),
         new Stats('Freudian', 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego', [bars.id, bars.ego, bars.sup], true),
         new Stats('Jungian', 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions', [bars.e, bars.s, bars.t], true),
-        new Stats('MBTI', 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator', [bars.j,
-          {
-            tag: 'p',
+        new Stats('MBTI', 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator', [{
+            display: 'block',
+            margin: '2em 0 0.5em',
             fontSize: '1.5em',
             fontFamily: 'monospace',
-            margin: '1em 0',
             text: _mbti,
-          }
+          },
+          bars.j,
         ], true)
       ].map(s => ({
         stat: s,
@@ -184,7 +213,7 @@ export const model = {
     footer: {
       small: _feature.as(v => Copy.text({
         en: `RGB color code: ${v}`,
-        es: `Código de color RGB: ${v}`,
+        es: `Código de color RGB: ${v} (${v.toRGB().map(n => Math.round(100*n/255) + '%')})`,
       })),
     }
   }

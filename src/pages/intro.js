@@ -62,14 +62,14 @@ export default {
           ul: {
             li: Copy.text({
               en: [
-                `${colorBullet('#822')}Physical perception (sensing): Sensory awareness of one's surroundings.`,
-                `${colorBullet('#282')}Rational perception (conceiving): Grasping ideas, meanings, and concepts.`,
-                `${colorBullet('#228')}Emotional perception (empathizing): Sensing moods, vibes, and inspiration.`,
+                `${colorBullet('#822')} Physical perception (sensing): Sensory awareness of one's surroundings.`,
+                `${colorBullet('#282')} Rational perception (conceiving): Grasping ideas, meanings, and concepts.`,
+                `${colorBullet('#228')} Emotional perception (empathizing): Sensing moods, vibes, and inspiration.`,
               ],
               es: [
-                `${colorBullet('#822')}Percepción física (sensación): Observar el entorno sensorial inmediato.`,
-                `${colorBullet('#282')}Percepción racional (concepción): Concebir ideas, significados y datos.`,
-                `${colorBullet('#228')}Percepción emocional (inspiración): Empatizar o percibir ánimos y vibras.`,
+                `${colorBullet('#822')} Percepción física (sensación): Observar el entorno sensorial inmediato.`,
+                `${colorBullet('#282')} Percepción racional (concepción): Concebir ideas, significados y datos.`,
+                `${colorBullet('#228')} Percepción emocional (inspiración): Empatizar o percibir ánimos y vibras.`,
               ]
             }),
           },
@@ -81,14 +81,14 @@ export default {
           ul: {
             li: Copy.text({
               en: [
-                `${colorBullet('#d22')}Physical determination (actioning): Exerting change on the environment.`,
-                `${colorBullet('#2d2')}Rational determination (regulating): Arriving at thinking-based conclusions.`,
-                `${colorBullet('#22d')}Emotional determination (valuing): Judging based on emotional affect.`,
+                `${colorBullet('#d22')} Physical determination (actioning): Exerting change on the environment.`,
+                `${colorBullet('#2d2')} Rational determination (regulating): Arriving at thinking-based conclusions.`,
+                `${colorBullet('#22d')} Emotional determination (valuing): Judging based on emotional affect.`,
               ],
               es: [
-                `${colorBullet('#d22')}Determinación física (acción): Ejercer cambios en el medio ambiente.`,
-                `${colorBullet('#2d2')}Determinación racional (regulación): Concluir en base al pensamiento.`,
-                `${colorBullet('#22d')}Determinación emocional (valoración): Apreciar basándonos en el afecto.`,
+                `${colorBullet('#d22')} Determinación física (acción): Ejercer cambios en el medio ambiente.`,
+                `${colorBullet('#2d2')} Determinación racional (regulación): Concluir en base al pensamiento.`,
+                `${colorBullet('#22d')} Determinación emocional (valoración): Apreciar basándonos en el afecto.`,
               ],
             }),
           },
@@ -100,14 +100,14 @@ export default {
           ul: {
             li: Copy.text({
               en: [
-                `${colorBullet('#222', '#d22c')}Physical disengagement (abstracting) helps problem-solving and creativity.`,
-                `${colorBullet('#222', '#2d2c')}Rational disengagement (instincting) enables quick, intuitive responses.`,
-                `${colorBullet('#222', '#22dc')}Emotional disengagement (detaching) provides emotional objectivity.`
+                `${colorBullet('#222', '#d22c')} Physical disengagement (abstracting) helps problem-solving and creativity.`,
+                `${colorBullet('#222', '#2d2c')} Rational disengagement (instincting) enables quick, intuitive responses.`,
+                `${colorBullet('#222', '#22dc')} Emotional disengagement (detaching) provides emotional objectivity.`
               ],
               es: [
-                `${colorBullet('#222', '#d22c')}Desconexión física (abstracción): Ayuda al análisis y a la creatividad.`,
-                `${colorBullet('#222', '#2d2c')}Desconexión racional (instinción): Permite respuestas rápidas e intuitivas.`,
-                `${colorBullet('#222', '#22dc')}Desconexión emocional (objetivación): Proporciona objetividad emocional.`
+                `${colorBullet('#222', '#d22c')} Desconexión física (abstracción): Ayuda al análisis y a la creatividad.`,
+                `${colorBullet('#222', '#2d2c')} Desconexión racional (instinción): Permite respuestas rápidas e intuitivas.`,
+                `${colorBullet('#222', '#22dc')} Desconexión emocional (objetivación): Proporciona objetividad emocional.`
               ],
             })
           }
@@ -126,8 +126,9 @@ export default {
       es: `Entender el cubo`,
     }),
     p_: Copy.text({
-      en: [`We engage and disengage with these dimensions to perform tasks, focus, and even relax. In subjects like math, we benefit from physical abstraction to focus on logic. Emotional detachment enhances objectivity in decision-making. And, keen instincts require bypassing rational overthinking.`, `Some tasks are multidimensional. For instance, a dance performance needs physical and emotional focus; car repair calls for physical and rational engagement.`, `These combinations create the dynamic spectrum illustrated above. Each cube represents an archetype that embodies its unique combination. We may be multifaceted, but gravitate to some spaces with more ease than others.`],
-      es: [`Nos involucramos y desconectamos de estas dimensiones para realizar tareas, concentrarnos o relajarnos. En materias como matemáticas, nos beneficiamos de la abstracción física para centrarnos en la lógica. El desapego emocional mejora la objetividad en la toma de decisiones. Y agudizar el instinto requiere pasar por alto el pensamiento racional.`, `Algunas tareas son multidimensionales. Un espectáculo de danza, por ejemplo nos demanda tanto atención física como emocional. La reparación de automóviles requiere un compromiso físico y racional.`, `Estas combinaciones crean el espectro dinámico ilustrado arriba. Cada cubo representa un arquetipo que encarna su combinación única. Puede que seamos multifacéticos, pero tenemos tendencia a unos roles más que a otros.`],
+      en: [`We engage and disengage with these dimensions to perform tasks, focus, and even relax. In subjects like math, we benefit from physical abstraction to focus on logic. Emotional detachment enhances objectivity in decision-making. And, bypassing rational overthinking is necessary to develop keen instincts.`, `Some tasks are multidimensional. For instance, a dance performance needs physical and emotional focus; car repair calls for physical and rational engagement; while creative writing is a rational and emotional affair.`, `These combinations create the dynamic spectrum illustrated above. Each cube represents an archetype that embodies its unique combination. We may be multifaceted, but gravitate to some spaces with more ease than others.`],
+      es: [`Nos involucramos y desconectamos de estas dimensiones para realizar tareas, concentrarnos o relajarnos. En materias como matemáticas, nos beneficiamos de la abstracción física para centrarnos en la lógica. El desapego emocional mejora la objetividad en la toma de decisiones. Y necesitamos evitar el pensamiento excesivo racional para agudizar nuestros instintos.`, `
+      Algunas tareas son multidimensionales. Por ejemplo, un espectáculo de danza necesita concentración física y emocional; la reparación de automóviles exige un compromiso físico y racional; mientras que la escritura creativa es un asunto racional y emocional.`, `Estas combinaciones crean el espectro dinámico ilustrado arriba. Cada cubo representa un arquetipo que encarna su combinación única. Puede que seamos multifacéticos, pero tenemos tendencia a unos roles más que a otros.`],
     }),
   },
 };

@@ -36,7 +36,7 @@ String.prototype.codeToHex = function () {
 String.prototype.hexToCode = function () {
   let s = this.startsWith('#') ? this.substr(1) : this;
   let arr = s.length > 3 ? [s[0] + s[1], s[2] + s[3], s[4] + s[5]] : [s[0] + s[0], s[1] + s[1], s[2] + s[2]];
-  return arr.map(s => Math.round(2 * parseInt('0x' + s) / 255)).join('');
+  return arr.map(s => Math.floor(3 * parseInt(s, 16) / 255)).join('');
 }
 String.prototype.codeToColor = function () {
   return this.codeToCoords().codeToColor();
@@ -106,7 +106,7 @@ export class State {
     this.value = 1;
   };
 
-  set center(center){
+  set center(center) {
     let base = center !== undefined ? center : CENTERCODE;
     if (this.index === false) this.index = CENTERCODE.codeToOrdinal();
     this.inCoords = this.index.codeToCoords();
@@ -145,20 +145,20 @@ export class State {
     ];
   }
 
-  draw(sketch){
-    if(sketch) this.sketch = sketch;
-    if(!this.sketch) return;
-    if(!this.image) this.sketch.loadImage('media/symbolsprite.png', img => this.image = img);
+  draw(sketch) {
+    if (sketch) this.sketch = sketch;
+    if (!this.sketch) return;
+    if (!this.image) this.sketch.loadImage('media/symbolsprite.png', img => this.image = img);
     let x = this.value;
     let opacity = !this.interact ? 1 : 0.5 + Math.cos(3 * Math.cos(1.57 * x)) / 2;
-    let size = this.radius;// * (!this.interact ?  1 : this.sketch.map(opacity,0,1,0.68,1.14));
+    let size = this.radius; // * (!this.interact ?  1 : this.sketch.map(opacity,0,1,0.68,1.14));
     this.onupdate(this);
     if (isNaN(this.post)) this.post = 0;
     let end = this.posts[this.post];
     let ended = this.sketch.dist(...end, ...this.coords) < 0.25;
     if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
     if (this.hidden) return;
-    if(!this.sketch) return;
+    if (!this.sketch) return;
     this.sketch.push();
     this.sketch.noStroke();
     this.sketch.translate(...this.coords);
@@ -173,7 +173,7 @@ export class State {
       let l = this.sketch.lightness(this.color) < 45 || this.sketch.green(this.color) < 45;
       this.sketch.fill(l ? 255 : 0, opacity * 255);
       this.sketch.strokeWeight(2.5);
-      if(!this.interact) this.sketch.stroke(l ? 0 : 255,  opacity * 100);
+      if (!this.interact) this.sketch.stroke(l ? 0 : 255, opacity * 100);
       this.sketch.textFont('Verdana');
       this.sketch.textAlign(this.sketch.CENTER, this.sketch.CENTER);
       this.sketch.textLeading(0);

@@ -86,6 +86,9 @@ const modelQuestion = q => {
     en: 'Moderately',
     es: "Moderadamente",
   }), Copy.text({
+    en: 'Normally',
+    es: "Normalmente",
+  }), Copy.text({
     en: 'Frequently',
     es: "Fequentemente",
   }), Copy.text({
@@ -110,7 +113,7 @@ const modelQuestion = q => {
         text: q.question
       },
       ul: {
-        margin: 0,
+        padding: 0,
         display: 'flex',
         flexDirection: 'column',
         li: q.options.map(o => {
@@ -148,8 +151,9 @@ const modelQuestion = q => {
               display: 'block',
               width: '100%',
               type: 'range',
-              min: 1,
-              max: 99,
+              min: 0,
+              max: 100,
+              step: 5,
               value: answer.value,
               oninput: e => {
                 answer.value = parseInt(e.target.value);
@@ -244,19 +248,19 @@ const updateResults = _ => {
   );
   //PRE results
   let rgb = getAverage(0, 5).map(v => v * 255 / 100);
-  let sats = getAverage(10, 13);
-  let lights = getAverage(6, 9);
+  let light = getAverage(0, 9);
+  let sat = getAverage(10, 13);
   //console.log(rgb, sats, lights, );
-  let R = AUX.rgb(AUX.hex(...rgb, sats[0], lights[0]))[0];
-  let G = AUX.rgb(AUX.hex(...rgb, sats[1], lights[1]))[1];
-  let B = AUX.rgb(AUX.hex(...rgb, sats[2], lights[2]))[2];
+  let R = AUX.rgb(AUX.hex(...rgb, sat[0], light[0]))[0];
+  let G = AUX.rgb(AUX.hex(...rgb, sat[1], light[1]))[1];
+  let B = AUX.rgb(AUX.hex(...rgb, sat[2], light[2]))[2];
   //_results.value = AUX.hex(R, G, B);
-  let [r,g,b] = AUX.rgb(AUX.hex(...rgb,
-    sats.reduce((o, v) => v + o, 0) / 3,
-    lights.reduce((o, v) => v + o, 0) / 3,
+  let [r, g, b] = AUX.rgb(AUX.hex(...rgb,
+    sat.reduce((o, v) => v + o, 0) / 3,
+    light.reduce((o, v) => v + o, 0) / 3,
   ));
   //_results.value = AUX.hex(r, g, b);
-  _results.value = AUX.hex((R+r)/2, (G+g)/2, (B+b)/2);
+  _results.value = AUX.hex((R + r) / 2, (G + g) / 2, (B + b) / 2);
 }
 
 export default questionnaire;
