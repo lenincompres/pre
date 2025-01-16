@@ -376,7 +376,7 @@ export default {
         },
         archetype: {
             en: "scout",
-            es: "vigilante",
+            es: "explorador",
         },
         field: {
             en: "exploration",
@@ -455,8 +455,8 @@ export default {
             es: "gusto",
         },
         archetype: {
-            en: "esthetician",
-            es: "estilista",
+            en: "designer",
+            es: "diseñador",
         },
         field: {
             en: "fashion",
@@ -790,8 +790,8 @@ export default {
             es: "passion",
         },
         archetype: {
-            en: "artisan",
-            es: "artesano",
+            en: "artist",
+            es: "artista",
         },
         field: {
             en: "artistry",

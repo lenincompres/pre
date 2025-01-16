@@ -133,6 +133,28 @@ export const model = {
       margin: '0.5em 0',
       text: _copy.as(copy => copy.at.archetype),
     },
+    /**
+     * The best concept to define the focus of this state is responsibility. It is the state of determination and duty. It represents a psyche that is physically, rationally and emotionally tense. In it we are prepared to act towards a predetermined goal. We have no time for banalities, and feel deeply involved, pro or con, with everything. It is not really socially extroverted, but socially committed.
+
+By definition, this is the state of focus in action, regulation and valuation. Its main properties are bringing principles to action, order to passions, and value to industry. This defines our ability to carry on our ideals with conviction and sense of duty.
+
+It has three tendencies towards introversion:
+
+- Action cultivates competition and impatience, prompting self-reliance.
+- Regulation cultivates righteousness and strictness, maintaining self-confidence.
+- Valuation cultivates particular interests and sensibility, causing self-absorption.
+
+Topographic Map location: Government
+
+MBTI approximation: I**J
+
+
+Archetype: The Chief
+
+Rulers, Executives… people who have a constant tendency to this state love being productive, are passionate about order, and religious about habits. They tend to achieve relaxation through control. They are committed, and remain focused on their duties even on vacation. Others would think they make a big event out of trivial things, or stress unnecessarily. They are effective in carrying out any enterprise, as they struggle to cover every subject. They may tend to feel righteous; this can make them the most decisive and successful people, but the less likely to question their goals. They are bound for leadership. They enjoy acknowledging merits, inspiring others, having strong adversaries, power and victory.
+
+People that are strongly imperial like to analyze things thoroughly, but are passionate about their feelings, beliefs, likes and dislikes; this may constrict analysis towards a particular goal. Also, they are eager to act, and this limits patience. They look at the greater good or big picture, but are lenient towards customs, routines and personal preferences. They have great focus, and thus a tunneled view. This combination results in great achievements, but they must beware not to lead arbitrarily. They tend to be philosophic when relaxed, passionate when having fun, and industrious when alone.
+     */
     section: _copy.as(copy => ({
       p: Copy.text({
         en: [`The ${copy.at.tone} (${copy.at.colour}) color is ${copy.at.adjective}; a psyche focused on ${copy.at.concept} as an archetypical ${copy.at.archetype}. It fits comfortably at a ${copy.at.location} (${copy.at.map}).`,
@@ -153,7 +175,7 @@ export const model = {
       p: Copy.text({
         en: `The middle point (${Copy.at.flexible}) is equivalent to perception. The 3D Psyche considers a combination of this in all three dimensions as the point of greatest extroversion or greatest external focus.`,
         es: `El punto medio (${Copy.at.flexible}) equivale a la percepción. La Psiquis 3D considera que una combinación de este en las tres dimenciones es el punto de mayor extroversión o enfoque externo.`,
-      })
+      }),
     }
     //aside: _cubeState,
   },

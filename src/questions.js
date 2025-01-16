@@ -2,8 +2,8 @@ import Copy from "../lib/Copy.js";
 
 export default [{
     question: Copy.text({
-      en: "In art appreciating, what do you value?",
-      es: "En la aprecion del arte, ¿qué valoras?",
+      en: "When contemplating art, what do you appreciate?",
+      es: "Cuando contemplas arte, ¿qué aprecias?",
     }),
     options: [{
         choice: Copy.text({
@@ -150,8 +150,8 @@ export default [{
   },
   {
     question: Copy.text({
-      en: "In the work environment, what do you focus on?",
-      es: "En el ambiente laboral, ¿en qué te concentras?",
+      en: "In a work environment, what do you focus on?",
+      es: "En un ambiente laboral, ¿en qué te concentras?",
     }),
     options: [{
         choice: Copy.text({

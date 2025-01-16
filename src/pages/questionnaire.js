@@ -45,7 +45,10 @@ const sampleQuestions = [{
     }
   ]
 }, {
-  question: "Adjust your color preference given these tendencies.",
+  question: Copy.text({
+    en: "Adjust your color preference given these tendencies.",
+    es: "Ajusta tu preferencia de color de acuerdo a estas tendencias.",
+  }),
   options: [
     [{
       choice: Copy.text({
