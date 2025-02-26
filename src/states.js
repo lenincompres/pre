@@ -12,7 +12,7 @@ export default {
         },
         concept: {
             en: "serenity",
-            es: "serenidad",
+            es: "la serenidad",
         },
         archetype: {
             en: "monk",
@@ -22,22 +22,22 @@ export default {
             en: "nature",
             es: "naturaleza",
         },
-        color: {
+        colour: {
             en: "dark",
             es: "negro",
         },
         tone: {
             en: "charcoal",
-            es: "negro",
+            es: "carbón",
         },
         mbti: "i--p",
         location: {
             en: "nature",
-            es: "naturaleza",
+            es: "la naturaleza",
         },
         map: {
             en: "retreat, open range, getaway",
-            es: "camp abierto, retiro, excursion",
+            es: "campo abierto, retiro, excursion",
         },
     },
     "001": {
@@ -56,7 +56,7 @@ export default {
         },
         concept: {
             en: "empathy",
-            es: "empatía",
+            es: "la empatía",
         },
         archetype: {
             en: "aide",
@@ -73,11 +73,11 @@ export default {
         mbti: "-nfp",
         location: {
             en: "garden",
-            es: "jardín",
+            es: "jardines",
         },
         map: {
             en: "botanical garden, zoo, fair",
-            es: "jardín botánico, zoológico, feria",
+            es: "infantil, botánico, zoológico, feria",
         },
     },
     "002": {
@@ -92,7 +92,7 @@ export default {
         },
         concept: {
             en: "feelings",
-            es: "sentimientos",
+            es: "los sentimientos",
         },
         archetype: {
             en: "poet",
@@ -113,11 +113,11 @@ export default {
         mbti: "infp",
         location: {
             en: "auditorium",
-            es: "auditorio",
+            es: "auditorios",
         },
         map: {
             en: "concert hall, theatre, opera house",
-            es: "recital, teatro, ópera",
+            es: "recital, teatro, templo, ópera",
         },
     },
     "010": {
@@ -132,7 +132,7 @@ export default {
         },
         concept: {
             en: "inquiry",
-            es: "curiosidad",
+            es: "la curiosidad",
         },
         archetype: {
             en: "researcher",
@@ -144,7 +144,7 @@ export default {
         },
         colour: {
             en: "dark green",
-            es: "erde oscuro",
+            es: "verde oscuro",
         },
         tone: {
             en: "forest",
@@ -153,11 +153,11 @@ export default {
         mbti: "-ntp",
         location: {
             en: "field",
-            es: "campo",
+            es: "los campos",
         },
         map: {
             en: "research center, journal, excursion",
-            es: "centro de investigación, excursión",
+            es: "de investigación, excursión, descubrimiento",
         },
     },
     "011": {
@@ -172,7 +172,7 @@ export default {
         },
         concept: {
             en: "creativity",
-            es: "creatividad",
+            es: "la creatividad",
         },
         archetype: {
             en: "storyteller",
@@ -193,11 +193,11 @@ export default {
         mbti: "en-p",
         location: {
             en: "cafe",
-            es: "café",
+            es: "los cafés",
         },
         map: {
             en: "dialogue, lecture, publication",
-            es: "diálogo, charla, publicación",
+            es: "diálogo, charla, publicaciones",
         },
     },
     "012": {
@@ -212,7 +212,7 @@ export default {
         },
         concept: {
             en: "meaning",
-            es: "significado",
+            es: "el significado",
         },
         archetype: {
             en: "counselor",
@@ -233,11 +233,11 @@ export default {
         mbti: "-nf-",
         location: {
             en: "sanctuary",
-            es: "santuario",
+            es: "los santuarios",
         },
         map: {
             en: "temple, memorial, museum",
-            es: "templo, memorial, museo",
+            es: "templo, memorial, museo, etc.",
         },
     },
     "020": {
@@ -252,7 +252,7 @@ export default {
         },
         concept: {
             en: "logic",
-            es: "lógica",
+            es: "la lógica",
         },
         archetype: {
             en: "analyst",
@@ -273,11 +273,11 @@ export default {
         mbti: "intp",
         location: {
             en: "study",
-            es: "estudio",
+            es: "los estudios",
         },
         map: {
             en: "desk, board, observatory",
-            es: "escritorio, pizzarra, observatorio",
+            es: "escritorio, aula, observatorio, etc.",
         },
     },
     "021": {
@@ -292,7 +292,7 @@ export default {
         },
         concept: {
             en: "ideas",
-            es: "ideas",
+            es: "las ideas",
         },
         archetype: {
             en: "instructor",
@@ -313,11 +313,11 @@ export default {
         mbti: "-nt-",
         location: {
             en: "seminar",
-            es: "seminario",
+            es: "los seminarios",
         },
         map: {
             en: "forum, expo, classroom",
-            es: "foro, expo, aula",
+            es: "foro, expo, academia, etc.",
         },
     },
     "022": {
@@ -332,7 +332,7 @@ export default {
         },
         concept: {
             en: "morals",
-            es: "moralidad",
+            es: "la moralidad",
         },
         archetype: {
             en: "philosopher",
@@ -353,11 +353,11 @@ export default {
         mbti: "in-j",
         location: {
             en: "library",
-            es: "biblioteca",
+            es: "las bibliotecas",
         },
         map: {
             en: "rectory, seminar, history",
-            es: "archivos, mentoría, historia",
+            es: "archivos, mentoría, historiales, etc.",
         },
     },
     "100": {
@@ -372,7 +372,7 @@ export default {
         },
         concept: {
             en: "alertness",
-            es: "alerta",
+            es: "la atención",
         },
         archetype: {
             en: "scout",
@@ -393,11 +393,11 @@ export default {
         mbti: "-s-p",
         location: {
             en: "field",
-            es: "campo",
+            es: "los campos",
         },
         map: {
             en: "park, hunting ground, yard",
-            es: "campo deportivo, excursión, parque",
+            es: "caza, deporte, excursión, parque, etc.",
         },
     },
     "101": {
@@ -412,7 +412,7 @@ export default {
         },
         concept: {
             en: "mood",
-            es: "humor",
+            es: "el humor",
         },
         archetype: {
             en: "entertainer",
@@ -433,11 +433,11 @@ export default {
         mbti: "esfp",
         location: {
             en: "club",
-            es: "club",
+            es: "los clubes",
         },
         map: {
             en: "cafeteria, bar, disco",
-            es: "cafetería, bar, salón de fiestas",
+            es: "cafetería, bar, salón de fiestas, etc.",
         },
     },
     "102": {
@@ -452,7 +452,7 @@ export default {
         },
         concept: {
             en: "taste",
-            es: "gusto",
+            es: "el gusto",
         },
         archetype: {
             en: "designer",
@@ -473,11 +473,11 @@ export default {
         mbti: "--f-",
         location: {
             en: "gallery",
-            es: "galería",
+            es: "las galerías",
         },
         map: {
             en: "restaurant, art exhibit, runway",
-            es: "exhibición de arte, restaurant, pasarela",
+            es: "exhibición, restaurant, pasarela, etc.",
         },
     },
     "110": {
@@ -492,7 +492,7 @@ export default {
         },
         concept: {
             en: "objectivity",
-            es: "objetividad",
+            es: "la objetividad",
         },
         archetype: {
             en: "merchant",
@@ -513,11 +513,11 @@ export default {
         mbti: "estp",
         location: {
             en: "market",
-            es: "mercado",
+            es: "los mercados",
         },
         map: {
             en: "market, trading floor, casino",
-            es: "comercio, banca, casino",
+            es: "comercio, banca, casino, etc.",
         },
     },
     "111": {
@@ -532,7 +532,7 @@ export default {
         },
         concept: {
             en: "communication",
-            es: "comunicación",
+            es: "la comunicación",
         },
         archetype: {
             en: "messenger",
@@ -553,11 +553,11 @@ export default {
         mbti: "e---",
         location: {
             en: "plaza",
-            es: "plaza",
+            es: "las plazas",
         },
         map: {
             en: "hallway, media, main hub",
-            es: "pasillo, medios de comunciación, centro",
+            es: "pasillo, medios, centro, etc.",
         },
     },
     "112": {
@@ -572,7 +572,7 @@ export default {
         },
         concept: {
             en: "relationships",
-            es: "vínculos",
+            es: "los vínculos",
         },
         archetype: {
             en: "diplomat",
@@ -593,11 +593,11 @@ export default {
         mbti: "enfj",
         location: {
             en: "community center",
-            es: "centro comunitario",
+            es: "centros comunitarios",
         },
         map: {
             en: "cultural center, embassy, hospitality",
-            es: "centro cultural, embajada, hotelería",
+            es: "centro cultural, embajada, hotelería, etc.",
         },
     },
     "120": {
@@ -608,7 +608,7 @@ export default {
         },
         concept: {
             en: "functionality",
-            es: "funcionalidad",
+            es: "la funcionalidad",
         },
         archetype: {
             en: "technician",
@@ -629,11 +629,11 @@ export default {
         mbti: "--t-",
         location: {
             en: "lab",
-            es: "laboratorio",
+            es: "los laboratorios",
         },
         map: {
             en: "systems, technology, accounting",
-            es: "sistemas, tecnología, contabilidad",
+            es: "sistemas, tecnología, contabilidad, etc.",
         },
     },
     "121": {
@@ -664,11 +664,11 @@ export default {
         },
         location: {
             en: "civic center",
-            es: "centro civil",
+            es: "los centros civiles",
         },
         map: {
             en: "organization, club, politic arena",
-            es: "organización, club, arena política",
+            es: "organización, club, arena política, etc.",
         },
     },
     "122": {
@@ -679,7 +679,7 @@ export default {
         },
         concept: {
             en: "order",
-            es: "orden",
+            es: "el orden",
         },
         archetype: {
             en: "arbiter",
@@ -700,11 +700,11 @@ export default {
         mbti: "-n-j",
         location: {
             en: "court",
-            es: "corte",
+            es: "las cortes",
         },
         map: {
             en: "assembly, advisory, congress",
-            es: "asamblea, consejería, congreso",
+            es: "asamblea, consejería, congreso, etc.",
         },
     },
     "200": {
@@ -715,7 +715,7 @@ export default {
         },
         concept: {
             en: "action",
-            es: "acción",
+            es: "la acción",
         },
         archetype: {
             en: "athlete",
@@ -736,22 +736,22 @@ export default {
         mbti: "is-p",
         location: {
             en: "arena",
-            es: "arena",
+            es: "las arenas",
         },
         map: {
             en: "stadium, dojo, track & field",
-            es: "estadio, dojo, campo y pista",
+            es: "estadio, dojo, campo y pista, etc.",
         },
     },
     "201": {
         code: "201",
         adjective: {
             en: "sensational",
-            es: "sensacional",
+            es: "sensacionalista",
         },
         concept: {
             en: "attitude",
-            es: "actitud",
+            es: "la actitud",
         },
         archetype: {
             en: "performer",
@@ -772,11 +772,11 @@ export default {
         mbti: "-sf-",
         location: {
             en: "gym",
-            es: "gimnasio",
+            es: "los gimnasios",
         },
         map: {
             en: "ring, stage, dance floor",
-            es: "pista, escenario, salón de baile",
+            es: "pista, escenario, salón de baile, etc.",
         },
     },
     "202": {
@@ -787,7 +787,7 @@ export default {
         },
         concept: {
             en: "passion",
-            es: "passion",
+            es: "la pasión",
         },
         archetype: {
             en: "artist",
@@ -808,11 +808,11 @@ export default {
         mbti: "isfj",
         location: {
             en: "studio",
-            es: "atelier",
+            es: "los atelieres",
         },
         map: {
             en: "atelier, crafts, kitchen",
-            es: "artesanía, cocina, manualidades",
+            es: "artesanía, cocina, manualidades, etc.",
         },
     },
     "210": {
@@ -823,7 +823,7 @@ export default {
         },
         concept: {
             en: "aptitude",
-            es: "aptitud",
+            es: "la aptitud",
         },
         archetype: {
             en: "builder",
@@ -844,11 +844,11 @@ export default {
         mbti: "-st-",
         location: {
             en: "workshop",
-            es: "taller",
+            es: "los talleres",
         },
         map: {
             en: "warehouse, garage, construction",
-            es: "almacen, garage, construcción",
+            es: "almacen, garage, construcción, etc.",
         },
     },
     "211": {
@@ -859,7 +859,7 @@ export default {
         },
         concept: {
             en: "service",
-            es: "servicio",
+            es: "el servicio",
         },
         archetype: {
             en: "agent",
@@ -880,11 +880,11 @@ export default {
         mbti: "es-j",
         location: {
             en: "service center",
-            es: "centro de servicio",
+            es: "centros de servicio",
         },
         map: {
             en: "security, life guarding, agency",
-            es: "seguridad, agencia, superintendencia",
+            es: "seguridad, agencia, etc.",
         },
     },
     "212": {
@@ -895,7 +895,7 @@ export default {
         },
         concept: {
             en: "security",
-            es: "seguridad",
+            es: "la seguridad",
         },
         archetype: {
             en: "caretaker",
@@ -916,11 +916,11 @@ export default {
         mbti: "-sfj",
         location: {
             en: "clinic",
-            es: "clínica",
+            es: "las clínicas",
         },
         map: {
             en: "aid, health, care center",
-            es: "asistencia, centro de salud, guardería",
+            es: "asistencia, centro de salud, etc.",
         },
     },
     "220": {
@@ -931,7 +931,7 @@ export default {
         },
         concept: {
             en: "productivity",
-            es: "productividad",
+            es: "la productividad",
         },
         archetype: {
             en: "engineer",
@@ -952,11 +952,11 @@ export default {
         mbti: "istj",
         location: {
             en: "industry",
-            es: "industria",
+            es: "las industrias",
         },
         map: {
             en: "factory, engineering, manufactoring",
-            es: "fábrica, ingeniería, manufactura",
+            es: "fábrica, ingeniería, manufactura, etc.",
         },
     },
     "221": {
@@ -967,7 +967,7 @@ export default {
         },
         concept: {
             en: "goals",
-            es: "propósitos",
+            es: "las metas",
         },
         archetype: {
             en: "manager",
@@ -988,11 +988,11 @@ export default {
         mbti: "-stj",
         location: {
             en: "company",
-            es: "compañía",
+            es: "las compañías",
         },
         map: {
             en: "venture, business, enterprise",
-            es: "projectos, negocios, empresas",
+            es: "projectos, negocios, empresas, etc.",
         },
     },
     "222": {
@@ -1003,7 +1003,7 @@ export default {
         },
         concept: {
             en: "control",
-            es: "control",
+            es: "el control",
         },
         archetype: {
             en: "cheif",
@@ -1024,11 +1024,11 @@ export default {
         mbti: "i--j",
         location: {
             en: "management",
-            es: "gerencia",
+            es: "la gerencia",
         },
         map: {
             en: "palace, tribune, government",
-            es: "palacio, tribunal, gobierno",
+            es: "palacio, tribunal, gobierno, etc.",
         },
     }
 };

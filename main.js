@@ -101,7 +101,7 @@ DOM.set({
   },
 
   header: {
-    background: `linear-gradient(to bottom, #fff0 0%, ${STYLE.lightScreen} 100%)`,
+    background: rgb ? undefined : `linear-gradient(to bottom, #fff0 0%, ${STYLE.lightScreen} 100%)`,
     h1: {
       a: {
         href: `.`,
@@ -120,8 +120,7 @@ DOM.set({
 
   section: rgb ? undefined : intro,
 
-  div: {
-    marginBottom: rgb ? undefined : `1em`,
+  div: rgb ? undefined : {
     height: `6rem`,
     background: `linear-gradient(to bottom, ${STYLE.lightScreen} 0%, #fff0 100%)`,
   },
@@ -147,7 +146,6 @@ DOM.set({
       style: STYLE.section,
       display: `flex`,
       flexDirection: `column`,
-      paddingTop: rgb ? 0 : undefined,
       h2: rgb && !fav ? undefined : Copy.text({
         en: `Results`,
         es: `Resultados`,
@@ -241,7 +239,7 @@ DOM.set({
       default: '#000',
     }),
     fontSize: '1.2em',
-    margin: '0 auto 3em',
+    margin: '-1em auto 3em',
     borderRadius: '2em',
     padding: '0.6em 3em',
     display: questionnaire._qCounter.as(n => n > qTotal ? 'none' : 'block'),

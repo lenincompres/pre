@@ -66,7 +66,70 @@ Copy.add({
     en: 'determined',
     es: 'determinado',
   },
+  only: {
+    en: 'only',
+    es: 'solo',
+  },
+  and: {
+    en: 'and',
+    es: 'y',
+  },
 });
+
+const INTROS = [
+  [
+    Copy.text({
+      en: 'physical abstraction can make it aloof and fearful',
+      es: 'la abstracción física lo puede hacer apartado y temeroso',
+    }),
+    undefined,
+    Copy.text({
+      en: 'physical action can make it competitive and impatient',
+      es: 'la acción física lo puede hacer competitivo e impaciente',
+    }),
+  ],
+  [
+    Copy.text({
+      en: 'rational instiction can make it impulsive and obstinate',
+      es: 'la instinción racional lo puede hacer impulsivo y obstinado',
+    }),
+    undefined,
+    Copy.text({
+      en: 'rational regulation can make it rightgeous and sctrict',
+      es: 'la regulación racional lo puede hacer santurrón y estricto',
+    }),
+  ],
+  [
+    Copy.text({
+      en: 'emotional detachment can make it eccentric and insensitive',
+      es: 'el desapego emocional lo puede hacer excéntrico e insensible',
+    }),
+    undefined,
+    Copy.text({
+      en: 'emotional valuation can make it biased and sensitive',
+      es: 'la valoración emocional lo puede hacer sesgado y sensible',
+    }),
+  ],
+];
+
+const TENDECIES = [
+  Copy.text({
+    es: 'altamente introvertida',
+    en: 'highly introverted',
+  }),
+  Copy.text({
+    es: 'mayormente introvertida',
+    en: 'more introverted',
+  }),
+  Copy.text({
+    es: 'mayormente extrovertida',
+    en: 'more extroverted',
+  }),
+  Copy.text({
+    es: 'altamente extrovertida',
+    en: 'highly extroverted',
+  }),
+];
 
 const level = (d, i) => {
   const vals = ['2a', '80', 'd5'];
@@ -157,44 +220,27 @@ People that are strongly imperial like to analyze things thoroughly, but are pas
      */
     section: _copy.as(copy => ({
       p: Copy.text({
-        en: [`The ${copy.at.tone} (${copy.at.colour}) color is ${copy.at.adjective}; a psyche focused on ${copy.at.concept} as an archetypical ${copy.at.archetype}. It fits comfortably at a ${copy.at.location} (${copy.at.map}).`,
-          `The following are the levels or coordinates for this state in the three dimensions of the psyche. Each dimenssion could be ${Copy.at.relaxed}, ${Copy.at.flexible} or ${Copy.at.intense}:`
-        ],
-        es: [`El color ${copy.at.tone} (${copy.at.colour}) es ${copy.at.adjective}; una psiquis enfocada en ${copy.at.concept}. Como su arquetipo de ${copy.at.archetype}, se manifiesta a gusto en ${copy.at.location}s (${copy.at.map}).`,
-          `Los siguientes son los niveles o coordenadas de este estado en las tres dimentiones de la psiquis. El nivel de cada dimensión puede ser ${Copy.at.relaxed}, ${Copy.at.flexible} o ${Copy.at.intense}:`
-        ],
+        en: `The ${copy.at.tone} (${copy.at.colour}) color is ${copy.at.adjective}; a psyche focused on ${copy.at.concept} as an archetypical ${copy.at.archetype}. It fits comfortably at ${copy.at.location} (${copy.at.map}).`,
+        es: `El color ${copy.at.tone} (${copy.at.colour}) es ${copy.at.adjective}; una psiquis enfocada en ${copy.at.concept}. Como su arquetipo de ${copy.at.archetype}, se manifiesta a gusto en ${copy.at.location} (${copy.at.map}).`,
       })
     })),
     ul: _feature.as(v => ({
       textAlign: 'left',
       margin: '0 auto',
       width: 'fit-content',
-      li: [...STATES[v.hexToCode()].code].map((n, i) => level(i, parseInt(n))),
+      li: [...STATES[v.hexToCode()].code].map((n, i) => level(i, parseInt(n) || 0)),
     })),
     footer: {
       p: _feature.as(v => {
-        let ext = [...STATES[v.hexToCode()].code].map(n => parseInt(n)).reduce((o, n) => n === 1 ? (o + 1) : o, 0);
-        let tendency = [
-          Copy.text({
-            es: 'introversión alta',
-            en: 'high introversion',
-          }),
-          Copy.text({
-            es: 'introversión',
-            en: 'introversion',
-          }),
-          Copy.text({
-            es: 'extroversión',
-            en: 'extroversion',
-          }),
-          Copy.text({
-            es: 'extroversión alta',
-            en: 'high extroversion',
-          }),
-        ][ext];
+        let code = [...STATES[v.hexToCode()].code].map(n => parseInt(n));
+        let ext = code.reduce((o, n) => n === 1 ? (o + 1) : o, 0);
+        let s = ext === 1 ? '' : 's';
+        let only = ext === 1 ? Copy.at.only : '';
+        let intros = code.map((n, i) => INTROS[i][n]).filter(n => n);
+        intros[intros.length-1] = Copy.at.and + ' ' + intros[intros.length-1];
         return Copy.text({
-          en: `The middle point (${Copy.at.flexible}) is equivalent to perception—the point of extroversion or external focus. In this case, there are ${ext} ${Copy.at.flexible} tendencies, which suggest a ${tendency}.`,
-          es: `El punto medio (${Copy.at.flexible}) equivale a la percepción: el punto de extroversión o enfoque externo. En tu caso, tenemos ${ext} tendencias ${Copy.at.flexible}s; lo que sugiere una ${tendency}.`,
+          en: `The levels or coordinates in the three dimensions of the psyche could be ${Copy.at.relaxed}, ${Copy.at.flexible} or ${Copy.at.intense}. The middle level (${Copy.at.flexible}) is equivalent to perception—the point of extroversion or external focus. There ${s?'are':'is'} ${only} ${ext} ${Copy.at.flexible} tendencies, which indicates a ${TENDECIES[ext]} personality. In this case: ${intros.join('; ')}.`,
+          es: `Los niveles o coordenadas en las tres dimentiones de la psiquis pueden ser ${Copy.at.relaxed}, ${Copy.at.flexible} o ${Copy.at.intense}. El nivel medio (${Copy.at.flexible}) equivale a la percepción o enfoque externo. Tenemos ${only} ${ext} tendencia${s} ${Copy.at.flexible}${s}; lo que indica una personalidad ${TENDECIES[ext]}. De modo que: ${intros.join('; ')}.`,
         })
       }),
     }
