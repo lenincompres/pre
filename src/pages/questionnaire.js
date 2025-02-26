@@ -123,7 +123,8 @@ const modelQuestion = q => {
       h3: !q.question ? undefined : {
         color: '#fff',
         backgroundColor: style.darkScreen,
-        text: q.question
+        padding: '0.4em 0.6em',
+        text: q.question,
       },
       ul: {
         padding: 0,

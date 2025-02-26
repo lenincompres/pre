@@ -369,7 +369,7 @@ export default [{
   }, {
     question: Copy.text({
       en: "How much would these adjectives define you?",
-      es: "¿Cuánto te definirían estos adjetivos?",
+      es: "¿Cuánto te definen estos adjetivos?",
     }),
     options: [{
         choice: Copy.text({
@@ -442,19 +442,19 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Rather work alone",
-          es: "Prefieres trabajar a solas",
+          es: "Trabajar a solas",
         }),
       },
       {
         choice: Copy.text({
           en: "Demand freedom and control",
-          es: "Demandas libertad y control",
+          es: "Demandar libertad y control",
         }),
       },
       {
         choice: Copy.text({
-          en: "Avoid gossip and drama",
-          es: "Evitas el chisme y el drama",
+          en: "Ignore gossip and drama",
+          es: "Ignorar chismes y drama",
         }),
       }
     ]
@@ -463,19 +463,19 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Seek group activities",
-          es: "Buscas actividades grupales",
+          es: "Buscar actividades grupales",
         }),
       },
       {
         choice: Copy.text({
           en: "Enjoy discussions",
-          es: "Disfrutas de los debates",
+          es: "Disfrutar de debates",
         }),
       },
       {
         choice: Copy.text({
           en: "Interact with a diversity of people",
-          es: "Interactuas con personas diversas",
+          es: "Interactuar con personas diversas",
         }),
         hint: Copy.text({
           en: "other ages, genders, backgrounds",
