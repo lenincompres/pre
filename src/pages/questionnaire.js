@@ -141,10 +141,10 @@ const modelQuestion = q => {
             position: 'relative',
             order: Math.floor(100 * Math.random()),
             label: {
-              margin: '0 1em',
+              margin: `0 ${isVS ? '3em': '1em'}`,
               display: 'flex',
               flexDirection: 'row',
-              justifyContent: 'space-around',
+              justifyContent: isVS ? 'space-between' : 'space-around',
               div: o.map(option => new Object({
                 span: {
                   fontSize: '1.2rem',
@@ -176,7 +176,7 @@ const modelQuestion = q => {
             },
             small: {
               fontSize: isVS ? '1em' : 'small',
-              lineHeight: '1rem',
+              lineHeight: isVS ? '1.6em' : '1rem',
               color: '#06c',
               bottom: '3em',
               position: 'absolute',
@@ -191,13 +191,6 @@ const modelQuestion = q => {
               }, {
                 left: 0,
                 text: isVS ? '⟵' : answer.as(v => frequencies[Math.floor(v * frequencies.length / 100)])
-              }, !isVS ? undefined : {
-                left: '50%',
-                marginLeft: '-0.5em',
-                text: Copy.text({
-                  en: 'or',
-                  es: 'o',
-                }),
               }]
             }
           }

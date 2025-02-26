@@ -397,7 +397,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Like it the way you like it.",
-          es: "Tus gustos son específicos.",
+          es: "De gustos específicos.",
         }),
       }
     ]
@@ -420,7 +420,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "Look to understand and clarify",
-          es: "Buscas comprender y aclarar.",
+          es: "Buscas discernir y aclarar.",
         }),
       },
       {
