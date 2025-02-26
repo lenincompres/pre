@@ -113,7 +113,7 @@ const modelQuestion = q => {
   q.name = _qCounter.value + mqCounter++;
   q.model = {
     a: {
-      name: 'question' + q.name,
+      name: 'q' + q.name,
     },
     section: {
       display: _qCounter.as(n => n >= q.name ? 'block' : 'none'),
@@ -211,7 +211,7 @@ const questions = new Binder(QUESTIONS.map(modelQuestion));
 export const questionnaire = {
   style: style.section,
   a: {
-    name: 'question-2',
+    name: 'q-2',
   },
   header: {
     p: {
@@ -245,7 +245,7 @@ export const questionnaire = {
     marginTop: '4em',
     display: _qCounter.as(n => n >= 0 ? 'block' : 'none'),
     a: {
-      name: 'question0',
+      name: 'q0',
     },
     h2: Copy.text({
       en: 'Questionaire',

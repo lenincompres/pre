@@ -141,7 +141,7 @@ DOM.set({
     display: rgb ? undefined : questionnaire._qCounter.as(n => n > qTotal ? 'block' : 'none'),
     backgroundColor: rgb ? rgb : results._feature,
     a: {
-      name: 'question14',
+      name: 'q14',
     },
     section: {
       style: STYLE.section,
@@ -247,7 +247,7 @@ DOM.set({
     display: questionnaire._qCounter.as(n => n > qTotal ? 'none' : 'block'),
     click: () => {
       questionnaire._qCounter.value = questionnaire._qCounter.value + 1;
-      location.href = "#question" + questionnaire._qCounter.value;
+      location.href = "#q" + questionnaire._qCounter.value;
     },
   },
 });
