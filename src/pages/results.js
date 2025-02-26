@@ -158,10 +158,10 @@ People that are strongly imperial like to analyze things thoroughly, but are pas
     section: _copy.as(copy => ({
       p: Copy.text({
         en: [`The ${copy.at.tone} (${copy.at.colour}) color is ${copy.at.adjective}; a psyche focused on ${copy.at.concept} as an archetypical ${copy.at.archetype}. It fits comfortably at a ${copy.at.location} (${copy.at.map}).`,
-          `The following are the levels or coordinates for this state in the three dimensions of the 3D Psyche. Each dimenssion could be ${Copy.at.relaxed}, ${Copy.at.flexible} or ${Copy.at.intense}:`
+          `The following are the levels or coordinates for this state in the three dimensions of the psyche. Each dimenssion could be ${Copy.at.relaxed}, ${Copy.at.flexible} or ${Copy.at.intense}:`
         ],
         es: [`El color ${copy.at.tone} (${copy.at.colour}) es ${copy.at.adjective}; una psiquis enfocada en ${copy.at.concept}. Como su arquetipo de ${copy.at.archetype}, se manifiesta a gusto en ${copy.at.location}s (${copy.at.map}).`,
-          `Los siguientes son los niveles o coordenadas de este estado en las tres dimentiones de la Psiquis 3D. El nivel de cada dimensión puede ser ${Copy.at.relaxed}, ${Copy.at.flexible} o ${Copy.at.intense}:`
+          `Los siguientes son los niveles o coordenadas de este estado en las tres dimentiones de la psiquis. El nivel de cada dimensión puede ser ${Copy.at.relaxed}, ${Copy.at.flexible} o ${Copy.at.intense}:`
         ],
       })
     })),
