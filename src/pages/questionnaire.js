@@ -210,6 +210,9 @@ const questions = new Binder(QUESTIONS.map(modelQuestion));
 
 export const questionnaire = {
   style: style.section,
+  a: {
+    name: 'question-2',
+  },
   header: {
     p: {
       style: style.floatingSign,
