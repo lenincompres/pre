@@ -453,8 +453,8 @@ export default [{
       },
       {
         choice: Copy.text({
-          en: "Avoid drama and gossip",
-          es: "Evitas el drama y los chismes",
+          en: "Avoid gossip and drama",
+          es: "Evitas el chisme y el drama",
         }),
       }
     ]

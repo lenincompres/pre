@@ -194,7 +194,10 @@ const modelQuestion = q => {
               }, !isVS ? undefined : {
                 left: '50%',
                 marginLeft: '-0.5em',
-                text: 'or'
+                text: Copy.text({
+                  en: 'or',
+                  es: 'o',
+                }),
               }]
             }
           }
