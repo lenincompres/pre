@@ -23,7 +23,7 @@ const CSS = {
     fontWeight: `bold`,
   },
   a: {
-    color: `#fffc`,
+    color: `#fffd`,
     textDecoration: `none`,
     textShadow: `0 0 1px #000c, 1px 1px 2px #000c`,
     hover: {
@@ -54,7 +54,7 @@ const CSS = {
     padding: `0.3rem 0 0`,
     textAlign: `center`,
     fontSize: `3rem`,
-    color: `#fffc`,
+    color: `#fffd`,
     textShadow: `0 0 3px #000c, 0 0 3px #000c`,
     textTransform: `capitalize`,
   },
@@ -62,7 +62,7 @@ const CSS = {
     fontSize: `1.4rem`,
     paddingTop: `1em`,
     textAlign: `center`,
-    color: `#fffc`,
+    color: `#fffd`,
     textTransform: `capitalize`,
     textShadow: `0 0 3px #000c, 0 0 3px #000c`,
   },
