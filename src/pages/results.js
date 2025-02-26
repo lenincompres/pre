@@ -172,9 +172,30 @@ People that are strongly imperial like to analyze things thoroughly, but are pas
       li: [...STATES[v.hexToCode()].code].map((n, i) => level(i, parseInt(n))),
     })),
     footer: {
-      p: Copy.text({
-        en: `The middle point (${Copy.at.flexible}) is equivalent to perception. The 3D Psyche considers a combination of this in all three dimensions as the point of greatest extroversion or greatest external focus.`,
-        es: `El punto medio (${Copy.at.flexible}) equivale a la percepción. La Psiquis 3D considera que una combinación de este en las tres dimenciones es el punto de mayor extroversión o enfoque externo.`,
+      p: _feature.as(v => {
+        let ext = [...STATES[v.hexToCode()].code].map(n => parseInt(n)).reduce((n, o) => n === 1 ? (o + 1) : o, 0);
+        let tendency = [
+          Copy.text({
+            es: 'introversión alta',
+            en: 'high introversion',
+          }),
+          Copy.text({
+            es: 'introversión media',
+            en: 'medium introversion',
+          }),
+          Copy.text({
+            es: 'extroversión media',
+            en: 'medium extroversion',
+          }),
+          Copy.text({
+            es: 'extroversión alta',
+            en: 'high extroversion',
+          }),
+        ][ext];
+        return Copy.text({
+          en: `The middle point (${Copy.at.flexible}) is equivalent to perception. The 3D Psyche considers a combination of this in all three dimensions as the point of greatest extroversion or greatest external focus. In you case, there are ${ext} ${Copy.at.flexible} tendencies out of 3; so, this results suggest a ${tendency}.`,
+          es: `El punto medio (${Copy.at.flexible}) equivale a la percepción. La Psiquis 3D considera que una combinación de este en las tres dimenciones es el punto de mayor extroversión o enfoque externo. En tu caso, tenemos ${ext} tendencias ${Copy.at.flexible}s de 3; lo que sugiere una ${tendency}.`,
+        })
       }),
     }
     //aside: _cubeState,

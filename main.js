@@ -90,6 +90,7 @@ DOM.set({
   css: CSS,
   fontFamily: `Verdana, Geneva, Tahoma, sans-serif`,
   fontSize: `16px`,
+  overflowX: `hidden`,
 
   nav: {
     textAlign: `right`,
@@ -101,10 +102,15 @@ DOM.set({
 
   header: {
     background: `linear-gradient(to bottom, #fff0 0%, ${STYLE.lightScreen} 100%)`,
-    h1: Copy.text({
-      en: `The 3DPsyche`,
-      es: `La Psiquis 3D`,
-    }),
+    h1: {
+      a: {
+        href: `.`,
+        text: Copy.text({
+          en: `The 3DPsyche`,
+          es: `La Psiquis 3D`,
+        })
+      },
+    },
     a: {
       display: `block`,
       href: `http://lenino.net`,
@@ -115,7 +121,7 @@ DOM.set({
   section: rgb ? undefined : intro,
 
   div: {
-    marginBottom: `1em`,
+    marginBottom: rgb ? undefined : `1em`,
     height: `6rem`,
     background: `linear-gradient(to bottom, ${STYLE.lightScreen} 0%, #fff0 100%)`,
   },
@@ -132,7 +138,7 @@ DOM.set({
   },
 
   footer: {
-    display: questionnaire._qCounter.as(n => n > qTotal ? 'block' : 'none'),
+    display: rgb ? undefined : questionnaire._qCounter.as(n => n > qTotal ? 'block' : 'none'),
     backgroundColor: rgb ? rgb : results._feature,
     a: {
       name: 'question14',
@@ -141,6 +147,7 @@ DOM.set({
       style: STYLE.section,
       display: `flex`,
       flexDirection: `column`,
+      paddingTop: rgb ? 0 : undefined,
       h2: rgb && !fav ? undefined : Copy.text({
         en: `Results`,
         es: `Resultados`,
@@ -202,7 +209,7 @@ DOM.set({
     }
   },
 
-  button: {
+  button: rgb ? undefined : {
     text: questionnaire._qCounter.as({
       [-3]: Copy.text({
         en: 'Take the test',
