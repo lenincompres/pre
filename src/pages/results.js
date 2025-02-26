@@ -193,8 +193,8 @@ People that are strongly imperial like to analyze things thoroughly, but are pas
           }),
         ][ext];
         return Copy.text({
-          en: `The middle point (${Copy.at.flexible}) is equivalent to perception. The 3D Psyche considers a combination of this in all three dimensions as the point of greatest extroversion or greatest external focus. In this case, there are ${ext} ${Copy.at.flexible} tendencies; so, this results suggest a ${tendency}.`,
-          es: `El punto medio (${Copy.at.flexible}) equivale a la percepción. La Psiquis 3D considera que una combinación de este en las tres dimenciones es el punto de mayor extroversión o enfoque externo. En tu caso, tenemos ${ext} tendencias ${Copy.at.flexible}s; lo que sugiere una ${tendency}.`,
+          en: `The middle point (${Copy.at.flexible}) is equivalent to perception—the point of extroversion or external focus. In this case, there are ${ext} ${Copy.at.flexible} tendencies, which suggest a ${tendency}.`,
+          es: `El punto medio (${Copy.at.flexible}) equivale a la percepción: el punto de extroversión o enfoque externo. En tu caso, tenemos ${ext} tendencias ${Copy.at.flexible}s; lo que sugiere una ${tendency}.`,
         })
       }),
     }
