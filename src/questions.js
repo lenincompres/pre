@@ -40,7 +40,7 @@ export default [{
   {
     question: Copy.text({
       en: "In physical activities, what do you get into?",
-      es: "En las actividades físicas ¿en qué te metes?",
+      es: "En las actividades físicas ¿en qué te involucras?",
     }),
     options: [{
         choice: Copy.text({
@@ -69,7 +69,7 @@ export default [{
         }),
         hint: Copy.text({
           en: "fandom, environment, team",
-          es: "fandom, ambiente, equipos",
+          es: "fanaticada, ambiente, equipo",
         }),
       }
     ]
@@ -77,7 +77,7 @@ export default [{
   {
     question: Copy.text({
       en: "In studies, what peaks your interest?",
-      es: "En los estudios, ¿qué es lo que despierta tu interés?",
+      es: "En los estudios, ¿qué despierta tu interés?",
     }),
     options: [{
         choice: Copy.text({
@@ -223,7 +223,7 @@ export default [{
   }, {
     question: Copy.text({
       en: "On your free time, how open are you to these?",
-      es: "En el tiempo libre, ¿qué tan abierto estás a esto?",
+      es: "En tu tiempo libre, ¿qué tan abierto estás a esto?",
     }),
     options: [{
         choice: Copy.text({
@@ -293,7 +293,7 @@ export default [{
   }, {
     question: Copy.text({
       en: "In general, how intent are you on these?",
-      es: "En general, ¿qué tan concentrado estás en esto?",
+      es: "En general, ¿qué tanto te preocupa esto?",
     }),
     options: [{
         choice: Copy.text({
@@ -318,7 +318,7 @@ export default [{
       {
         choice: Copy.text({
           en: "Upholding values",
-          es: "Defender los valores",
+          es: "Defender valores",
         }),
         hint: Copy.text({
           en: "Won't give them up.",
@@ -406,7 +406,7 @@ export default [{
     options: [{
         choice: Copy.text({
           en: "Alert",
-          es: "Alert",
+          es: "Alerta",
         }),
         hint: Copy.text({
           en: "Aware of your surroundings",

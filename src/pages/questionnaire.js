@@ -7,6 +7,7 @@ import Copy from "../../lib/Copy.js";
 
 export const _favorite = new Binder('#808080');
 export const _results = new Binder('#808080');
+export const _qCounter = new Binder(-3);
 
 const sampleQuestions = [{
   question: Copy.text({
@@ -75,38 +76,47 @@ const sampleQuestions = [{
   ]
 }];
 
+
+const frequencies = [Copy.text({
+  en: 'Rarely',
+  es: "Raramente",
+}), Copy.text({
+  en: 'Seldom',
+  es: "Escasamente",
+}), Copy.text({
+  en: 'Occasionally',
+  es: "Ocasionalmente",
+}), Copy.text({
+  en: 'Moderately',
+  es: "Moderadamente",
+}), Copy.text({
+  en: 'Normally',
+  es: "Normalmente",
+}), Copy.text({
+  en: 'Frequently',
+  es: "Fequentemente",
+}), Copy.text({
+  en: 'Generally',
+  es: "Generalmente",
+}), Copy.text({
+  en: 'Usually',
+  es: "Usualmente",
+}), Copy.text({
+  en: 'Extremely',
+  es: "Extremadamente",
+})];
+
+let mqCounter = 1;
+
 const modelQuestion = q => {
-  const frequencies = [Copy.text({
-    en: 'Rarely',
-    es: "Raramente",
-  }), Copy.text({
-    en: 'Seldom',
-    es: "Escasamente",
-  }), Copy.text({
-    en: 'Occasionally',
-    es: "Ocasionalmente",
-  }), Copy.text({
-    en: 'Moderately',
-    es: "Moderadamente",
-  }), Copy.text({
-    en: 'Normally',
-    es: "Normalmente",
-  }), Copy.text({
-    en: 'Frequently',
-    es: "Fequentemente",
-  }), Copy.text({
-    en: 'Generally',
-    es: "Generalmente",
-  }), Copy.text({
-    en: 'Usually',
-    es: "Usualmente",
-  }), Copy.text({
-    en: 'Extremely',
-    es: "Extremadamente",
-  })];
   q.answers = [];
+  q.name = _qCounter.value + mqCounter++;
   q.model = {
+    a: {
+      name: 'question' + q.name,
+    },
     section: {
+      display: _qCounter.as(n => n >= q.name ? 'block' : 'none'),
       marginTop: q.question ? '2em' : undefined,
       borderRadius: '1em',
       overflow: 'hidden',
@@ -134,7 +144,7 @@ const modelQuestion = q => {
               margin: '0 1em',
               display: 'flex',
               flexDirection: 'row',
-              placeContent: 'space-around',
+              justifyContent: 'space-around',
               div: o.map(option => new Object({
                 span: {
                   fontSize: '1.2rem',
@@ -145,6 +155,7 @@ const modelQuestion = q => {
                   text: option.choice,
                 },
                 p: {
+                  textAlign: 'center',
                   fontSize: 'small',
                   text: option.hint,
                 }
@@ -189,11 +200,12 @@ const modelQuestion = q => {
           }
         })
       }
-    }
+    },
   }
   return q;
 };
 
+const samples = sampleQuestions.map(q => modelQuestion(q).model);
 const questions = new Binder(QUESTIONS.map(modelQuestion));
 
 export const questionnaire = {
@@ -212,7 +224,7 @@ export const questionnaire = {
       en: 'Example',
       es: "Ejemplo",
     }),
-    section: sampleQuestions.map(q => modelQuestion(q).model),
+    section: samples,
     small: {
       marginTop: '4em',
       a: {
@@ -228,11 +240,15 @@ export const questionnaire = {
   },
   main: {
     marginTop: '4em',
+    display: _qCounter.as(n => n >= 0 ? 'block' : 'none'),
+    a: {
+      name: 'question0',
+    },
     h2: Copy.text({
       en: 'Questionaire',
       es: "Cuestionario",
     }),
-    section: questions.as(qs => qs.map(q => q.model))
+    section: questions.as(qs => qs.map(q => q.model)),
   }
 };
 

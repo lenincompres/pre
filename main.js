@@ -3,6 +3,9 @@ import * as results from "./src/pages/results.js";
 import * as STYLE from "./src/style.js";
 import Copy from "./lib/Copy.js";
 import intro from "./src/pages/intro.js";
+import QUESTIONS from "./src/questions.js";
+
+const qTotal = QUESTIONS.length - 1;
 
 const QS = DOM.querystring();
 let rgb = QS.rgb ? `#${QS.rgb}` : undefined;
@@ -13,13 +16,16 @@ questionnaire._results.bind(results._feature);
 if (rgb) results._feature.value = rgb;
 
 const CSS = {
+  html: {
+    scrollBehavior: `smooth`,
+  },
   b: {
     fontWeight: `bold`,
   },
   a: {
-    color: `white`,
+    color: `#fffc`,
     textDecoration: `none`,
-    textShadow: `0 0 1px black, 1px 1px 2px black`,
+    textShadow: `0 0 1px #000c, 1px 1px 2px #000c`,
     hover: {
       textDecoration: `underline`,
     },
@@ -48,17 +54,17 @@ const CSS = {
     padding: `0.3rem 0 0`,
     textAlign: `center`,
     fontSize: `3rem`,
-    color: `white`,
-    textShadow: `0 0 3px black, 0 0 3px black`,
+    color: `#fffc`,
+    textShadow: `0 0 3px #000c, 0 0 3px #000c`,
     textTransform: `capitalize`,
   },
   h2: {
     fontSize: `1.4rem`,
     paddingTop: `1em`,
     textAlign: `center`,
-    color: `white`,
+    color: `#fffc`,
     textTransform: `capitalize`,
-    textShadow: `0 0 3px black, 0 0 3px black`,
+    textShadow: `0 0 3px #000c, 0 0 3px #000c`,
   },
   h3: {
     fontSize: `1.2rem`,
@@ -109,20 +115,28 @@ DOM.set({
   section: rgb ? undefined : intro,
 
   div: {
+    marginBottom: `1em`,
     height: `6rem`,
     background: `linear-gradient(to bottom, ${STYLE.lightScreen} 0%, #fff0 100%)`,
   },
 
-  main: rgb ? undefined : questionnaire.questionnaire,
+  main: {
+    display: questionnaire._qCounter.as(n => n >= -2 ? 'block' : 'none'),
+    content: rgb ? undefined : questionnaire.questionnaire,
+  },
 
   div_: rgb ? undefined : {
-    height: `6rem`,
+    display: questionnaire._qCounter.as(n => n > qTotal ? 'block' : 'none'),
+    height: `60rem`,
     background: rgb ? rgb : results._feature.as(v => `linear-gradient(to bottom, ${questionnaire._favorite.value} 0%, ${v} 100%)`),
   },
 
   footer: {
+    display: questionnaire._qCounter.as(n => n > qTotal ? 'block' : 'none'),
     backgroundColor: rgb ? rgb : results._feature,
-
+    a: {
+      name: 'question14',
+    },
     section: {
       style: STYLE.section,
       display: `flex`,
@@ -155,7 +169,7 @@ DOM.set({
           padding: `0.5em 1em`,
           width: `fit-content`,
           borderRadius: `0.5em`,
-          boxShadow: `1px 1px 2px black`,
+          boxShadow: `1px 1px 2px #000c`,
           backgroundColor: fav,
           href: `./?rgb=${fav.substr(1)}`,
           target: `_blank`,
@@ -186,5 +200,47 @@ DOM.set({
         }]
       }
     }
-  }
+  },
+
+  button: {
+    text: questionnaire._qCounter.as({
+      [-3]: Copy.text({
+        en: 'Take the test',
+        es: 'Toma el test',
+      }),
+      [-1]: Copy.text({
+        en: 'Start',
+        es: 'Comenzar',
+      }),
+      [qTotal]: Copy.text({
+        en: 'Results',
+        es: 'Resultados',
+      }),
+      default: Copy.text({
+        en: 'Next',
+        es: 'Siguiente',
+      }),
+    }),
+    backgroundColor: questionnaire._qCounter.as({
+      [-3]: '#000b',
+      [-1]: '#000b',
+      [qTotal]: '#000b',
+      default: '#fffb',
+    }),
+    color: questionnaire._qCounter.as({
+      [-3]: '#fff',
+      [-1]: '#fff',
+      [qTotal]: '#fff',
+      default: '#000',
+    }),
+    fontSize: '1.2em',
+    margin: '0 auto 3em',
+    borderRadius: '2em',
+    padding: '0.6em 3em',
+    display: questionnaire._qCounter.as(n => n > qTotal ? 'none' : 'block'),
+    click: () => {
+      questionnaire._qCounter.value = questionnaire._qCounter.value + 1;
+      location.href = "#question" + questionnaire._qCounter.value;
+    },
+  },
 });
